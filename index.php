@@ -1,6 +1,7 @@
 <?php
-
 include 'fungsi/fungsi.php';
+include "fungsi/phpqrcode/qrlib.php";
+
 
 if (isset($_POST["btn-submit"])) {
   if (tambah($_POST)) {
@@ -15,22 +16,33 @@ if (isset($_POST["btn-submit"])) {
   }
 }
 
+if (isset($_POST["edit-sample"])) {
+  if (ubahSample($_POST)) {
+    header('Location: index.php');
+  } else {
+    echo "
+        <script>
+          alert('data tidak berhasil di ubah !');
+          document.location.href = 'index.php';
+        </script>
+    ";
+  }
+}
+
 $sample = query("SELECT * FROM tb_sample WHERE njo_stat=0");
 $sample_ready = query("SELECT * FROM tb_sample WHERE njo_stat=1");
 
+// membuat kode
 $query = mysqli_query($konek, "SELECT max(sample_test) as kodeTerbesar FROM tb_sample");
 $data = mysqli_fetch_array($query);
 $kode_sample = $data['kodeTerbesar'];
-
 $year_now = date("y");
-
-
-$urutan = (int) substr($kode_sample, 3, 3);
-
+$urutan = (int) substr($kode_sample, 4, 4);
 $urutan++;
-
 $huruf = "ST";
-$kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
+$kode_sample = $huruf . $year_now . sprintf("%04s", $urutan);
+// kode selesai
+
 
 ?>
 
@@ -114,7 +126,7 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
       <div class="card-body">
         <div class="row dataku">
 
-          <div class="col-md-7">
+          <div class="col-md-8">
             <h2 class="mb-4">
               SAMPLE PENDING
             </h2>
@@ -139,7 +151,7 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                   <thead class="table-dark">
                     <tr>
                       <th scope="col">No</th>
-                      <th scope="col">Work Code</th>
+                      <th scope="col">Sample Test</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Qty</th>
                       <th scope="col">Tanggal</th>
@@ -157,7 +169,7 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                           <?= $i; ?>
                         </td>
                         <td>
-                          <?= $row["njo"]; ?>
+                          <?= $row["sample_test"]; ?>
                         </td>
                         <td>
                           <?= $row["nm_sample"]; ?>
@@ -175,17 +187,25 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                           <?= $row["due_date"]; ?>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-primary"><strong>DETAIL</strong></button>
+                          <button class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#detailModal<?= $row["sample_test"]; ?>"><strong>DETAIL</strong></button>
                         </td>
-                        <td width="100">
+                        <td width="150">
                           <div class="row text-center" style="padding-left: 10px; padding-right: 10px;">
-                            <div class="col-md-6 p-0">
+                            <div class="col-md-4 p-1">
+                              <a href="cetak-barcode.php?isi_konten=<?= $row["sample_test"]; ?>">
+                                <button class="btn btn-sm btn-warning" name="cetakqr">
+                                  <i class="fa fa-print"></i>
+                                </button>
+                              </a>
+                            </div>
+                            <div class="col-md-4 p-1">
                               <button class="btn btn-sm btn-success" name="edit" data-toggle="modal"
                                 data-target="#editModal<?= $row["sample_test"]; ?>">
                                 <i class="fa fa-pen-to-square"></i>
                               </button>
                             </div>
-                            <div class="col-md-6 p-0">
+                            <div class="col-md-4 p-1">
                               <button class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                               </button>
@@ -199,13 +219,17 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h4 class="text-secondary">EDIT DATA</h4>
+                              <h4 class="text-black">EDIT DATA</h4>
                               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                               <form action="" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?= $row["id_sample"]; ?>">
+
                                 <input type="hidden" name="id_temp" value="1">
+
+                                <label for="id" class="mt-3 mb-1">Sample Test</label>
+                                <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>"
+                                  readonly>
 
                                 <label for="njo" class="mt-3 mb-1">NJO/Work Order</label>
                                 <input type="text" class="form-control" name="njo" id="njo" value="<?= $row["njo"]; ?>">
@@ -217,20 +241,24 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                                 <label for="qty" class="mt-3 mb-1">Qty</label>
                                 <input type="text" class="form-control" name="qty" id="qty" value="<?= $row["qty"]; ?>">
 
+                                <label for="cust" class="mt-3 mb-1">Customer</label>
+                                <input type="text" class="form-control" name="cust" id="cust"
+                                  value="<?= $row["customer"]; ?>">
+
                                 <label for="tgl-dtg" class="mt-3 mb-1">Tanggal Datang</label>
                                 <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg"
                                   value="<?= $row["tgl_datang"]; ?>">
 
-                                <label for="tujuan" class="mt-3 mb-1">Tujuan </label>
-                                <input type="text" class="form-control" name="tujuan1" id="tujuan"
+                                <label for="tujuan" class="mt-3 mb-1">Tujuan (Item-test)</label>
+                                <input type="text" class="form-control" name="tujuan1" id="tujuan1"
                                   value="<?= $row["tujuan1"]; ?>">
-                                <input type="text" class="form-control mt-3" name="tujuan2" id="tujuan"
+                                <input type="text" class="form-control mt-3" name="tujuan2" id="tujuan2"
                                   value="<?= $row["tujuan2"]; ?>">
-                                <input type="text" class="form-control mt-3" name="tujuan3" id="tujuan"
+                                <input type="text" class="form-control mt-3" name="tujuan3" id="tujuan3"
                                   value="<?= $row["tujuan3"]; ?>">
-                                <input type="text" class="form-control mt-3" name="tujuan4" id="tujuan"
+                                <input type="text" class="form-control mt-3" name="tujuan4" id="tujuan4"
                                   value="<?= $row["tujuan4"]; ?>">
-                                <input type="text" class="form-control mt-3" name="tujuan5" id="tujuan"
+                                <input type="text" class="form-control mt-3" name="tujuan5" id="tujuan5"
                                   value="<?= $row["tujuan5"]; ?>">
 
                                 <label for="tools" class="mt-3 mb-1">Tools </label>
@@ -241,6 +269,10 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                                 <input type="text" class="form-control" name="after" id="after"
                                   value="<?= $row["after_test"]; ?>">
 
+                                <label for="duedate" class="mt-3 mb-1">Due Date </label>
+                                <input type="text" class="form-control" name="duedate" id="duedate"
+                                  value="<?= $row["due_date"]; ?>">
+
                                 <label for="note" class="mt-3 mb-1">Note </label>
                                 <input type="text" class="form-control" name="note" id="note"
                                   value="<?= $row["note"]; ?>">
@@ -249,13 +281,77 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                             <div class="modal-footer">
                               <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"></i>
                                 CANCEL</button>
-                              <button type="submit" class="btn btn-primary" name="editAnggota"><i class="fa fa-edit"></i>
-                                UBAH</button>
+                              <button type="submit" class="btn btn-primary" name="edit-sample"><i class="fa fa-edit"></i>
+                                EDIT</button>
                               </form>
                             </div>
                           </div>
                         </div>
                       </div>
+                      <!-- end modal edit -->
+
+                      <!-- detail modal -->
+                      <div id="detailModal<?= $row["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="text-black">
+                                <?= $row["sample_test"]; ?>
+                              </h4>
+                              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <h6>NJO/Work Order &emsp13; :
+                                <?= $row["njo"]; ?>
+                              </h6>
+                              <h6>Nama Sample &emsp13; :
+                                <?= $row["nm_sample"]; ?>
+                              </h6>
+                              <h6>Qty &emsp13; :
+                                <?= $row["qty"]; ?>
+                              </h6>
+                              <h6>Customer &emsp13; :
+                                <?= $row["customer"]; ?>
+                              </h6>
+                              <h6>Tanggal Datang &emsp13; :
+                                <?= $row["tgl_datang"]; ?>
+                              </h6>
+                              <h6>Tujuan 1 &emsp13; :
+                                <?= $row["tujuan1"]; ?>
+                              </h6>
+                              <h6>Tujuan 2 &emsp13; :
+                                <?= $row["tujuan2"]; ?>
+                              </h6>
+                              <h6>Tujuan 3 &emsp13; :
+                                <?= $row["tujuan3"]; ?>
+                              </h6>
+                              <h6>Tujuan 4 &emsp13; :
+                                <?= $row["tujuan4"]; ?>
+                              </h6>
+                              <h6>Tujuan 5 &emsp13; :
+                                <?= $row["tujuan5"]; ?>
+                              </h6>
+                              <h6>Tools &emsp13; :
+                                <?= $row["tools"]; ?>
+                              </h6>
+                              <h6>After Test &emsp13; :
+                                <?= $row["after_test"]; ?>
+                              </h6>
+                              <h6>Due Date &emsp13; :
+                                <?= $row["due_date"]; ?>
+                              </h6>
+                              <h6>Note &emsp13; :
+                                <?= $row["note"]; ?>
+                              </h6>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"></i>
+                                CLOSE</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end modal edit -->
 
                     </tbody>
 
@@ -266,7 +362,7 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                 </table>
               </div>
             </div>
-            <h2 class="mb-4 mt-2">
+            <h2 class="mb-4 mt-4">
               SAMPLE READY
             </h2>
             <div class="row">
@@ -290,10 +386,10 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                   <thead class="table-dark">
                     <tr>
                       <th scope="col">No</th>
+                      <th scope="col">Sample Test</th>
                       <th scope="col">Work Code</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Qty</th>
-                      <th scope="col">Tanggal</th>
                       <th scope="col">After Test</th>
                       <th scope="col">Due Date</th>
                       <th scope="col">Status</th>
@@ -309,6 +405,9 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                           <?= $i; ?>
                         </td>
                         <td>
+                          <?= $row["sample_test"]; ?>
+                        </td>
+                        <td>
                           <?= $row["njo"]; ?>
                         </td>
                         <td>
@@ -316,9 +415,6 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                         </td>
                         <td>
                           <?= $row["qty"]; ?>
-                        </td>
-                        <td>
-                          <?= $row["tgl_datang"]; ?>
                         </td>
                         <td>
                           <?= $row["after_test"]; ?>
@@ -330,7 +426,7 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                         <td>
                           <button class="btn btn-sm btn-primary"><strong>DETAIL</strong></button>
                         </td>
-                        <td width="300">
+                        <td width="150">
                           <div class="row text-center" style="padding-left: 7px; padding-right: 10px;">
                             <div class="col-md-4 p-1">
                               <button class="btn btn-sm btn-warning">
@@ -362,7 +458,7 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
             </div>
 
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             <h2 class="mb-4">
               SAMPLE INPUT
             </h2>
@@ -381,8 +477,8 @@ $kode_sample = $huruf . $year_now . sprintf("%05s", $urutan);
                 </thead>
                 <tr>
                   <td><label for="sample-test">Sample Test</label></td>
-                  <td><input type="text" id="sample-test" name="sample-test" class="form-disabled"
-                      value="<?= $kode_sample; ?>"></td>
+                  <td><input type="text" id="sample-test" name="sample-test" class="form-control"
+                      value="<?= $kode_sample; ?>" readonly></td>
                 </tr>
                 <tr>
                   <td><label for="njo">NJO / Work Code</label></td>
