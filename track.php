@@ -3,13 +3,26 @@ include 'fungsi/fungsi.php';
 
 if (isset($_GET["sample"])) {
     $smp_test = $_GET["sample"];
-    $rs = mysqli_query($konek, "SELECT * FROM track WHERE sample_test = '$smp_test'");
-    // $samp = mysqli_fetch_assoc($rs);
-    $numrow = mysqli_num_rows($rs);
-    if ($numrow != 0) {
-        $sample = query("SELECT * FROM track WHERE sample_test='$smp_test'");
+    $rs = mysqli_query($konek, "SELECT * FROM tb_sample WHERE sample_test = '$smp_test'");
+    $samp = mysqli_fetch_assoc($rs);
+    // $numrow = mysqli_num_rows($rs);
+    $id_loc = $samp["id_loc"];
+    // $loc = "";
+
+    if ($id_loc == 1) {
+        $loc = "sample rack";
+    } elseif ($id_loc == 2) {
+        $loc = "lab";
+    } elseif ($id_loc == 3) {
+        $loc = "return";
+    } elseif ($id_loc == 4) {
+        $loc = "finish";
     }
-    $sample = query("SELECT * FROM track WHERE sample_test='$smp_test'");
+
+    // var_dump($loc);
+    // echo $loc;
+
+    $sample = query("SELECT * FROM tb_sample WHERE sample_test='$smp_test'");
 
 } else {
     $smp_test = "";
@@ -113,7 +126,7 @@ $trackk = query("SELECT * FROM track");
                     <div class="col-md-4">
 
                         <form action="track.php" method="get">
-                            <!-- <input type="hidden" name="track" class="form-cotrol" value=""> -->
+
 
                             <table class="table table-bordered align-middle">
                                 <thead class="table-light">
@@ -146,6 +159,7 @@ $trackk = query("SELECT * FROM track");
                         </form>
                         <tr>
                             <form action="" method="post">
+                                <input type="hidden" id="track" name="track" class="form-cotrol" value="<?= $loc; ?>">
                                 <input type="hidden" name="sample" value="<?= $smp_test; ?>">
                                 <td><label for="id_kry">PIC</label></td>
                                 <td><input type="text" id="id_kry" name="id_kry" class="form-control" <?php
@@ -173,7 +187,6 @@ $trackk = query("SELECT * FROM track");
                         <?php
                         if (isset($_GET["sample"])):
                             foreach ($sample as $row): ?>
-
                                 <h2>
                                     <?= $row["sample_test"]; ?>
                                 </h2>
@@ -248,14 +261,6 @@ $trackk = query("SELECT * FROM track");
                                         <i class="uil uil-check"></i>
                                     </div>
                                     <p class="text">Lab</p>
-                                </li>
-                                <li>
-                                    <i class="icon uil uil-chart"></i>
-                                    <div class="prog three">
-                                        <!-- <p>3</p> -->
-                                        <i class="uil uil-check"></i>
-                                    </div>
-                                    <p class="text">Testing</p>
                                 </li>
                                 <li>
                                     <i class="icon uil uil-server"></i>
@@ -336,7 +341,7 @@ $trackk = query("SELECT * FROM track");
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <script src="js/script-trackk.js"></script>
+    <script src="js/script-track.js"></script>
     <script src="js/script.js"></script>
 </body>
 
