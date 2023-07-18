@@ -8,6 +8,15 @@ if (isset($_GET["sample"])) {
     $sample = query("SELECT * FROM tb_sample");
 }
 
+date_default_timezone_set("Asia/Jakarta");
+$date = date("Y-m-d H:i:s");
+echo $date . "\n";
+
+$date_subs = date_create('2006-12-12');
+date_modify($date_subs, '+1 month');
+echo date_format($date_subs, 'Y-m-d');
+
+
 // $rs = mysqli_query($konek, "SELECT * FROM tb_sample WHERE sample_test = 'ST230004'");
 // $cari_sample = mysqli_fetch_assoc($rs);
 
@@ -30,12 +39,15 @@ $track = query("SELECT * FROM track");
 
     <!-- Boxicons CSS -->
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/style-track.css">
 </head>
 
 <?php
@@ -153,6 +165,59 @@ if (isset($_POST["btn-send"])) {
                             </tr>
                         </tbody>
                     <?php endforeach; ?>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container">
+                <table class="table table-responsive table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sample Test</th>
+                            <th>Work Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <ul class="bars mt-5" style="margin-top: 0px !important; ">
+                                    <li>
+                                        <i class="icon uil uil-server"></i>
+                                        <div class="prog one active">
+                                            <i class="uil uil-check"></i>
+                                        </div>
+                                        <p class="text">Sample Rack</p>
+                                    </li>
+                                    <li>
+                                        <i class="icon uil uil-flask"></i>
+                                        <div class="prog two">
+                                            <i class="uil uil-check">
+                                            </i>
+                                        </div>
+                                        <p class="text">Lab</p>
+                                    </li>
+                                    <li>
+                                        <i class="icon uil uil-server"></i>
+                                        <div class="prog four">
+                                            <i class="uil uil-check"></i>
+                                        </div>
+                                        <p class="text">Sample Rack</p>
+                                    </li>
+                                    <li>
+                                        <i class="icon uil uil-file-check-alt"></i>
+                                        <div class="prog five">
+                                            <i class="uil uil-check"></i>
+                                        </div>
+                                        <p class="text">Finish</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 

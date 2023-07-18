@@ -189,10 +189,10 @@ if (isset($_POST["cari-ready"])) {
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td><label for="duedate">Due Date</label></td>
                   <td><input type="date" id="duedate" name="duedate" class="form-control"></td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td><label for="note">Note</label></td>
                   <td><textarea type="text" id="note" name="note" class="form-control" rows="3"></textarea></td>
@@ -368,10 +368,6 @@ if (isset($_POST["cari-ready"])) {
                                   <input type="text" class="form-control" name="after" id="after"
                                     value="<?= $row["after_test"]; ?>">
 
-                                  <label for="duedate" class="mt-3 mb-1">Due Date </label>
-                                  <input type="text" class="form-control" name="duedate" id="duedate"
-                                    value="<?= $row["due_date"]; ?>">
-
                                   <label for="note" class="mt-3 mb-1">Note </label>
                                   <input type="text" class="form-control" name="note" id="note"
                                     value="<?= $row["note"]; ?>">
@@ -437,9 +433,6 @@ if (isset($_POST["cari-ready"])) {
                                 </h6>
                                 <h6>After Test &emsp13; :
                                   <?= $row["after_test"]; ?>
-                                </h6>
-                                <h6>Due Date &emsp13; :
-                                  <?= $row["due_date"]; ?>
                                 </h6>
                                 <h6>Note &emsp13; :
                                   <?= $row["note"]; ?>
@@ -654,10 +647,6 @@ if (isset($_POST["cari-ready"])) {
                                 <input type="text" class="form-control" name="after" id="after"
                                   value="<?= $row["after_test"]; ?>">
 
-                                <label for="duedate" class="mt-3 mb-1">Due Date </label>
-                                <input type="text" class="form-control" name="duedate" id="duedate"
-                                  value="<?= $row["due_date"]; ?>">
-
                                 <label for="note" class="mt-3 mb-1">Note </label>
                                 <input type="text" class="form-control" name="note" id="note"
                                   value="<?= $row["note"]; ?>">
@@ -721,9 +710,6 @@ if (isset($_POST["cari-ready"])) {
                               </h6>
                               <h6>After Test &emsp13; :
                                 <?= $row["after_test"]; ?>
-                              </h6>
-                              <h6>Due Date &emsp13; :
-                                <?= $row["due_date"]; ?>
                               </h6>
                               <h6>Note &emsp13; :
                                 <?= $row["note"]; ?>

@@ -61,7 +61,7 @@ ul:not(.lists) li .prog{
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: rgba(68, 68, 68, 0.781);
+    background-color: rgba(210, 210, 210, 0.713);
     margin: 14px 0;
     display: grid;
     place-items: center;
@@ -74,7 +74,7 @@ ul:not(.lists) li .prog{
     position: absolute;
     width: 125px;
     height: 5px;
-    background-color: rgba(68, 68, 68, 0.781);
+    background-color: rgba(210, 210, 210, 0.713);
     right: 30px;
 }
 .one::after{

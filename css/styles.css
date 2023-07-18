@@ -236,6 +236,42 @@ label {
   animation: fade-in 1.5s linear;
 }
 
+.notification-fail-track {
+  position: absolute;
+  /* bottom: 500px; */
+  top: 100px;
+  right: 400px;
+  padding: 12px 10px;
+  width: max-content;
+  height: 50px;
+  border-radius: 6px;
+  background-color: #d60000;
+  color: #dfffcf;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(30px);
+  opacity: 0;
+  visibility: hidden;
+  animation: fade-in 1.5s linear;
+}
+
+.notification-fail-confirm {
+  position: absolute;
+  /* bottom: 500px; */
+  top: 100px;
+  right: 300px;
+  padding: 12px 10px;
+  width: max-content;
+  height: 50px;
+  border-radius: 6px;
+  background-color: #d60000;
+  color: #dfffcf;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(30px);
+  opacity: 0;
+  visibility: hidden;
+  animation: fade-in 1.5s linear;
+}
+
 .notification_icon {
   height: 26px;
   width: 26px;
