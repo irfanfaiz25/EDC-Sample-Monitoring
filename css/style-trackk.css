@@ -26,7 +26,7 @@
     color: #333;
 }
 .head_1 span{
-    color: #ff4732;
+    color: #f25a5a;
 }
 .head_2{
     font-size: 16px;
@@ -34,30 +34,30 @@
     color: #333;
     margin-top: 3px;
 }
-ul:not(.lists){
+ul:not(.nav-links){
     display: flex;
     margin-top: 80px;
 }
-ul:not(.lists) li{
+ul:not(.nav-links) li{
     list-style: none;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-ul:not(.lists) li .icon{
+ul:not(.nav-links) li .icon{
     font-size: 35px;
-    color: #ff4732;
+    color: #f25a5a;
     margin: 0 60px;
 }
-ul:not(.lists) li .text{
+ul:not(.nav-links) li .text{
     font-size: 14px;
     font-weight: 600;
-    color: #ff4732;
+    color: #f25a5a;
 }
 
 /* prog Div Css  */
 
-ul:not(.lists) li .prog{
+ul:not(.nav-links) li .prog{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -82,27 +82,27 @@ ul:not(.lists) li .prog{
     height: 0;
 }
 
-ul:not(.lists) li .prog .uil{
+ul:not(.nav-links) li .prog .uil{
     display: none;
 }
-ul:not(.lists) li .prog p{
+ul:not(.nav-links) li .prog p{
     font-size: 13px;
 }
 
 /* Active Css  */
 
-ul:not(.lists) li .active{
-    background-color: #ff4732;
+ul:not(.nav-links) li .active{
+    background-color: #f25a5a;
     display: grid;
     place-items: center;
 }
 li .active::after{
-    background-color: #ff4732;
+    background-color: #f25a5a;
 }
-ul:not(.lists) li .active p{
+ul:not(.nav-links) li .active p{
     display: none;
 }
-ul:not(.lists) li .active .uil{
+ul:not(.nav-links) li .active .uil{
     font-size: 20px;
     display: flex;
 }
@@ -110,13 +110,13 @@ ul:not(.lists) li .active .uil{
 /* Responsive Css  */
 
 @media (max-width: 980px) {
-    ul:not(.lists){
+    ul:not(.nav-links){
         flex-direction: column;
     }
-    ul:not(.lists) li{
+    ul:not(.nav-links) li{
         flex-direction: row;
     }
-    ul:not(.lists) li .prog{
+    ul:not(.nav-links) li .prog{
         margin: 0 30px;
     }
     .prog::after{
@@ -130,7 +130,7 @@ ul:not(.lists) li .active .uil{
     .one::after{
         height: 0;
     }
-    ul:not(.lists) li .icon{
+    ul:not(.nav-links) li .icon{
         margin: 15px 0;
     }
 }

@@ -30,22 +30,20 @@ function tambah($data)
     $tujuan4 = htmlspecialchars($data["tujuan4"]);
     $tujuan5 = htmlspecialchars($data["tujuan5"]);
     $tools = htmlspecialchars($data["tools"]);
-    // $duedate = htmlspecialchars($data["duedate"]);
     $note = htmlspecialchars($data["note"]);
-
-    if (isset($data["status"])) {
-        $after = htmlspecialchars($data["status"]);
-    }
+    $date_ent = date_create(date('Y-m-d'));
+    date_modify($date_ent, '+1 month');
+    $due_date = date_format($date_ent, 'Y-m-d');
 
     if (
         $nama == "" || $qty == "" || $cust == "" || $tgl_dtg == ""
-        || $tgl_dtg == "dd/mm/yyyy" || $tools == "" || $after == ""
+        || $tgl_dtg == "dd/mm/yyyy" || $tools == ""
     ) {
         return false;
     }
 
     $input = "INSERT IGNORE INTO tb_sample VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg',
-    '$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools','$after','','','','$note','','','','')";
+    '$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools','','','','$due_date','$note','','','','')";
 
     mysqli_query($konek, $input);
 
@@ -70,7 +68,6 @@ function ubahSample($data)
     $tujuan5 = htmlspecialchars($data["tujuan5"]);
     $tools = htmlspecialchars($data["tools"]);
     $after = htmlspecialchars($data["after"]);
-    // $duedate = htmlspecialchars($data["duedate"]);
     $note = htmlspecialchars($data["note"]);
 
     $edit = "UPDATE tb_sample SET sample_test='$smp_test',njo='$njo',nm_sample='$nama',qty='$qty',
@@ -97,7 +94,6 @@ function tracking($data)
     global $konek;
 
     $sample = htmlspecialchars($data["sample"]);
-    $id_kry = htmlspecialchars($data["id_kry"]);
     date_default_timezone_set("Asia/Jakarta");
     $date = date("Y-m-d H:i:s");
 
@@ -106,8 +102,11 @@ function tracking($data)
     $cari_sample = mysqli_fetch_assoc($rs);
     $id_loc = $cari_sample["id_loc"];
     $date_subs = date_create($cari_sample["tgl_datang"]);
+    $date_ret = date_create($cari_sample["date_return"]);
     date_modify($date_subs, '+1 month');
+    date_modify($date_ret, '+1 month');
     $due_date1 = date_format($date_subs, 'Y-m-d');
+    $due_date2 = date_format($date_ret, 'Y-m-d');
 
     $nama = "faiz";
 
@@ -125,6 +124,8 @@ function tracking($data)
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', date_take='$date' WHERE sample_test='$sample'";
         } elseif ($id_loc == 2) {
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', date_return='$date' WHERE sample_test='$sample'";
+        } elseif ($id_loc == 3) {
+            $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', due_date='$due_date2' WHERE sample_test='$sample'";
         } elseif ($id_loc > 4 || $id_loc < 0) {
             return false;
         }
@@ -151,22 +152,18 @@ function return_track($data)
 
 }
 
-function cari_sample($keyword)
+function update_after($data)
 {
     global $konek;
 
-    $cari = "SELECT * FROM tb_sample WHERE sample_test LIKE '%$keyword%' OR nm_sample LIKE '%$keyword%' AND njo=''";
+    $sample_test = $data["sample_test"];
+    $after_test = $data["after_test"];
 
-    return query($cari);
-}
+    $update = "UPDATE tb_sample SET after_test='$after_test' WHERE sample_test='$sample_test'";
 
-function cari_sample_ready($keyword)
-{
-    global $konek;
+    mysqli_query($konek, $update);
 
-    $cari = "SELECT * FROM tb_sample WHERE sample_test LIKE '%$keyword%' OR nm_sample LIKE '%$keyword%' OR njo LIKE '%$keyword%' AND njo != ''";
-
-    return query($cari);
+    return mysqli_affected_rows($konek);
 }
 
 
