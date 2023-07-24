@@ -433,17 +433,17 @@ if (isset($_GET["after_test"])) {
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show" id="scrap">
+
+                        <div class="tab-pane fade show active" id="scrap">
                             <div class="card-dash-body">
 
                                 <div class="table-responsive">
                                     <div id="pending-table" style="color: black !important;">
-                                        <table id="tabel-data2" class="table table-bordered align-middle text-center">
+                                        <table id="tabel-scrap" class="table table-bordered align-middle text-center">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col" hidden>Timestamp</th>
-                                                    <th scope="col">After</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
@@ -644,25 +644,6 @@ if (isset($_GET["after_test"])) {
                                                     <td hidden>
                                                         <?= $data["time_stamp"]; ?>
                                                     </td>
-                                                    <td>
-                                                        <button class="btn btn-danger btn-sm dropdown-toggle" role="button"
-                                                            data-bs-toggle="dropdown" aria-expanded="false" <?php
-                                                            if ($data["id_loc"] != 4) {
-                                                                echo "disabled";
-                                                            }
-                                                            ?>>
-                                                            After Test
-                                                        </button>
-
-                                                        <ul class="nav-links dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                    href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
-                                                            </li>
-                                                            <li><a class="dropdown-item"
-                                                                    href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
-                                                                    to Customer</a></li>
-                                                        </ul>
-                                                    </td>
                                                 </tr>
 
                                                 <?php $i++; ?>
@@ -673,17 +654,17 @@ if (isset($_GET["after_test"])) {
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show" id="return">
+
+                        <div class="tab-pane fade show active" id="return">
                             <div class="card-dash-body">
 
                                 <div class="table-responsive">
                                     <div id="pending-table" style="color: black !important;">
-                                        <table id="tabel-data3" class="table table-bordered align-middle text-center">
+                                        <table id="tabel-return" class="table table-bordered align-middle text-center">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col" hidden>Timestamp</th>
-                                                    <th scope="col">After</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
@@ -884,25 +865,6 @@ if (isset($_GET["after_test"])) {
                                                     <td hidden>
                                                         <?= $data["time_stamp"]; ?>
                                                     </td>
-                                                    <td>
-                                                        <button class="btn btn-danger btn-sm dropdown-toggle" role="button"
-                                                            data-bs-toggle="dropdown" aria-expanded="false" <?php
-                                                            if ($data["id_loc"] != 4) {
-                                                                echo "disabled";
-                                                            }
-                                                            ?>>
-                                                            After Test
-                                                        </button>
-
-                                                        <ul class="nav-links dropdown-menu">
-                                                            <li><a class="dropdown-item"
-                                                                    href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
-                                                            </li>
-                                                            <li><a class="dropdown-item"
-                                                                    href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
-                                                                    to Customer</a></li>
-                                                        </ul>
-                                                    </td>
                                                 </tr>
 
                                                 <?php $i++; ?>
@@ -913,12 +875,7 @@ if (isset($_GET["after_test"])) {
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="tab-pane fade" id="scrap">
 
-                        </div>
-                        <div class="tab-pane fade" id="return">
-
-                        </div> -->
                     </div>
 
 
@@ -949,32 +906,34 @@ if (isset($_GET["after_test"])) {
             .draw();
 
         $(document).ready(function () {
-            $('#tabel-data2').DataTable();
+            $('#tabel-scrap').DataTable();
         });
 
-        $('#tabel-data2').dataTable({
+        $('#tabel-scrap').dataTable({
             "pageLength": 2
         });
 
-        var table = $('#tabel-data2').DataTable();
+        var table = $('#tabel-scrap').DataTable();
 
         table
             .order([1, 'desc'])
             .draw();
 
         $(document).ready(function () {
-            $('#tabel-data3').DataTable();
+            $('#tabel-return').DataTable();
         });
 
-        $('#tabel-data3').dataTable({
+        $('#tabel-return').dataTable({
             "pageLength": 2
         });
 
-        var table = $('#tabel-data3').DataTable();
+        var table = $('#tabel-return').DataTable();
 
         table
             .order([1, 'desc'])
             .draw();
+
+
 
         document.addEventListener("DOMContentLoaded", function () {
             var tabList = [].slice.call(document.querySelectorAll('a[data-bs-toggle="tab"]'));

@@ -731,12 +731,13 @@ margin-left: auto;
 }
 
 .nav-tab {
-  margin-top: -50px;
+  margin-top: -40px!important;
 }
 
 #myTab {
   padding-left: 20px;
   padding-bottom: 1px;
 }
+
 
 
