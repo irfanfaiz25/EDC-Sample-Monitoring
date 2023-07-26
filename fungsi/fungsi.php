@@ -149,7 +149,6 @@ function return_track($data)
     mysqli_query($konek, $update);
 
     return mysqli_affected_rows($konek);
-
 }
 
 function update_after($data)
@@ -160,11 +159,13 @@ function update_after($data)
     $after_test = $data["after_test"];
 
     $update = "UPDATE tb_sample SET after_test='$after_test' WHERE sample_test='$sample_test'";
-
     mysqli_query($konek, $update);
+
+    $move = "INSERT INTO tb_history SELECT * FROM tb_sample WHERE sample_test = '$sample_test'";
+    mysqli_query($konek, $move);
+
+    $del = "DELETE FROM tb_sample WHERE sample_test = '$sample_test'";
+    mysqli_query($konek, $del);
 
     return mysqli_affected_rows($konek);
 }
-
-
-?>

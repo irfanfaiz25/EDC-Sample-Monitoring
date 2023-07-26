@@ -1,11 +1,11 @@
 /* Google Fonts - Poppins */
 /* Google Fonts Import Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Karla', sans-serif;
 }
 html {
   font-size: 80%;
@@ -197,6 +197,7 @@ html {
 .sidebar.close .profile-details img{
   padding: 10px;
 }
+
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .job{
   color: rgb(56, 56, 56);
@@ -585,11 +586,12 @@ label {
 }
 
 .fill {
-  font-size: 2.5rem;
+  font-size: 5.2rem;
+  margin-top: -13px;
 }
 
 .note {
-  padding-top: 0px;
+  margin-top: -70px;
   /* opacity: .8; */
   color:#05060f;
   font-size: 1.3rem;
@@ -629,13 +631,13 @@ label {
 }
 
 .nav-item .active {
-  background-color: #00FFA0 !important;
+  background-color: #05060f !important;
   
 }
 
 .nav .active {
-  background-color: #00FFA0 !important;
-  
+  background-color: #05060f !important;
+  color:#f8f8f8 !important;
 }
 
 .cont-dash2 {
@@ -645,6 +647,7 @@ label {
 .notif {
 margin-left: auto;
 /* margin-right: 20px; */
+z-index: 100;
 }
 
 .icon {
@@ -744,5 +747,15 @@ margin-left: auto;
   padding-bottom: 1px;
 }
 
+.icon-dash {
+  padding-left: 12rem;
+  opacity:.6;
+}
+
+.checkbox-lg .form-check-input{
+ /* top: .8rem; */
+ scale: 1.4;
+ /* margin-right: 0.7rem; */
+ }
 
 

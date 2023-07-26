@@ -4,6 +4,8 @@ include "fungsi/phpqrcode/qrlib.php";
 
 $sample = query("SELECT * FROM tb_sample WHERE njo=''");
 $sample_ready = query("SELECT * FROM tb_sample WHERE njo!=''");
+$today = date("d/m/Y");
+// echo $today;
 
 // membuat kode
 $query = mysqli_query($konek, "SELECT max(sample_test) as kodeTerbesar FROM tb_sample");
@@ -59,8 +61,7 @@ if (isset($_POST["edit-ready"])) {
 
 
   <!-- CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" />
@@ -144,12 +145,12 @@ if (isset($_POST["edit-ready"])) {
             </h2>
             <!-- errorinput notif -->
             <?php
-            if (isset($errorinput)): ?>
+            if (isset($errorinput)) : ?>
               <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
                 input data gagal, periksa kembali data yang di inputkan!
                 <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
               </div>
-              <?php
+            <?php
             endif;
             ?>
             <form action="" method="post">
@@ -167,8 +168,7 @@ if (isset($_POST["edit-ready"])) {
                 </thead>
                 <tr>
                   <td><label for="sample-test">Sample Test</label></td>
-                  <td><input type="text" id="sample-test" name="sample-test" class="form-control"
-                      value="<?= $kode_sample; ?>" readonly></td>
+                  <td><input type="text" id="sample-test" name="sample-test" class="form-control" value="<?= $kode_sample; ?>" readonly></td>
                 </tr>
                 <tr>
                   <td><label for="njo">NJO / Work Code</label></td>
@@ -221,13 +221,124 @@ if (isset($_POST["edit-ready"])) {
                 <tr>
                   <td colspan="2">
                     <div class="btn-add text-center pt-3 pb-3">
-                      <button type="submit" name="btn-submit" class="btn btn-lg btn-success"><strong><i
-                            class="fa fa-circle-plus"></i> ADD</strong>
+
+                      <button type="button" class="btn btn-success btn-block btn-lg" data-toggle="modal" data-target="#myModal">
+                        <strong>NEXT <i class="fa fa-circle-arrow-right"></i></strong>
                       </button>
                     </div>
                   </td>
                 </tr>
               </table>
+
+
+
+              <!-- The Modal -->
+              <div class="modal" id="myModal">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">SAMPLE DATA CONFIRMATION</h4>
+                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered text-center">
+                          <thead class="table-light">
+                            <tr>
+                              <th colspan="2">
+                                <img class="m-2" src="img/logoo.png" width="90" height="20" alt="">
+                              </th>
+                              <th class="text-center">
+                                <h5>CHECK LIST SAMPLE</h5>
+                              </th>
+                            </tr>
+                            <tr>
+                              <th width="10">NO</th>
+                              <th>ITEM</th>
+                              <th>MKT</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1.</td>
+                              <td class="text-start">
+                                <label for="cek1">Nama/nomor sample sesuai dengan yang diorder.</label>
+                              </td>
+                              <td class="checkbox-lg">
+                                <input class="form-check-input border-1 border-secondary" type="checkbox" value="1" id="cek1" name="cek_nama">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>2.</td>
+                              <td class="text-start">
+                                <label for="cek2">Jumlah sample sesuai dengan yang diorder.</label>
+                              </td>
+                              <td class="checkbox-lg">
+                                <input class="form-check-input border-1 border-secondary" type="checkbox" value="1" id="cek2" name="cek_qty">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>3.</td>
+                              <td class="text-start">
+                                <label for="cek3">Kelengkapan sample sudah sesuai.</label>
+                              </td>
+                              <td class="checkbox-lg">
+                                <input class="form-check-input border-1 border-secondary" type="checkbox" value="1" id="cek3" name="cek_comp">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>4.</td>
+                              <td class="text-start">
+                                <label for="cek4">Sample seragam (pengujian lebih dari 1 sample).</label>
+                              </td>
+                              <td class="checkbox-lg">
+                                <input class="form-check-input border-1 border-secondary" type="checkbox" value="1" id="cek4" name="cek_dupl">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>5.</td>
+                              <td class="text-start">
+                                <label for="cek5">Kondisi sample layak untuk diuji.</label>
+                              </td>
+                              <td class="checkbox-lg">
+                                <input class="form-check-input border-1 border-secondary" type="checkbox" value="1" id="cek5" name="cek_layak">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" class="text-start">
+                                Keterangan :
+                                <p>1. &nbsp;Untuk point 3 bilamana sample yang diuji adalah sample assy.</p>
+                                <p style="margin-top: -10px;">2. Untuk point 4 bilamana sample yang diuji lebih dari satu dan bentuknya harus sama saat diuji.</p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" class="text-start">
+                                Tekan checkbox dan berikan simbol (&#10003;) jika sesuai dan (&nbsp;) 'kosongkan' jika tidak sesuai.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">Sign name,</td>
+                              <td>Silmi</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      <button type="submit" name="btn-submit" class="btn btn-success"><strong><i class="fa fa-circle-plus"></i> REGISTER</strong>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
 
 
             </form>
@@ -238,37 +349,35 @@ if (isset($_POST["edit-ready"])) {
               SAMPLE PENDING
             </h2>
 
-
             <!-- error edit sample pending notif -->
             <?php
-            if (isset($errorsample)): ?>
+            if (isset($errorsample)) : ?>
               <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
                 edit data gagal!
                 <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
               </div>
-              <?php
+            <?php
             endif;
             ?>
 
             <div class="table-responsive">
               <!-- <div class="table-wrapper-scroll-y my-custom-scrollbar"> -->
               <div id="pending-table">
-                <table id="tabel-data1" class="table table-bordered align-middle text-center">
-                  <thead class="table-dark">
+                <table id="tabel-data1" class="table table-bordered align-middle text-center table-striped">
+                  <thead class="table-dark align-middle" height="50">
                     <tr>
                       <th scope="col">No</th>
                       <th scope="col">Sample Test</th>
                       <th scope="col">Nama</th>
                       <th scope="col">Qty</th>
                       <th scope="col">Tanggal</th>
-                      <th scope="col">After Test</th>
                       <th scope="col">Due Date</th>
                       <th scope="col">Detail</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
                   <?php $i = 1; ?>
-                  <?php foreach ($sample as $row): ?>
+                  <?php foreach ($sample as $row) : ?>
                     <tr>
                       <td>
                         <?= $i; ?>
@@ -286,14 +395,10 @@ if (isset($_POST["edit-ready"])) {
                         <?= $row["tgl_datang"]; ?>
                       </td>
                       <td>
-                        <?= $row["after_test"]; ?>
-                      </td>
-                      <td>
                         <?= $row["due_date"]; ?>
                       </td>
                       <td>
-                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                          data-target="#detailModal<?= $row["sample_test"]; ?>"><strong>DETAIL</strong></button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal<?= $row["sample_test"]; ?>"><strong>DETAIL</strong></button>
                       </td>
                       <td width="150">
                         <div class="row text-center" style="padding-left: 10px; padding-right: 10px;">
@@ -305,14 +410,12 @@ if (isset($_POST["edit-ready"])) {
                             </a>
                           </div>
                           <div class="col-md-4 p-1">
-                            <button class="btn btn-sm btn-success" name="edit" data-toggle="modal"
-                              data-target="#editModal<?= $row["sample_test"]; ?>">
+                            <button class="btn btn-sm btn-success" name="edit" data-toggle="modal" data-target="#editModal<?= $row["sample_test"]; ?>">
                               <i class="fa fa-pen-to-square"></i>
                             </button>
                           </div>
                           <div class="col-md-4 p-1">
-                            <button class="btn btn-sm btn-danger" name="delete" data-toggle="modal"
-                              data-target="#deleteModal<?= $row["sample_test"]; ?>">
+                            <button class="btn btn-sm btn-danger" name="delete" data-toggle="modal" data-target="#deleteModal<?= $row["sample_test"]; ?>">
                               <i class="fa fa-trash"></i>
                             </button>
                           </div>
@@ -322,68 +425,108 @@ if (isset($_POST["edit-ready"])) {
 
                     <!-- modal edit data -->
                     <div id="editModal<?= $row["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                      <div class="modal-dialog">
+                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4 class="text-black">EDIT DATA</h4>
+                            <h4 class="text-black">EDIT</h4>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
+                            <h2>SAMPLE DATA</h2>
                             <form action="" method="post" enctype="multipart/form-data">
+                              <div class="row g-3 align-items-center mt-3 mb-1">
+                                <div class="col-md-4">
+                                  <label for="id">Sample Test</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>" readonly>
+                                </div>
+                              </div>
 
-                              <label for="id" class="mt-3 mb-1">Sample Test</label>
-                              <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>"
-                                readonly>
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="njo">NJO/Work Order</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="njo" id="njo" value="<?= $row["njo"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="njo" class="mt-3 mb-1">NJO/Work Order</label>
-                              <input type="text" class="form-control" name="njo" id="njo" value="<?= $row["njo"]; ?>">
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="sample">Nama Sample</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="sample" id="sample" value="<?= $row["nm_sample"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="sample" class="mt-3 mb-1">Nama Sample</label>
-                              <input type="text" class="form-control" name="sample" id="sample"
-                                value="<?= $row["nm_sample"]; ?>">
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="qty">Qty</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="qty" id="qty" value="<?= $row["qty"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="qty" class="mt-3 mb-1">Qty</label>
-                              <input type="text" class="form-control" name="qty" id="qty" value="<?= $row["qty"]; ?>">
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="cust">Customer</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="cust" id="cust" value="<?= $row["customer"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="cust" class="mt-3 mb-1">Customer</label>
-                              <input type="text" class="form-control" name="cust" id="cust"
-                                value="<?= $row["customer"]; ?>">
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="tgl-dtg">Tanggal Datang</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg" value="<?= $row["tgl_datang"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="tgl-dtg" class="mt-3 mb-1">Tanggal Datang</label>
-                              <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg"
-                                value="<?= $row["tgl_datang"]; ?>">
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="tujuan">Tujuan (Item-test)</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="tujuan1" id="tujuan1" value="<?= $row["tujuan1"]; ?>">
+                                  <input type="text" class="form-control mt-1" name="tujuan2" id="tujuan2" value="<?= $row["tujuan2"]; ?>">
+                                  <input type="text" class="form-control mt-1" name="tujuan3" id="tujuan3" value="<?= $row["tujuan3"]; ?>">
+                                  <input type="text" class="form-control mt-1" name="tujuan4" id="tujuan4" value="<?= $row["tujuan4"]; ?>">
+                                  <input type="text" class="form-control mt-1" name="tujuan5" id="tujuan5" value="<?= $row["tujuan5"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="tujuan" class="mt-3 mb-1">Tujuan (Item-test)</label>
-                              <input type="text" class="form-control" name="tujuan1" id="tujuan1"
-                                value="<?= $row["tujuan1"]; ?>">
-                              <input type="text" class="form-control mt-3" name="tujuan2" id="tujuan2"
-                                value="<?= $row["tujuan2"]; ?>">
-                              <input type="text" class="form-control mt-3" name="tujuan3" id="tujuan3"
-                                value="<?= $row["tujuan3"]; ?>">
-                              <input type="text" class="form-control mt-3" name="tujuan4" id="tujuan4"
-                                value="<?= $row["tujuan4"]; ?>">
-                              <input type="text" class="form-control mt-3" name="tujuan5" id="tujuan5"
-                                value="<?= $row["tujuan5"]; ?>">
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="tools">Tools </label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="tools" id="tools" value="<?= $row["tools"]; ?>">
+                                </div>
+                              </div>
 
-                              <label for="tools" class="mt-3 mb-1">Tools </label>
-                              <input type="text" class="form-control" name="tools" id="tools"
-                                value="<?= $row["tools"]; ?>">
-
-                              <label for="after" class="mt-3 mb-1">After Test </label>
-                              <input type="text" class="form-control" name="after" id="after"
-                                value="<?= $row["after_test"]; ?>">
-
-                              <label for="note" class="mt-3 mb-1">Note </label>
-                              <input type="text" class="form-control" name="note" id="note" value="<?= $row["note"]; ?>">
-
+                              <div class="row g-3 align-items-center mt-1 mb-1">
+                                <div class="col-md-4">
+                                  <label for="note">Note </label>
+                                </div>
+                                <div class="col-md-8">
+                                  <textarea type="text" class="form-control" name="note" id="note"><?= $row["note"]; ?></textarea>
+                                </div>
+                              </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"></i>
-                              CANCEL</button>
-                            <button type="submit" class="btn btn-primary" name="edit-sample"><i class="fa fa-edit"></i>
-                              EDIT</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-xmark"></i>
+                              CLOSE</button>
+                            <button class="btn btn-primary" type="submit" name="submit-check"><i class="fa fa-edit"></i>
+                              SUBMIT</button>
                             </form>
                           </div>
+
                         </div>
                       </div>
                     </div>
@@ -433,15 +576,12 @@ if (isset($_POST["edit-ready"])) {
                             <h6>Tools &emsp13; :
                               <?= $row["tools"]; ?>
                             </h6>
-                            <h6>After Test &emsp13; :
-                              <?= $row["after_test"]; ?>
-                            </h6>
                             <h6>Note &emsp13; :
                               <?= $row["note"]; ?>
                             </h6>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"></i>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-xmark"></i>
                               CLOSE</button>
                           </div>
                         </div>
@@ -465,13 +605,11 @@ if (isset($_POST["edit-ready"])) {
                                 <h6 class="pb-5">Do you want to delete '
                                   <?= $row["sample_test"]; ?> ' This process cannot be undone.
                                 </h6>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i
-                                    class="fa-regular fa-circle-xmark"></i>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa-regular fa-circle-xmark"></i>
                                   CANCEL
                                 </button>
                                 <a href="hapus.php?id_sample=<?= $row["sample_test"]; ?>">
-                                  <button type="submit" class="btn btn-success" name="delete-sample"><i
-                                      class="fa-regular fa-circle-check"></i>
+                                  <button type="submit" class="btn btn-success" name="delete-sample"><i class="fa-regular fa-circle-check"></i>
                                     YES
                                   </button>
                                 </a>
@@ -497,33 +635,32 @@ if (isset($_POST["edit-ready"])) {
             </h2>
 
             <?php
-            if (isset($errorready)): ?>
+            if (isset($errorready)) : ?>
               <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
                 edit data gagal!
                 <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
               </div>
-              <?php
+            <?php
             endif;
             ?>
 
             <div class="table-responsive">
               <!-- <div class="table-wrapper-scroll-y my-custom-scrollbar"> -->
-              <table id="tabel-data2" class="table table-bordered align-middle text-center">
-                <thead class="table-dark">
+              <table id="tabel-data2" class="table table-bordered align-middle text-center table-striped">
+                <thead class="table-dark align-middle" height="50">
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">Sample Test</th>
                     <th scope="col">Work Code</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Qty</th>
-                    <th scope="col">After Test</th>
                     <th scope="col">Due Date</th>
                     <th scope="col">Detail</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <?php $i = 1; ?>
-                <?php foreach ($sample_ready as $row): ?>
+                <?php foreach ($sample_ready as $row) : ?>
                   <tr>
                     <td>
                       <?= $i; ?>
@@ -541,14 +678,10 @@ if (isset($_POST["edit-ready"])) {
                       <?= $row["qty"]; ?>
                     </td>
                     <td>
-                      <?= $row["after_test"]; ?>
-                    </td>
-                    <td>
                       <?= $row["due_date"]; ?>
                     </td>
                     <td>
-                      <button class="btn btn-sm btn-primary" name="editReady" data-toggle="modal"
-                        data-target="#detailReady<?= $row["sample_test"]; ?>"><strong>DETAIL</strong></button>
+                      <button class="btn btn-sm btn-primary" name="editReady" data-toggle="modal" data-target="#detailReady<?= $row["sample_test"]; ?>"><strong>DETAIL</strong></button>
                     </td>
                     <td width="150">
                       <div class="row text-center" style="padding-left: 7px; padding-right: 10px;">
@@ -560,14 +693,12 @@ if (isset($_POST["edit-ready"])) {
                           </a>
                         </div>
                         <div class="col-md-4 p-1">
-                          <button class="btn btn-sm btn-success" name="editReady" data-toggle="modal"
-                            data-target="#editReady<?= $row["sample_test"]; ?>">
+                          <button class="btn btn-sm btn-success" name="editReady" data-toggle="modal" data-target="#editReady<?= $row["sample_test"]; ?>">
                             <i class="fa fa-pen-to-square"></i>
                           </button>
                         </div>
                         <div class="col-md-4 p-1">
-                          <button class="btn btn-sm btn-danger" name="delete" data-toggle="modal"
-                            data-target="#deleteReady<?= $row["sample_test"]; ?>">
+                          <button class="btn btn-sm btn-danger" name="delete" data-toggle="modal" data-target="#deleteReady<?= $row["sample_test"]; ?>">
                             <i class="fa fa-trash"></i>
                           </button>
                         </div>
@@ -588,52 +719,38 @@ if (isset($_POST["edit-ready"])) {
                           <form action="" method="post" enctype="multipart/form-data">
 
                             <label for="id" class="mt-3 mb-1">Sample Test</label>
-                            <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>"
-                              readonly>
+                            <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>" readonly>
 
                             <label for="njo" class="mt-3 mb-1">NJO/Work Order</label>
                             <input type="text" class="form-control" name="njo" id="njo" value="<?= $row["njo"]; ?>">
 
                             <label for="sample" class="mt-3 mb-1">Nama Sample</label>
-                            <input type="text" class="form-control" name="sample" id="sample"
-                              value="<?= $row["nm_sample"]; ?>">
+                            <input type="text" class="form-control" name="sample" id="sample" value="<?= $row["nm_sample"]; ?>">
 
                             <label for="qty" class="mt-3 mb-1">Qty</label>
                             <input type="text" class="form-control" name="qty" id="qty" value="<?= $row["qty"]; ?>">
 
                             <label for="cust" class="mt-3 mb-1">Customer</label>
-                            <input type="text" class="form-control" name="cust" id="cust"
-                              value="<?= $row["customer"]; ?>">
+                            <input type="text" class="form-control" name="cust" id="cust" value="<?= $row["customer"]; ?>">
 
                             <label for="tgl-dtg" class="mt-3 mb-1">Tanggal Datang</label>
-                            <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg"
-                              value="<?= $row["tgl_datang"]; ?>">
+                            <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg" value="<?= $row["tgl_datang"]; ?>">
 
                             <label for="tujuan" class="mt-3 mb-1">Tujuan (Item-test)</label>
-                            <input type="text" class="form-control" name="tujuan1" id="tujuan1"
-                              value="<?= $row["tujuan1"]; ?>">
-                            <input type="text" class="form-control mt-3" name="tujuan2" id="tujuan2"
-                              value="<?= $row["tujuan2"]; ?>">
-                            <input type="text" class="form-control mt-3" name="tujuan3" id="tujuan3"
-                              value="<?= $row["tujuan3"]; ?>">
-                            <input type="text" class="form-control mt-3" name="tujuan4" id="tujuan4"
-                              value="<?= $row["tujuan4"]; ?>">
-                            <input type="text" class="form-control mt-3" name="tujuan5" id="tujuan5"
-                              value="<?= $row["tujuan5"]; ?>">
+                            <input type="text" class="form-control" name="tujuan1" id="tujuan1" value="<?= $row["tujuan1"]; ?>">
+                            <input type="text" class="form-control mt-3" name="tujuan2" id="tujuan2" value="<?= $row["tujuan2"]; ?>">
+                            <input type="text" class="form-control mt-3" name="tujuan3" id="tujuan3" value="<?= $row["tujuan3"]; ?>">
+                            <input type="text" class="form-control mt-3" name="tujuan4" id="tujuan4" value="<?= $row["tujuan4"]; ?>">
+                            <input type="text" class="form-control mt-3" name="tujuan5" id="tujuan5" value="<?= $row["tujuan5"]; ?>">
 
                             <label for="tools" class="mt-3 mb-1">Tools </label>
                             <input type="text" class="form-control" name="tools" id="tools" value="<?= $row["tools"]; ?>">
 
-                            <label for="after" class="mt-3 mb-1">After Test </label>
-                            <input type="text" class="form-control" name="after" id="after"
-                              value="<?= $row["after_test"]; ?>">
-
                             <label for="note" class="mt-3 mb-1">Note </label>
                             <input type="text" class="form-control" name="note" id="note" value="<?= $row["note"]; ?>">
-
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"></i>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-xmark"></i>
                             CANCEL</button>
                           <button type="submit" class="btn btn-primary" name="edit-ready"><i class="fa fa-edit"></i>
                             EDIT</button>
@@ -688,15 +805,12 @@ if (isset($_POST["edit-ready"])) {
                           <h6>Tools &emsp13; :
                             <?= $row["tools"]; ?>
                           </h6>
-                          <h6>After Test &emsp13; :
-                            <?= $row["after_test"]; ?>
-                          </h6>
                           <h6>Note &emsp13; :
                             <?= $row["note"]; ?>
                           </h6>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"></i>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-xmark"></i>
                             CLOSE</button>
                         </div>
                       </div>
@@ -720,13 +834,11 @@ if (isset($_POST["edit-ready"])) {
                               <h6 class="pb-5">Do you want to delete '
                                 <?= $row["sample_test"]; ?> ' This process cannot be undone.
                               </h6>
-                              <button type="button" class="btn btn-danger" data-dismiss="modal"><i
-                                  class="fa-regular fa-circle-xmark"></i>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa-regular fa-circle-xmark"></i>
                                 CANCEL
                               </button>
                               <a href="hapus.php?id_sample=<?= $row["sample_test"]; ?>">
-                                <button type="submit" class="btn btn-success" name="delete-sample"><i
-                                    class="fa-regular fa-circle-check"></i>
+                                <button type="submit" class="btn btn-success" name="delete-sample"><i class="fa-regular fa-circle-check"></i>
                                   YES
                                 </button>
                               </a>
@@ -750,21 +862,18 @@ if (isset($_POST["edit-ready"])) {
         </div>
       </div>
     </div>
-    <!-- php button fungsi -->
-    <?php
 
 
-    ?>
   </section>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       var btn = document.getElementById("myBtn");
       var element = document.getElementById("myAlert");
 
       // Create alert instance
       var myAlert = new bootstrap.Alert(element);
 
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", function() {
         myAlert.close();
       });
     });
@@ -776,11 +885,11 @@ if (isset($_POST["edit-ready"])) {
 
     }, 2000);
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('#tabel-data1').DataTable();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('#tabel-data2').DataTable();
     });
 
@@ -797,12 +906,8 @@ if (isset($_POST["edit-ready"])) {
   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="js/script.js"></script>
 </body>
 

@@ -549,7 +549,8 @@ $sample_tbl = query("SELECT * FROM tb_sample ORDER BY time_stamp DESC");
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <div class="table-responsive">
-                            <table id="tabel-data" class="table table-responsive table-bordered align-middle">
+                            <table id="tabel-data"
+                                class="table table-responsive table-bordered align-middle table-striped">
                                 <thead class="table-secondary">
                                     <tr>
                                         <th>Sample Test</th>
