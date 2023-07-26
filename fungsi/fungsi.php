@@ -35,6 +35,36 @@ function tambah($data)
     date_modify($date_ent, '+1 month');
     $due_date = date_format($date_ent, 'Y-m-d');
 
+    if (isset($data["cek_nama"])) {
+        $cek_nama = 1;
+    } else {
+        $cek_nama = 0;
+    }
+
+    if (isset($data["cek_qty"])) {
+        $cek_qty = 1;
+    } else {
+        $cek_qty = 0;
+    }
+
+    if (isset($data["cek_comp"])) {
+        $cek_comp = 1;
+    } else {
+        $cek_comp = 0;
+    }
+
+    if (isset($data["cek_dupl"])) {
+        $cek_dupl = 1;
+    } else {
+        $cek_dupl = 0;
+    }
+
+    if (isset($data["cek_layak"])) {
+        $cek_layak = 1;
+    } else {
+        $cek_layak = 0;
+    }
+
     if (
         $nama == "" || $qty == "" || $cust == "" || $tgl_dtg == ""
         || $tgl_dtg == "dd/mm/yyyy" || $tools == ""
@@ -42,8 +72,10 @@ function tambah($data)
         return false;
     }
 
-    $input = "INSERT IGNORE INTO tb_sample VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg',
-    '$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools','','','','$due_date','$note','','','','')";
+    $input = "INSERT IGNORE INTO tb_sample (sample_test,njo,nm_sample,qty,customer,tgl_datang,tujuan1,tujuan2,tujuan3,tujuan4,tujuan5,
+    tools,after_test,date_take,date_return,due_date,note,id_loc,pic,rak,time_stamp,cek_nama,cek_qty,cek_comp,cek_dupl,cek_layak)
+    VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg','$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools',
+    '','','','$due_date','$note','','','','','$cek_nama','$cek_qty','$cek_comp','$cek_dupl','$cek_layak')";
 
     mysqli_query($konek, $input);
 

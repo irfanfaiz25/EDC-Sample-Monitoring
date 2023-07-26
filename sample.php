@@ -232,7 +232,7 @@ if (isset($_POST["edit-ready"])) {
 
 
 
-              <!-- The Modal -->
+              <!-- MODAL CEKLIS FORM -->
               <div class="modal" id="myModal">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
@@ -339,8 +339,7 @@ if (isset($_POST["edit-ready"])) {
                   </div>
                 </div>
               </div>
-
-
+              <!-- END MODAL CEKLIS FORM -->
             </form>
 
           </div>
@@ -425,99 +424,174 @@ if (isset($_POST["edit-ready"])) {
 
                     <!-- modal edit data -->
                     <div id="editModal<?= $row["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                      <div class="modal-dialog modal-lg">
+                      <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h4 class="text-black">EDIT</h4>
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <h2>SAMPLE DATA</h2>
-                            <form action="" method="post" enctype="multipart/form-data">
-                              <div class="row g-3 align-items-center mt-3 mb-1">
-                                <div class="col-md-4">
-                                  <label for="id">Sample Test</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>" readonly>
-                                </div>
-                              </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <h2>SAMPLE DATA</h2>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="row g-3 align-items-center mt-3 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="id">Sample Test</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="id" value="<?= $row["sample_test"]; ?>" readonly>
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="njo">NJO/Work Order</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="njo" id="njo" value="<?= $row["njo"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="njo">NJO/Work Order</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="njo" id="njo" value="<?= $row["njo"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="sample">Nama Sample</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="sample" id="sample" value="<?= $row["nm_sample"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="sample">Nama Sample</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="sample" id="sample" value="<?= $row["nm_sample"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="qty">Qty</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="qty" id="qty" value="<?= $row["qty"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="qty">Qty</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="qty" id="qty" value="<?= $row["qty"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="cust">Customer</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="cust" id="cust" value="<?= $row["customer"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="cust">Customer</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="cust" id="cust" value="<?= $row["customer"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="tgl-dtg">Tanggal Datang</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg" value="<?= $row["tgl_datang"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="tgl-dtg">Tanggal Datang</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="tgl-dtg" id="tgl-dtg" value="<?= $row["tgl_datang"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="tujuan">Tujuan (Item-test)</label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="tujuan1" id="tujuan1" value="<?= $row["tujuan1"]; ?>">
-                                  <input type="text" class="form-control mt-1" name="tujuan2" id="tujuan2" value="<?= $row["tujuan2"]; ?>">
-                                  <input type="text" class="form-control mt-1" name="tujuan3" id="tujuan3" value="<?= $row["tujuan3"]; ?>">
-                                  <input type="text" class="form-control mt-1" name="tujuan4" id="tujuan4" value="<?= $row["tujuan4"]; ?>">
-                                  <input type="text" class="form-control mt-1" name="tujuan5" id="tujuan5" value="<?= $row["tujuan5"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="tujuan">Tujuan (Item-test)</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="tujuan1" id="tujuan1" value="<?= $row["tujuan1"]; ?>">
+                                      <input type="text" class="form-control mt-1" name="tujuan2" id="tujuan2" value="<?= $row["tujuan2"]; ?>">
+                                      <input type="text" class="form-control mt-1" name="tujuan3" id="tujuan3" value="<?= $row["tujuan3"]; ?>">
+                                      <input type="text" class="form-control mt-1" name="tujuan4" id="tujuan4" value="<?= $row["tujuan4"]; ?>">
+                                      <input type="text" class="form-control mt-1" name="tujuan5" id="tujuan5" value="<?= $row["tujuan5"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="tools">Tools </label>
-                                </div>
-                                <div class="col-md-8">
-                                  <input type="text" class="form-control" name="tools" id="tools" value="<?= $row["tools"]; ?>">
-                                </div>
-                              </div>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="tools">Tools </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="tools" id="tools" value="<?= $row["tools"]; ?>">
+                                    </div>
+                                  </div>
 
-                              <div class="row g-3 align-items-center mt-1 mb-1">
-                                <div class="col-md-4">
-                                  <label for="note">Note </label>
+                                  <div class="row g-3 align-items-center mt-1 mb-1">
+                                    <div class="col-md-4">
+                                      <label for="note">Note </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <textarea type="text" class="form-control" name="note" id="note"><?= $row["note"]; ?></textarea>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                <h2>CHEKLIST SAMPLE</h2>
+                                <div class="row g-3 align-items-center mt-3 mb-1">
+                                  <div class="col-md-10">
+                                    <label for="cek1" class="col-form-label">
+                                      1. Nama/nomor sample sesuai dengan yang di order
+                                    </label>
+                                  </div>
+                                  <div class="col-md-2 checkbox-lg">
+                                    <input class="form-check-input border-1 border-primary" type="checkbox" value="1" id="cek1" name="cek1" <?php if ($row["cek_nama"] == true) {
+                                                                                                                                              echo "checked";
+                                                                                                                                            } ?> disabled>
+                                  </div>
                                 </div>
-                                <div class="col-md-8">
-                                  <textarea type="text" class="form-control" name="note" id="note"><?= $row["note"]; ?></textarea>
+                                <div class="row g-3 align-items-center mt-1 mb-1">
+                                  <div class="col-md-10">
+                                    <label for="cek2" class="col-form-label">
+                                      2. Jumlah sample sesuai dengan yang di order <?= $row["cek_qty"]; ?>
+                                    </label>
+                                  </div>
+                                  <div class="col-md-2 checkbox-lg">
+                                    <input class="form-check-input border-1 border-primary" type="checkbox" value="1" id="cek2" name="cek2" <?php if ($row["cek_qty"] == true) {
+                                                                                                                                              echo "checked";
+                                                                                                                                            } ?> disabled>
+                                  </div>
+                                </div>
+                                <div class="row g-3 align-items-center mt-1 mb-1">
+                                  <div class="col-md-10">
+                                    <label for="cek3" class="col-form-label">
+                                      3. Kelengkapan sample sudah sesuai
+                                    </label>
+                                  </div>
+                                  <div class="col-md-2 checkbox-lg">
+                                    <input class="form-check-input border-1 border-primary" type="checkbox" value="1" id="cek3" name="cek3" <?php if ($row["cek_comp"] == true) {
+                                                                                                                                              echo "checked";
+                                                                                                                                            } ?> disabled>
+                                  </div>
+                                </div>
+                                <div class="row g-3 align-items-center mt-1 mb-1">
+                                  <div class="col-md-10">
+                                    <label for="cek4" class="col-form-label">
+                                      4. Sample seragam (pengujian lebih dari 1 sample) <?= $row["cek_dupl"]; ?>
+                                    </label>
+                                  </div>
+                                  <div class="col-md-2 checkbox-lg">
+                                    <input class="form-check-input border-1 border-primary" type="checkbox" value="1" id="cek4" name="cek4" <?php if ($row["cek_dupl"] == true) {
+                                                                                                                                              echo "checked";
+                                                                                                                                            } ?> disabled>
+                                  </div>
+                                </div>
+                                <div class="row g-3 align-items-center mt-1 mb-1">
+                                  <div class="col-md-10">
+                                    <label for="cek5" class="col-form-label">
+                                      5. Kondisi sample layak untuk diuji <?= $row["cek_layak"]; ?>
+                                    </label>
+                                  </div>
+                                  <div class="col-md-2 checkbox-lg">
+                                    <input class="form-check-input border-1 border-primary" type="checkbox" value="1" id="cek5" name="cek5" <?php if ($row["cek_layak"] == true) {
+                                                                                                                                              echo "checked";
+                                                                                                                                            } ?> disabled>
+                                  </div>
+                                </div>
+                                <div class="row g-3 align-items-center mt-1 mb-1">
+                                  <p class="mb-0"><strong>Notes :</p>
+                                  <p class="mt-0">1. Untuk point 3 bilamana sample yang diuji adalah sample assy.</p>
+                                  <p class="mt-0">2. Untuk point 4 bilamana sample yang diuji lebih dari satu dan bentuknya harus sama saat diuji.</p>
+                                  <p class="mt-0">3. Tekan checkbox berikan simbol (&#10003;) jika sesuai dan (&nbsp;) "kosongkan" jika tidak sesuai.</strong></p>
+                                  <p class="mt-5"><strong>Sign name,</p>
+                                  <p class="mt-0 ms-3"><strong>Silmi</strong></p>
                                 </div>
                               </div>
+                            </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-xmark"></i>

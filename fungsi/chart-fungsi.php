@@ -1,5 +1,5 @@
 <?php
-include 'fungsi.php';
+include_once 'fungsi.php';
 
 $y = date("Y");
 $year1 = $y - ("1");
@@ -556,5 +556,3 @@ $dataPoints3 = array(
     array("label" => "November", "y" => $return_nov),
     array("label" => "December", "y" => $return_dec)
 );
-
-?>
