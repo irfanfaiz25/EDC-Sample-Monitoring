@@ -201,3 +201,57 @@ function update_after($data)
 
     return mysqli_affected_rows($konek);
 }
+
+function regist($data)
+{
+    global $konek;
+
+    $nama = htmlspecialchars($data["name"]);
+    $username = strtolower(stripslashes($data["username"]));
+    $password = mysqli_real_escape_string($konek, $data["password"]);
+    $password2 = mysqli_real_escape_string($konek, $data["password2"]);
+    $level = htmlspecialchars($data["level"]);
+    $token = $data["token"];
+
+    if ($nama == "" || $username == "" || $password == "" || $password2 == "" || $level == "" || $token == "" || $level == "") {
+        echo "
+            <script>
+                alert('Data tidak lengkap!');
+            </script>
+        ";
+        return false;
+    }
+
+    if ($token != 123) {
+        echo "
+            <script>
+                alert('Token salah!');
+            </script>
+        ";
+        return false;
+    }
+
+    $res = mysqli_query($konek, "SELECT username FROM tb_user WHERE username='$username'");
+
+    if (mysqli_fetch_assoc($res)) {
+        echo "
+            <script>
+                alert('Username sudah ada!');
+            </script>
+        ";
+        return false;
+    }
+
+    if ($password !== $password2) {
+        echo "
+            <script>
+                alert('Konfirmasi password tidak sesuai!');
+            </script>
+        ";
+        return false;
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    mysqli_query($konek, "INSERT INTO tb_user (nama,username,password,level_user) VALUES ('$nama','$username','$password','$level')");
+}

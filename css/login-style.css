@@ -1,7 +1,7 @@
 body, html {
   height: 100%;
   margin: 0;
-  background: #e8f1f2;
+  background: #ffffff;
 }
 
 .bg {
@@ -29,7 +29,7 @@ body, html {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 10rem;
+      padding-top: 2rem !important;
   }
   /* switch card */
   .switch {
@@ -149,7 +149,7 @@ body, html {
     justify-content: center;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    background: #a6e1fa;
+    background: #a2d2ff;
     gap: 20px;
     border-radius: 5px;
     border: 2px solid var(--main-color);
@@ -189,6 +189,20 @@ body, html {
     padding: 5px 10px;
     outline: none;
   }
+
+  .flip-card__inputt {
+    width: 275px;
+    height: 52px;
+    border-radius: 5px;
+    border: 2px solid var(--main-color);
+    background-color: var(--bg-color);
+    box-shadow: 4px 4px var(--main-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--font-color);
+    padding: 5px 10px;
+    outline: none;
+  }
   
   .flip-card__input::placeholder {
     color: var(--font-color-sub);
@@ -196,6 +210,10 @@ body, html {
   }
   
   .flip-card__input:focus {
+    border: 2px solid var(--input-focus);
+  }
+
+  .flip-card__inputt:focus {
     border: 2px solid var(--input-focus);
   }
   
@@ -217,3 +235,8 @@ body, html {
     color: var(--font-color);
     cursor: pointer;
   } 
+
+  .flip-card__btn:hover {
+    background-color: rgb(245, 76, 76);
+    color: aliceblue;
+  }

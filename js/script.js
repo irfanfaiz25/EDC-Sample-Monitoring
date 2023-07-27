@@ -12,6 +12,212 @@
             sidebar.classList.toggle("close");
         });
 
+        // script sample -->
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var btn = document.getElementById("myBtn");
+            var element = document.getElementById("myAlert");
+
+            // Create alert instance
+            var myAlert = new bootstrap.Alert(element);
+
+            btn.addEventListener("click", function() {
+            myAlert.close();
+            });
+        });
+
+        setTimeout(() => {
+            const alert = document.getElementById('myAlert');
+
+            alert.style.display = 'none';
+
+        }, 2000);
+
+        $(document).ready(function() {
+            $('#tabel-data-sample').DataTable();
+        });
+
+        $(document).ready(function() {
+            $('#tabel-data-ready').DataTable();
+        });
+
+        $('#tabel-data-sample').dataTable({
+            "pageLength": 5
+        });
+
+        $('#tabel-data-ready').dataTable({
+            "pageLength": 5
+        });
+
+        // <-- end script sample
+
+        // script track -->
+
+        //         var elem = document.getElementById("dash-index");
+        // function openFullscreen() {
+        //   if (elem.requestFullscreen) {
+        //     elem.requestFullscreen();
+        //   } else if (elem.webkitRequestFullscreen) { /* Safari */
+        //     elem.webkitRequestFullscreen();
+        //   } else if (elem.msRequestFullscreen) { /* IE11 */
+        //     elem.msRequestFullscreen();
+        //   }
+        // }
+
+        $(document).ready(function() {
+            $('#tabel-data-track').DataTable();
+        });
+
+        $('#tabel-data-track').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-data-track').DataTable();
+
+        table
+            .order([1, 'desc'])
+            .draw();
+
+        $(document).ready(function() {
+            $('#tabel-scrap').DataTable();
+        });
+
+        $('#tabel-scrap').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-scrap').DataTable();
+
+        table
+            .order([1, 'desc'])
+            .draw();
+
+        $(document).ready(function() {
+            $('#tabel-return').DataTable();
+        });
+
+        $('#tabel-return').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-return').DataTable();
+
+        table
+            .order([1, 'desc'])
+            .draw();
+
+        $(document).ready(function() {
+            $('#tabel-exp').DataTable();
+        });
+
+        $('#tabel-exp').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-exp').DataTable();
+
+        table
+            .order([1, 'desc'])
+            .draw();
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var tabList = [].slice.call(document.querySelectorAll('a[data-bs-toggle="tab"]'));
+            tabList.forEach(function(tab) {
+                tab.addEventListener("shown.bs.tab", function(e) {
+                    console.log(e.target); // newly activated tab
+                    console.log(e.relatedTarget); // previous active tab
+                    var activeTab = e.target.innerText; // Get the name of active tab
+                    var previousTab = e.relatedTarget.innerText; // Get the name of previous active tab
+                    document.querySelector(".active-tab span").innerHTML = activeTab;
+                    document.querySelector(".previous-tab span").innerHTML = previousTab;
+                });
+            });
+        });
+
+        $(document).ready(function() {
+
+
+
+
+            var down = false;
+
+            $('#bell').click(function(e) {
+
+                var color = $(this).text();
+                if (down) {
+
+                    $('#box').css('height', '0px');
+                    $('#box').css('opacity', '0');
+                    down = false;
+                } else {
+
+                    $('#box').css('height', 'auto');
+                    $('#box').css('opacity', '1');
+                    down = true;
+
+                }
+
+            });
+
+        });
+
+        
+
+        // $(document).ready(function() {
+        //     openFullscreen();
+        // });
+        // // window.onload = function () {
+        // var elem = document.getElementById("myvideo");
+
+        //         /* Function to open fullscreen mode */
+        //         function openFullscreen() {
+        //         if (elem.requestFullscreen) {
+        //             elem.requestFullscreen();
+        //         } else if (elem.webkitRequestFullscreen) { /* Safari */
+        //             elem.webkitRequestFullscreen();
+        //         } else if (elem.msRequestFullscreen) { /* IE11 */
+        //             elem.msRequestFullscreen();
+        //         }
+        //         }
+        // // }
+
+        // <-- end script track
+
+        // script track -->
+        document.addEventListener("DOMContentLoaded", function() {
+        var btn = document.getElementById("myBtn");
+        var element = document.getElementById("myAlert");
+
+        // Create alert instance
+        var myAlert = new bootstrap.Alert(element);
+
+        btn.addEventListener("click", function() {
+            myAlert.close();
+        });
+        });
+
+        $(document).ready(function() {
+            $('#tabel-data-tracking').DataTable();
+        });
+
+        $('#tabel-data-tracking').dataTable({
+            "pageLength": 5
+        });
+
+        // $('#tabel-data').dataTable({
+        //     "order": [[13, 'desc']];
+        // });
+
+        var table = $('#tabel-data-tracking').DataTable();
+
+        table
+            .order([12, 'desc'])
+            .draw();
+
+        // <-- end script track
+
         
 
      
