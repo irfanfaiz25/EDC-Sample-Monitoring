@@ -34,6 +34,7 @@ function tambah($data)
     $date_ent = date_create(date('Y-m-d'));
     date_modify($date_ent, '+1 month');
     $due_date = date_format($date_ent, 'Y-m-d');
+    $pic_cek = $data["pic_cek"];
 
     if (isset($data["cek_nama"])) {
         $cek_nama = 1;
@@ -72,10 +73,12 @@ function tambah($data)
         return false;
     }
 
+    $tgl_dtg = $tgl_dtg . date(" H:i:s");
+
     $input = "INSERT IGNORE INTO tb_sample (sample_test,njo,nm_sample,qty,customer,tgl_datang,tujuan1,tujuan2,tujuan3,tujuan4,tujuan5,
-    tools,after_test,date_take,date_return,due_date,note,id_loc,pic,rak,time_stamp,cek_nama,cek_qty,cek_comp,cek_dupl,cek_layak)
+    tools,after_test,date_take,date_return,due_date,date_after,note,id_loc,pic,rak,time_stamp,cek_nama,cek_qty,cek_comp,cek_dupl,cek_layak,pic_cek,sample_stat)
     VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg','$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools',
-    '','','','$due_date','$note','','','','','$cek_nama','$cek_qty','$cek_comp','$cek_dupl','$cek_layak')";
+    '','','','$due_date','','$note','','','','','$cek_nama','$cek_qty','$cek_comp','$cek_dupl','$cek_layak','$pic_cek',1)";
 
     mysqli_query($konek, $input);
 
@@ -140,7 +143,7 @@ function tracking($data)
     $due_date1 = date_format($date_subs, 'Y-m-d');
     $due_date2 = date_format($date_ret, 'Y-m-d');
 
-    $nama = "faiz";
+    $nama = $_SESSION["user"];
 
     $loc = $id_loc + 1;
 
@@ -148,7 +151,7 @@ function tracking($data)
         $rak = $data["rak"];
         if ($id_loc == 0) {
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', rak='$rak', due_date='$due_date1' WHERE sample_test='$sample'";
-        } elseif ($id_loc > 4 || $id_loc < 0) {
+        } elseif ($loc == 4 || $id_loc < 0) {
             return false;
         }
     } else {
@@ -158,7 +161,7 @@ function tracking($data)
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', date_return='$date' WHERE sample_test='$sample'";
         } elseif ($id_loc == 3) {
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', due_date='$due_date2' WHERE sample_test='$sample'";
-        } elseif ($id_loc > 4 || $id_loc < 0) {
+        } elseif ($loc == 4 || $id_loc < 0) {
             return false;
         }
     }
@@ -189,15 +192,10 @@ function update_after($data)
 
     $sample_test = $data["sample_test"];
     $after_test = $data["after_test"];
+    $date_after = date("d-m-Y H:i:s");
 
-    $update = "UPDATE tb_sample SET after_test='$after_test' WHERE sample_test='$sample_test'";
+    $update = "UPDATE tb_sample SET after_test='$after_test', date_after='$date_after', sample_stat=0, id_loc=4 WHERE sample_test='$sample_test'";
     mysqli_query($konek, $update);
-
-    $move = "INSERT INTO tb_history SELECT * FROM tb_sample WHERE sample_test = '$sample_test'";
-    mysqli_query($konek, $move);
-
-    $del = "DELETE FROM tb_sample WHERE sample_test = '$sample_test'";
-    mysqli_query($konek, $del);
 
     return mysqli_affected_rows($konek);
 }
@@ -214,44 +212,77 @@ function regist($data)
     $token = $data["token"];
 
     if ($nama == "" || $username == "" || $password == "" || $password2 == "" || $level == "" || $token == "" || $level == "") {
-        echo "
-            <script>
-                alert('Data tidak lengkap!');
-            </script>
-        ";
         return false;
     }
 
     if ($token != 123) {
-        echo "
-            <script>
-                alert('Token salah!');
-            </script>
-        ";
         return false;
     }
 
     $res = mysqli_query($konek, "SELECT username FROM tb_user WHERE username='$username'");
 
     if (mysqli_fetch_assoc($res)) {
-        echo "
-            <script>
-                alert('Username sudah ada!');
-            </script>
-        ";
         return false;
     }
 
     if ($password !== $password2) {
-        echo "
-            <script>
-                alert('Konfirmasi password tidak sesuai!');
-            </script>
-        ";
+        return false;
+    }
+
+    $foto = upload();
+    if (!$foto) {
         return false;
     }
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_query($konek, "INSERT INTO tb_user (nama,username,password,level_user) VALUES ('$nama','$username','$password','$level')");
+    mysqli_query($konek, "INSERT INTO tb_user (nama,username,password,level_user,foto) VALUES ('$nama','$username','$password','$level','$foto')");
+
+    return mysqli_affected_rows($konek);
+}
+
+function upload()
+{
+    $namaFile = $_FILES['foto']['name'];
+    $ukuran = $_FILES['foto']['size'];
+    $eror = $_FILES['foto']['error'];
+    $tmpName = $_FILES['foto']['tmp_name'];
+
+    if ($eror === 4) {
+        echo "
+                <script>
+                    alert('Pilih foto yang akan di upload');
+                </script>
+            ";
+        return false;
+    }
+
+    $valEkstensiFoto = ['jpg', 'jpeg', 'png'];
+    $ekstensiFoto = explode('.', $namaFile);
+    $ekstensiFoto = strtolower(end($ekstensiFoto));
+
+    if (!in_array($ekstensiFoto, $valEkstensiFoto)) {
+        echo "
+                <script>
+                    alert('Incorrect extension!');
+                </script>
+            ";
+        return false;
+    }
+
+    if ($ukuran > 2000000) {
+        echo "
+                <script>
+                    alert('File too large');
+                </script>
+            ";
+        return false;
+    }
+
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiFoto;
+
+    move_uploaded_file($tmpName, 'img/user-img/' . $namaFileBaru);
+    return $namaFileBaru;
 }

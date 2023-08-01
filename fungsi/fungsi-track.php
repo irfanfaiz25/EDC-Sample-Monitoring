@@ -9,6 +9,12 @@ if (isset($_GET["sample"])) {
     if ($numrow === 1) {
         $samp = mysqli_fetch_assoc($rs);
         $id_loc = $samp["id_loc"];
+        // $njo_cek = $samp["njo"];
+
+        // if ($njo_cek == "") {
+        //     $errornjo = true;
+        //     return false;
+        // }
 
         if ($id_loc == 1) {
             $loc = "Sample Before Test";
@@ -45,7 +51,7 @@ if (isset($_POST["btn-return"])) {
     }
 }
 if (isset($_POST["submit-kry"])) {
-    if ($id_loc != 4) {
+    if ($id_loc != 3) {
         if (tracking($_POST)) {
             header('Location: track.php');
         } else {

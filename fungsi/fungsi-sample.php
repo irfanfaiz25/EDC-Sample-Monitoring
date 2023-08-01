@@ -2,13 +2,13 @@
 
 include_once 'fungsi.php';
 
-$sample = query("SELECT * FROM tb_sample WHERE njo=''");
-$sample_ready = query("SELECT * FROM tb_sample WHERE njo!=''");
+$sample = query("SELECT * FROM tb_sample WHERE njo='' AND sample_stat=1");
+$sample_ready = query("SELECT * FROM tb_sample WHERE njo!='' AND sample_stat=1");
 $today = date("d/m/Y");
 // echo $today;
 
 // membuat kode
-$query = mysqli_query($konek, "SELECT max(sample_test) as kodeTerbesar FROM tb_sample");
+$query = mysqli_query($konek, "SELECT max(sample_test) AS kodeTerbesar FROM tb_sample");
 $data = mysqli_fetch_array($query);
 $kode_sample = $data['kodeTerbesar'];
 $year_now = date("y");

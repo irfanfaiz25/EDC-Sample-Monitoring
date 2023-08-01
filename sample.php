@@ -9,6 +9,11 @@ include "header.php";
   <div class="home-content">
     <i class='bx bx-menu'></i>
     <span class="text">Sample Data</span>
+    <span class="notif me-5">
+      <a href="logout.php">
+        <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
+      </a>
+    </span>
   </div>
   <div class="card mt-1 ms-3 me-3">
     <div class="card-body">
@@ -27,7 +32,10 @@ include "header.php";
             </div>
           <?php
           endif;
+
+          // var_dump($_SESSION);
           ?>
+
           <form action="" method="post">
 
             <table class="table table-bordered align-middle">
@@ -97,7 +105,7 @@ include "header.php";
                 <td colspan="2">
                   <div class="btn-add text-center pt-3 pb-3">
 
-                    <button type="button" class="btn btn-success btn-block btn-lg" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-success btn-block btn-lg" data-toggle="modal" data-target="#ceklisSample">
                       <strong>NEXT <i class="fa fa-circle-arrow-right"></i></strong>
                     </button>
                   </div>
@@ -108,7 +116,7 @@ include "header.php";
 
 
             <!-- MODAL CEKLIS FORM -->
-            <div class="modal" id="myModal">
+            <div class="modal" id="ceklisSample">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
 
@@ -197,7 +205,9 @@ include "header.php";
                           </tr>
                           <tr>
                             <td colspan="2">Sign name,</td>
-                            <td>Silmi</td>
+                            <td>
+                              <input type="text" class="form-control text-center pic_cek" name="pic_cek" value="<?= $_SESSION["user"]; ?>" readonly>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -541,7 +551,7 @@ include "header.php";
                                 <p class="mt-0">2. Untuk point 4 bilamana sample yang diuji lebih dari satu dan bentuknya harus sama saat diuji.</p>
                                 <p class="mt-0">3. Tekan checkbox berikan simbol (&#10003;) jika sesuai dan (&nbsp;) "kosongkan" jika tidak sesuai.</strong></p>
                                 <p class="mt-5"><strong>Sign name,</strong></p>
-                                <p class="mt-0 ms-3"><strong>Silmi</strong></p>
+                                <p class="mt-0 ms-3"><strong><?= $row["pic_cek"]; ?></strong></p>
                               </div>
                             </div>
                           </div>
@@ -917,7 +927,7 @@ include "header.php";
                               <p class="mt-0">2. Untuk point 4 bilamana sample yang diuji lebih dari satu dan bentuknya harus sama saat diuji.</p>
                               <p class="mt-0">3. Tekan checkbox berikan simbol (&#10003;) jika sesuai dan (&nbsp;) "kosongkan" jika tidak sesuai.</strong></p>
                               <p class="mt-5"><strong>Sign name,</strong></p>
-                              <p class="mt-0 ms-3"><strong>Silmi</strong></p>
+                              <p class="mt-0 ms-3"><strong><?= $row["pic_cek"]; ?></strong></p>
                             </div>
                           </div>
                         </div>

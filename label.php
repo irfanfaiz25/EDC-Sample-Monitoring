@@ -18,7 +18,6 @@ if (isset($_GET['sample_test'])) {
     // echo '<img src="' . $penyimpanan . 'hasil_qrcode.png">';
 
     $cetak = query("SELECT * FROM tb_sample WHERE sample_test='$isi'");
-
 } else {
     echo "
         <script>
@@ -43,116 +42,134 @@ if (isset($_GET['sample_test'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css" />
 
 
 </head>
 
+<style>
+    td,
+    th {
+        border-width: 2.5px !important;
+        border-color: black;
+    }
+
+    section {
+        /* scale: 50%; */
+        margin-left: 400px;
+    }
+</style>
+
 <body>
     <section id="main-content">
-        <div class="card card-label mt-4">
-            <div class="card-body">
-                <div class="row dataku" id="print-area">
-                    <div class="col-md-6 text-center">
+        <div class="row">
+            <div class="col-md-12 card-tag">
+                <div class="card card-label mt-4">
+                    <div class="card-body">
+                        <div id="print-area">
+                            <?php
+                            // for ($i = 1; $i <= 2; $i++) {
+                            ?>
+                            <div class="row dataku mb-4">
+                                <div class="col-md-6 text-center">
 
-                        <?php foreach ($cetak as $row): ?>
-                            <table class="table table-bordered align-middle text-center" style="width: 600px;">
-                                <tbody>
-                                    <tr>
-                                        <td class="label-header" rowspan="2" colspan="2">
-                                            <img style="margin-left: 20px;" src="img/logoo.png" height="40" alt="logo">
-                                            <span style="margin-left: 230px;">
-                                                <img src="temp/<?php echo "$isi"; ?>.png"
-                                                    style="height: 120px; margin-top: 0px;" alt="">
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <h4 class="pt-2" style="margin-bottom: 0px; padding-bottom: 0px; height: 30px;">
-                                                <strong>PART TAG</strong>
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <h6 style="margin-bottom: 0px; padding-bottom: 0px;"><strong>
-                                                    <?= strtoupper($row["nm_sample"]); ?>
-                                                </strong>
-                                            </h6>
-                                        </td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <td class="label-field"><strong>SAMPLE TEST:
-                                                <?= strtoupper($row["sample_test"]); ?>
-                                            </strong></td>
-                                        <td class="label-field"><strong>QTY:
-                                                <?= $row["qty"]; ?>
-                                            </strong></td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <td class="label-field"><strong>CUSTOMER NAME:
-                                                <?= strtoupper($row["customer"]); ?>
-                                            </strong></td>
-                                        <td class="label-field"><strong>ENTRY DATE:
-                                                <?= strtoupper($row["tgl_datang"]); ?>
-                                            </strong></td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <td class="label-field"><strong>ITEM TEST 1:
-                                                <?= strtoupper($row["tujuan1"]); ?>
-                                            </strong></td>
-                                        <td class="label-field"><strong>ITEM TEST 2:
-                                                <?= strtoupper($row["tujuan2"]); ?>
-                                            </strong></td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <td class="label-field"><strong>ITEM TEST 3:
-                                                <?= strtoupper($row["tujuan3"]); ?>
-                                            </strong></td>
-                                        <td class="label-field"><strong>ITEM TEST 4:
-                                                <?= strtoupper($row["tujuan4"]); ?>
-                                            </strong></td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <td class="label-field"><strong>ITEM TEST 5:
-                                                <?= strtoupper($row["tujuan5"]); ?>
-                                            </strong></td>
-                                        <td class="label-field"><strong>TOOLS:
-                                                <?= strtoupper($row["tools"]); ?>
-                                            </strong></td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <td class="label-field"><strong>AFTER TEST:
-                                                <?= strtoupper($row["after_test"]); ?>
-                                            </strong></td>
-                                        <td class="label-field"><strong>DUE DATE:
-                                                <?= strtoupper($row["due_date"]); ?>
-                                            </strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-header label-field" rowspan="2" colspan="2">
-                                            <strong>NOTE :
-                                                <?= strtoupper($row["note"]); ?>
-                                            </strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        <?php endforeach; ?>
+                                    <?php foreach ($cetak as $row) : ?>
+                                        <table class=" table table-bordered align-middle text-center" style="width: 600px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="label-header" rowspan="2" colspan="4">
+                                                        <img style="margin-left: 20px;" src="img/logoo.png" height="50" alt="logo">
+                                                        <span class="float-end">
+                                                            <h1 class="pt-3 pe-5">
+                                                                <strong>PART TAG</strong>
+                                                            </h1>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <h4 style="margin-bottom: 0px; padding-bottom: 0px;"><strong>
+                                                                <?= strtoupper($row["nm_sample"]); ?>
+                                                            </strong>
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-head text-start">SAMPLE TEST:</td>
+                                                    <td class="label-field"><?= strtoupper($row["sample_test"]); ?></td>
+                                                    <td class="label-head text-start">NJO:</td>
+                                                    <td class="label-field"><?= $row["njo"]; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-head text-start">CUSTOMER NAME:</td>
+                                                    <td class="label-field"><?= strtoupper($row["customer"]); ?></td>
+                                                    <td class="label-head text-start">QTY:</td>
+                                                    <td class="label-field"><?= strtoupper($row["qty"]); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-head text-start">ITEM TEST 1:</td>
+                                                    <td class="label-field"><?= strtoupper($row["tujuan1"]); ?></td>
+                                                    <td class="label-head text-start">ITEM TEST 2:</td>
+                                                    <td class="label-field"><?= strtoupper($row["tujuan2"]); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-head text-start">ITEM TEST 3:</td>
+                                                    <td class="label-field"><?= strtoupper($row["tujuan3"]); ?></td>
+                                                    <td class="label-head text-start">ITEM TEST 4:</td>
+                                                    <td class="label-field"><?= strtoupper($row["tujuan4"]); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-head text-start">ITEM TEST 5:</td>
+                                                    <td class="label-field"><?= strtoupper($row["tujuan5"]); ?></td>
+                                                    <td class="label-head text-start">TOOLS:</td>
+                                                    <td class="label-field"><?= strtoupper($row["tools"]); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-head text-start">AFTER TEST:</td>
+                                                    <td class="label-field">
+                                                        <input class="form-check-input border-2 border-dark" type="checkbox" value="" id="scrap" name="scrap" value="1">
+                                                        <label class="form-check-label" for="scrap">
+                                                            Scrap
+                                                        </label>
+                                                        <input class="form-check-input border-2 border-dark" type="checkbox" value="" id="scrap" name="scrap" value="1">
+                                                        <label class="form-check-label" for="scrap">
+                                                            Return
+                                                        </label>
+                                                    </td>
+                                                    <td class="label-head text-start">DATE ENTRY:</td>
+                                                    <td class="label-field"><?= strtoupper(date("d-m-Y", strtotime($row["tgl_datang"]))); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label-header label-field" rowspan="2" colspan="3">
+                                                        NOTE :
+                                                        <br>
+                                                        <?= strtoupper($row["note"]); ?>
+                                                    </td>
+                                                    <td>
+                                                        <img src="temp/<?php echo "$isi"; ?>.png" style="height: 150px;" alt="">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    <?php endforeach; ?>
 
+                                </div>
+                            </div>
+                            <?php
+                            // }
+                            ?>
+                        </div>
+                        <div class="col-md-12" style="float: right; padding-left: 270px;">
+                            <button class="btn btn-warning" onclick="printPage('print-area')">PRINT</button>
+                        </div>
                     </div>
-
-                </div>
-                <div class="col-md-12" style="float: right; padding-left: 270px;">
-                    <button class="btn btn-warning" onclick="printPage('print-area')">PRINT</button>
                 </div>
             </div>
         </div>
+
     </section>
 
 

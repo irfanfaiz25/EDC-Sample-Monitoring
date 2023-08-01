@@ -4,12 +4,12 @@ include_once "fungsi.php";
 date_default_timezone_set("Asia/Jakarta");
 $date = date("Y-m-d");
 
-$sample = query("SELECT * FROM tb_sample WHERE njo!='' ORDER BY time_stamp DESC");
-$sample_scrap = query("SELECT * FROM tb_history WHERE after_test='scrap' ORDER BY time_stamp DESC");
-$sample_return = query("SELECT * FROM tb_history WHERE after_test='return' ORDER BY time_stamp DESC");
-$sample_exp = query("SELECT * FROM tb_sample WHERE due_date < '$date'");
+$sample = query("SELECT * FROM tb_sample WHERE njo!='' AND sample_stat=1 ORDER BY time_stamp DESC");
+$sample_scrap = query("SELECT * FROM tb_sample WHERE after_test='scrap' AND sample_stat=0 ORDER BY time_stamp DESC");
+$sample_return = query("SELECT * FROM tb_sample WHERE after_test='return' AND sample_stat=0 ORDER BY time_stamp DESC");
+$sample_exp = query("SELECT * FROM tb_sample WHERE due_date < '$date' AND sample_stat=1");
 
-$sample_pending = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE id_loc=0");
+$sample_pending = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE id_loc=0 AND sample_stat=1");
 while ($row = mysqli_fetch_assoc($sample_pending)) {
     if (mysqli_num_rows($sample_pending) == 0) {
         $pending = "0";
@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_assoc($sample_pending)) {
     }
 }
 
-$sample_ot = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE id_loc!=0 AND id_loc!=4");
+$sample_ot = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE id_loc!=0 AND id_loc!=4 AND sample_stat=1");
 while ($row = mysqli_fetch_assoc($sample_ot)) {
     if (mysqli_num_rows($sample_ot) == 0) {
         $ot = "0";
@@ -27,7 +27,7 @@ while ($row = mysqli_fetch_assoc($sample_ot)) {
     }
 }
 
-$sample_done = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample");
+$sample_done = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE sample_stat=1");
 while ($row = mysqli_fetch_assoc($sample_done)) {
     if (mysqli_num_rows($sample_done) == 0) {
         $done = "0";
@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($sample_done)) {
     }
 }
 
-$sample_all = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE njo != ''");
+$sample_all = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE njo != '' AND sample_stat=1");
 while ($row = mysqli_fetch_assoc($sample_all)) {
     if (mysqli_num_rows($sample_all) == 0) {
         $all = "0";
@@ -45,7 +45,7 @@ while ($row = mysqli_fetch_assoc($sample_all)) {
     }
 }
 
-$scrap_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_history WHERE after_test='scrap'");
+$scrap_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE after_test='scrap' AND sample_stat=0");
 while ($row = mysqli_fetch_assoc($scrap_count)) {
     if (mysqli_num_rows($scrap_count) == 0) {
         $scrap = "0";
@@ -54,7 +54,7 @@ while ($row = mysqli_fetch_assoc($scrap_count)) {
     }
 }
 
-$return_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_history WHERE after_test='return'");
+$return_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE after_test='return'  AND sample_stat=0");
 while ($row = mysqli_fetch_assoc($return_count)) {
     if (mysqli_num_rows($return_count) == 0) {
         $return_c = "0";
@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_assoc($return_count)) {
     }
 }
 
-$exp_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE due_date < '$date'");
+$exp_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE due_date < '$date' AND sample_stat=1");
 while ($row = mysqli_fetch_assoc($exp_count)) {
     if (mysqli_num_rows($exp_count) == 0) {
         $exp = "0";

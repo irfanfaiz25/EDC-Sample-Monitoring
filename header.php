@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header('Location: login.php');
+    exit;
+}
+
+$inactive = 600;
+if (!isset($_SESSION['timeout']))
+    $_SESSION['timeout'] = time() + $inactive;
+
+$session_life = time() - $_SESSION['timeout'];
+
+if ($session_life > $inactive) {
+    session_destroy();
+    session_unset();
+    $_SESSION = [];
+    header("Location:index.php");
+}
+
+$_SESSION['timeout'] = time();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +39,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-trackk.css">
+    <link rel="stylesheet" href="css/card-setting.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- data table -->
@@ -76,13 +100,15 @@
             <li>
                 <div class="profile-details">
                     <div class="profile-content">
-                        <img src="img/davida.jpg" alt="profileImg">
+                        <img src="img/user-img/<?= $_SESSION["img"]; ?>" alt="profileImg">
                     </div>
                     <div class="name-job">
-                        <div class="profile_name">Agustinus</div>
-                        <div class="job">Web Designer</div>
+                        <div class="profile_name"><?= $_SESSION["user"]; ?></div>
+                        <div class="job"><?= $_SESSION["level"]; ?></div>
                     </div>
-                    <i class='bx bx-log-out'></i>
+                    <a href="">
+                        <i class=''></i>
+                    </a>
                 </div>
             </li>
         </ul>

@@ -7,6 +7,11 @@ include 'header.php';
     <div class="home-content">
         <i class='bx bx-menu'></i>
         <span class="text">Sample Input Tracking</span>
+        <span class="notif me-5">
+            <a href="logout.php">
+                <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
+            </a>
+        </span>
     </div>
     <div class="card mt-1 ms-3 me-3">
         <div class="card-body">
@@ -195,7 +200,7 @@ include 'header.php';
                                             <i class="uil uil-check">
                                             </i>
                                         </div>
-                                        <p class="text">Lab</p>
+                                        <p class="text">Lab/Testing</p>
                                     </li>
                                     <li>
                                         <i class="icon uil uil-server"></i>
@@ -209,7 +214,17 @@ include 'header.php';
                                         <div class="prog five">
                                             <i class="uil uil-check"></i>
                                         </div>
-                                        <p class="text">Finish</p>
+                                        <?php
+                                        if ($row["date_after"] != "") :
+                                        ?>
+                                            <p class="text mb-0"><?= $row["after_test"]; ?></p>
+                                        <?php
+                                        else :
+                                        ?>
+                                            <p class="text">Status After</p>
+                                        <?php
+                                        endif;
+                                        ?>
                                     </li>
                                 </ul>
                             <?php elseif ($loc == "Lab") : ?>
@@ -227,7 +242,7 @@ include 'header.php';
                                             <i class="uil uil-check">
                                             </i>
                                         </div>
-                                        <p class="text">Lab</p>
+                                        <p class="text">Lab/Testing</p>
                                     </li>
                                     <li>
                                         <i class="icon uil uil-server"></i>
@@ -241,7 +256,17 @@ include 'header.php';
                                         <div class="prog five">
                                             <i class="uil uil-check"></i>
                                         </div>
-                                        <p class="text">Finish</p>
+                                        <?php
+                                        if ($row["date_after"] != "") :
+                                        ?>
+                                            <p class="text mb-0"><?= $row["after_test"]; ?></p>
+                                        <?php
+                                        else :
+                                        ?>
+                                            <p class="text">Status After</p>
+                                        <?php
+                                        endif;
+                                        ?>
                                     </li>
                                 </ul>
                             <?php elseif ($loc == "Sample After Test") : ?>
@@ -259,7 +284,7 @@ include 'header.php';
                                             <i class="uil uil-check">
                                             </i>
                                         </div>
-                                        <p class="text">Lab</p>
+                                        <p class="text">Lab/Testing</p>
                                     </li>
                                     <li>
                                         <i class="icon uil uil-server"></i>
@@ -273,7 +298,17 @@ include 'header.php';
                                         <div class="prog five">
                                             <i class="uil uil-check"></i>
                                         </div>
-                                        <p class="text">Finish</p>
+                                        <?php
+                                        if ($row["date_after"] != "") :
+                                        ?>
+                                            <p class="text mb-0"><?= $row["after_test"]; ?></p>
+                                        <?php
+                                        else :
+                                        ?>
+                                            <p class="text">Status After</p>
+                                        <?php
+                                        endif;
+                                        ?>
                                     </li>
                                 </ul>
                             <?php elseif ($loc == "Finish") : ?>
@@ -291,7 +326,7 @@ include 'header.php';
                                             <i class="uil uil-check">
                                             </i>
                                         </div>
-                                        <p class="text">Lab</p>
+                                        <p class="text">Lab/Testing</p>
                                     </li>
                                     <li>
                                         <i class="icon uil uil-server"></i>
@@ -305,7 +340,17 @@ include 'header.php';
                                         <div class="prog five active">
                                             <i class="uil uil-check"></i>
                                         </div>
-                                        <p class="text">Finish</p>
+                                        <?php
+                                        if ($row["date_after"] != "") :
+                                        ?>
+                                            <p class="text mb-0"><?= $row["after_test"]; ?></p>
+                                        <?php
+                                        else :
+                                        ?>
+                                            <p class="text">Status After</p>
+                                        <?php
+                                        endif;
+                                        ?>
                                     </li>
                                 </ul>
                             <?php else : ?>
@@ -323,7 +368,7 @@ include 'header.php';
                                             <i class="uil uil-check">
                                             </i>
                                         </div>
-                                        <p class="text">Lab</p>
+                                        <p class="text">Lab/Testing</p>
                                     </li>
                                     <li>
                                         <i class="icon uil uil-server"></i>
@@ -337,7 +382,17 @@ include 'header.php';
                                         <div class="prog five">
                                             <i class="uil uil-check"></i>
                                         </div>
-                                        <p class="text">Finish</p>
+                                        <?php
+                                        if ($row["date_after"] != "") :
+                                        ?>
+                                            <p class="text mb-0"><?= $row["after_test"]; ?></p>
+                                        <?php
+                                        else :
+                                        ?>
+                                            <p class="text">Status After</p>
+                                        <?php
+                                        endif;
+                                        ?>
                                     </li>
                                 </ul>
                         <?php
@@ -364,7 +419,7 @@ include 'header.php';
                                 <div class="prog two">
                                     <i class="uil uil-check"></i>
                                 </div>
-                                <p class="text">Lab</p>
+                                <p class="text">Lab/Testing</p>
                             </li>
                             <li>
                                 <i class="icon uil uil-server"></i>
@@ -378,7 +433,7 @@ include 'header.php';
                                 <div class="prog five">
                                     <i class="uil uil-check"></i>
                                 </div>
-                                <p class="text">Finish</p>
+                                <p class="text">Status After</p>
                             </li>
                         </ul>
                     <?php endif; ?>
@@ -403,7 +458,7 @@ include 'header.php';
                                     <th>Loc</th>
                                     <th>PIC</th>
                                     <th>Rack</th>
-                                    <th>Timestamp</th>
+                                    <th hidden>Timestamp</th>
                                 </tr>
                             </thead>
                             <?php foreach ($sample_tbl as $row) : ?>
@@ -462,7 +517,7 @@ include 'header.php';
                                     <td>
                                         <?= $row["rak"]; ?>
                                     </td>
-                                    <td>
+                                    <td hidden>
                                         <?= $row["time_stamp"]; ?>
                                     </td>
                                 </tr>
