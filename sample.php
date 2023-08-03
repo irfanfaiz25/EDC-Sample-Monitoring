@@ -10,7 +10,7 @@ include "header.php";
     <i class='bx bx-menu'></i>
     <span class="text">Dashboard</span>
     <div class="col-md-10">
-      <div class="me-4" id="logout">
+      <div class="logout me-4" id="logout">
         <a href="logout.php">
           <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
         </a>

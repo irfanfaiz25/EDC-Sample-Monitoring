@@ -68,7 +68,7 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
             <img src="img/logoo-astra.png" height="50px" alt="">
             <span class="logo_name"><i>AOP</i></span>
         </div>
-        <ul class="nav-links">
+        <ul class="nav-links side-bar">
             <li <?php
                 if ($curPageName == "index.php") :
                 ?> class="active" <?php

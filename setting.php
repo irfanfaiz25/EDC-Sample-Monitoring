@@ -8,7 +8,7 @@ include "fungsi/fungsi-setting.php";
         <i class='bx bx-menu'></i>
         <span class="text">Dashboard</span>
         <div class="col-md-10">
-            <div class="me-4" id="logout">
+            <div class="logout me-4" id="logout">
                 <a href="logout.php">
                     <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
                 </a>
@@ -16,7 +16,7 @@ include "fungsi/fungsi-setting.php";
         </div>
     </div>
 
-    <div class="page-content page-container" id="page-content">
+    <div class="page-content page-container mt-3" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">
                 <div class="col-xl-6 col-md-12">

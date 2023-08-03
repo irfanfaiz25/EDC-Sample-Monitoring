@@ -10,12 +10,10 @@ include 'fungsi/fungsi.php';
 
 if (isset($_POST["btn-regist"])) {
    if (regist($_POST) > 0) {
-      $alert_suc = true;
+      $regist_success = true;
    } else {
-      $alert_fail = true;
+      $regist_fail = true;
    }
-   // var_dump($_POST);
-   // var_dump($_FILES);
 }
 
 if (isset($_POST["btn-login"])) {
@@ -63,90 +61,93 @@ if (isset($_POST["btn-login"])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
-   <link rel="stylesheet" href="css/login-style.css">
+   <link rel="stylesheet" href="css/login.css">
    <title>Document</title>
+
 </head>
 
 <body>
 
-   <div class="section">
-      <div class="container">
-         <div class="row full-height justify-content-center">
-            <div class="col-12 text-center align-self-center py-5">
-               <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                  <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-                  <input class="uil uil-lock-alt checkbox" type="checkbox" id="reg-log" name="reg-log" />
-                  <label for="reg-log"></label>
-                  <div class="card-3d-wrap mx-auto">
-                     <div class="card-3d-wrapper">
-                        <div class="card-front">
-                           <div class="center-wrap">
-                              <div class="section text-center">
-                                 <form action="" method="post">
-                                    <h4 class="log-text mb-4 pb-3">Log In</h4>
-                                    <div class="form-group">
-                                       <input type="text" name="username" class="form-style" placeholder="Your Username" id="logemail" autocomplete="off">
-                                       <i class="input-icon fa fa-user-circle"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="password" name="password" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-                                       <i class="input-icon uil fa fa-key"></i>
-                                    </div>
-                                    <button type="submit" name="btn-login" class="btn mt-5">login</button>
-                                    <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
-                                 </form>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="card-back">
-                           <div class="center-wrap">
-                              <div class="section-back text-center">
-                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <h4 class=" mb-4 pb-3">Sign Up</h4>
-                                    <div class="form-group">
-                                       <input type="text" name="name" class="form-style" placeholder="Your Name" id="logname" autocomplete="off">
-                                       <i class="input-icon fa fa-user-pen"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="text" name="username" class="form-style" placeholder="Your Username" id="logemail" autocomplete="off">
-                                       <i class="input-icon fa fa-user-circle"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="password" name="password" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-                                       <i class="input-icon fa fa-key"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="password" name="password2" class="form-style" placeholder="Confirm Password" id="logpass" autocomplete="off">
-                                       <i class="input-icon fa fa-key"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <select class="form-style" name="level" id="logpass" autocomplete="off">
-                                          <option value="">Your User Level</option>
-                                          <option value="marketing">Marketing</option>
-                                          <option value="lab">Lab</option>
-                                       </select>
-                                       <i class="input-icon fa fa-users-line"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="file" name="foto" class="form-style" placeholder="Your Photo" id="foto" autocomplete="off">
-                                       <i class="input-icon fa fa-camera-retro"></i>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="password" name="token" class="form-style" placeholder="Enter Token" id="logpass" autocomplete="off">
-                                       <i class="input-icon fa fa-lock"></i>
-                                    </div>
-                                    <button type="submit" name="btn-regist" class="btn mt-4">submit</a>
-                                 </form>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+   <div class="container" id="container">
+      <div class="form-container sign-up-container">
+         <form action="" method="post" enctype="multipart/form-data">
+            <h1>Register</h1>
+            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="password" name="password2" placeholder="Confirm password" />
+            <select name="level" id="level">
+               <option value="">User level</option>
+               <option value="marketing">Marketing</option>
+               <option value="testing">Testing</option>
+               <option value="lab">Lab</option>
+            </select>
+            <input type="file" name="foto" placeholder="Choose image" id="foto" title=" " />
+            <input type="password" name="token" placeholder="Confirm token" />
+            <button type="submit" name="btn-regist">Sign Up</button>
+         </form>
+      </div>
+      <div class="form-container sign-in-container">
+         <form action="" method="post" enctype="multipart/form-data">
+            <h1 class="mb-5">Sign in</h1>
+
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+
+            <?php
+            if (isset($regist_fail)) : ?>
+               <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
+                  Register failed
+                  <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
                </div>
+            <?php
+            elseif (isset($alert_pass)) : ?>
+               <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
+                  Incorrect password
+                  <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
+               </div>
+            <?php
+            elseif (isset($alert_user)) : ?>
+               <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
+                  Username not found
+                  <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
+               </div>
+            <?php
+            endif;
+            ?>
+
+            <a href="#">Forgot your password?</a>
+            <button type="submit" name="btn-login">Sign In</button>
+         </form>
+      </div>
+      <div class="overlay-container">
+         <div class="overlay">
+            <div class="overlay-panel overlay-left">
+               <img src="img/logoo.png" width="320" alt="astra otoparts">
+               <p>To keep connected with us please login with your personal info</p>
+               <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+               <img src="img/logoo.png" width="320" alt="astra otoparts">
+               <p>Enter your personal details and start journey with us</p>
+               <button class="ghost" id="signUp">Sign Up</button>
             </div>
          </div>
       </div>
    </div>
+   <script>
+      const signUpButton = document.getElementById('signUp');
+      const signInButton = document.getElementById('signIn');
+      const container = document.getElementById('container');
+
+      signUpButton.addEventListener('click', () => {
+         container.classList.add("right-panel-active");
+      });
+
+      signInButton.addEventListener('click', () => {
+         container.classList.remove("right-panel-active");
+      });
+   </script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

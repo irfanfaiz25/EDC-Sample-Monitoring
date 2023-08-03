@@ -504,9 +504,12 @@ label {
   
 }
 
-.nav-links .active {
+.nav-item .active {
+  color:#f8f8f8 !important;
+}
+
+.side-bar .active {
   background-color: #dadada !important;
-  /* color:#f8f8f8 !important; */
 }
 
 .cont-dash2 {
