@@ -1,4 +1,5 @@
 <?php
+include_once 'fungsi/fungsi.php';
 session_start();
 
 if (!isset($_SESSION["login"])) {
@@ -20,6 +21,13 @@ if ($session_life > $inactive) {
 }
 
 $_SESSION['timeout'] = time();
+
+$session_id = $_SESSION["id"];
+$res = mysqli_query($konek, "SELECT * FROM tb_user WHERE id=$session_id");
+$user = mysqli_fetch_assoc($res);
+$foto = $user["foto"];
+
+$curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +69,11 @@ $_SESSION['timeout'] = time();
             <span class="logo_name"><i>AOP</i></span>
         </div>
         <ul class="nav-links">
-            <li>
+            <li <?php
+                if ($curPageName == "index.php") :
+                ?> class="active" <?php
+                                endif;
+                                    ?>>
                 <a href="index.php">
                     <i class='fa fa-home'></i>
                     <span class="link_name">Dashboard</span>
@@ -70,7 +82,11 @@ $_SESSION['timeout'] = time();
                     <li><a class="link_name" href="index.php">Dashboard</a></li>
                 </ul>
             </li>
-            <li>
+            <li <?php
+                if ($curPageName == "sample.php") :
+                ?> class="active" <?php
+                                endif;
+                                    ?>>
                 <a href="sample.php">
                     <i class='fa fa-database'></i>
                     <span class="link_name">Sample Data</span>
@@ -79,7 +95,11 @@ $_SESSION['timeout'] = time();
                     <li><a class="link_name" href="sample.php">Sample Data</a></li>
                 </ul>
             </li>
-            <li>
+            <li <?php
+                if ($curPageName == "track.php") :
+                ?> class="active" <?php
+                                endif;
+                                    ?>>
                 <a href="track.php">
                     <i class='fa fa-location-dot'></i>
                     <span class="link_name">Tracking</span>
@@ -88,7 +108,11 @@ $_SESSION['timeout'] = time();
                     <li><a class="link_name" href="track.php">Tracking</a></li>
                 </ul>
             </li>
-            <li>
+            <li <?php
+                if ($curPageName == "setting.php") :
+                ?> class="active" <?php
+                                endif;
+                                    ?>>
                 <a href="setting.php">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
@@ -100,7 +124,7 @@ $_SESSION['timeout'] = time();
             <li>
                 <div class="profile-details">
                     <div class="profile-content">
-                        <img src="img/user-img/<?= $_SESSION["img"]; ?>" alt="profileImg">
+                        <img src="img/user-img/<?= $foto; ?>" alt="profileImg">
                     </div>
                     <div class="name-job">
                         <div class="profile_name"><?= $_SESSION["user"]; ?></div>

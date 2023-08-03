@@ -137,7 +137,7 @@ function tracking($data)
     $cari_sample = mysqli_fetch_assoc($rs);
     $id_loc = $cari_sample["id_loc"];
     $date_subs = date_create($cari_sample["tgl_datang"]);
-    $date_ret = date_create($cari_sample["date_return"]);
+    $date_ret = date_create(date("Y-m-d"));
     date_modify($date_subs, '+1 month');
     date_modify($date_ret, '+1 month');
     $due_date1 = date_format($date_subs, 'Y-m-d');
@@ -158,7 +158,7 @@ function tracking($data)
         if ($id_loc == 1) {
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', date_take='$date' WHERE sample_test='$sample'";
         } elseif ($id_loc == 2) {
-            $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', date_return='$date' WHERE sample_test='$sample'";
+            $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', date_return='$date', due_date='$due_date2' WHERE sample_test='$sample'";
         } elseif ($id_loc == 3) {
             $update = "UPDATE tb_sample SET id_loc=$loc, pic='$nama', due_date='$due_date2' WHERE sample_test='$sample'";
         } elseif ($loc == 4 || $id_loc < 0) {
@@ -285,4 +285,41 @@ function upload()
 
     move_uploaded_file($tmpName, 'img/user-img/' . $namaFileBaru);
     return $namaFileBaru;
+}
+
+function updateProfil($data)
+{
+    global $konek;
+
+    $id = $data["id"];
+    $nama = $data["nama"];
+    // $username = $data["username"];
+
+    $res = mysqli_query($konek, "SELECT * FROM tb_user WHERE id=$id");
+    $user = mysqli_fetch_assoc($res);
+    $pass_ori = $user["password"];
+
+    if ($_FILES['foto']['size'] <= 0) {
+        $foto = $data["foto_old"];
+    } else {
+        $foto = upload();
+    }
+
+    if ($data["old_password"] != "" || $data["password"] != "" || $data["password2"] != "") {
+        $old_pass = $data["old_password"];
+        $pass = $data["password"];
+        $pass2 = $data["password2"];
+        if (password_verify($old_pass, $pass_ori)) {
+            if ($pass !== $pass2) {
+                return false;
+            }
+            $new_pass = password_hash($pass, PASSWORD_DEFAULT);
+            mysqli_query($konek, "UPDATE tb_user SET nama='$nama', password='$new_pass', foto='$foto' WHERE id=$id");
+        }
+        return false;
+    } else {
+        mysqli_query($konek, "UPDATE tb_user SET nama='$nama', foto='$foto' WHERE id=$id");
+    }
+
+    return mysqli_affected_rows($konek);
 }

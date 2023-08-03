@@ -4,15 +4,18 @@ include "header.php";
 include "fungsi/fungsi-setting.php";
 ?>
 <section id="home-page" class="home-section">
-    <div class="home-content">
+    <div class="home-content" id="head-page">
         <i class='bx bx-menu'></i>
         <span class="text">Dashboard</span>
-        <span class="notif me-5">
-            <a href="logout.php">
-                <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
-            </a>
-        </span>
+        <div class="col-md-10">
+            <div class="me-4" id="logout">
+                <a href="logout.php">
+                    <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
+                </a>
+            </div>
+        </div>
     </div>
+
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">
@@ -67,21 +70,57 @@ include "fungsi/fungsi-setting.php";
                         </div>
                         <div class="col-md-9 border-right pe-5">
                             <div class="p-3 py-5">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="text-right text-black">Profile Settings</h4>
-                                </div>
-                                <div class="row mt-3 text-black">
-                                    <input type="file" class="custom-file-input pt-0 pb-2" name="foto" id="upload">
-                                    <input type="text" name="id" value="<?= $_SESSION["id"]; ?>" hidden>
-                                    <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" name="username" placeholder="" value="<?= $username; ?>" disabled></div>
-                                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" name="username" placeholder="" value="<?= $nama; ?>"></div>
-                                    <!-- <div class="col-md-12"><label class="labels pt-2">New Passsword</label><input type="text" class="form-control" name="password" placeholder="" value=""></div>
-                                    <div class="col-md-12"><label class="labels pt-2">Confirm Passsword</label><input type="text" class="form-control" name="password2" placeholder="" value=""></div> -->
-                                    <div class="col-md-12"><label class="labels pt-2">Position</label><input type="text" class="form-control" name="level" placeholder="" value="<?= $level; ?>" disabled></div>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="text-right text-black">Profile Settings</h4>
+                                    </div>
+                                    <div class="row mt-3 text-black">
+                                        <div class="col-md-3">
+                                            <input type="file" class="custom-file-input pt-0 pb-2" name="foto" id="upload">
+                                        </div>
+                                        <div class="col-md-2 mt-2 me-4">
+                                            <label for="upload"><i class="fa fa-images fa-2xl"></i></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="button" class="btn btn-warning float-end" data-toggle="modal" data-target="#editPass">Change password <i class="fa fa-key"></i></button>
+                                        </div>
+                                        <input type="text" name="id" value="<?= $_SESSION["id"]; ?>" hidden>
+                                        <input type="text" name="foto_old" value="<?= $foto; ?>" hidden>
+                                        <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" name="username" placeholder="" value="<?= $username; ?>" disabled></div>
+                                        <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" name="nama" placeholder="" value="<?= $nama; ?>"></div>
+                                        <div class="col-md-12"><label class="labels pt-2">Position</label><input type="text" class="form-control" name="level" placeholder="" value="<?= $level; ?>" disabled></div>
 
-                                </div>
-                                <div class="mt-5 mb-0 pb-0 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile <i class="fa fa-floppy-disk"></i></button></div>
+                                    </div>
+                                    <div class="mt-5 mb-0 pb-0 text-center"><button class="btn btn-primary profile-button" type="submit" name="btn-pass">Save Profile <i class="fa fa-floppy-disk"></i></button></div>
                             </div>
+                            <!-- detail modal -->
+                            <div id="editPass" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="text-black">
+                                                Edit password
+                                            </h4>
+                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-black">
+                                            <div class="col-md-12"><label class="labels pt-2">Old Passsword</label><input type="password" class="form-control" name="old_password" placeholder="" value=""></div>
+                                            <div class="col-md-12"><label class="labels pt-2">New Passsword</label><input type="password" class="form-control" name="password" placeholder="" value=""></div>
+                                            <div class="col-md-12"><label class="labels pt-2">Confirm Passsword</label><input type="password" class="form-control" name="password2" placeholder="" value=""></div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-xmark"></i>
+                                                CLOSE</button> -->
+                                            <button class="btn btn-success" data-dismiss="modal"><i class="fa fa-floppy-disk"></i>
+                                                SAVE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal detail -->
+                            </form>
+
                         </div>
                     </div>
                 </div>

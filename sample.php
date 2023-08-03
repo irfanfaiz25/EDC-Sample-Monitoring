@@ -6,15 +6,18 @@ include "header.php";
 ?>
 
 <section class="home-section">
-  <div class="home-content">
+  <div class="home-content" id="head-page">
     <i class='bx bx-menu'></i>
-    <span class="text">Sample Data</span>
-    <span class="notif me-5">
-      <a href="logout.php">
-        <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
-      </a>
-    </span>
+    <span class="text">Dashboard</span>
+    <div class="col-md-10">
+      <div class="me-4" id="logout">
+        <a href="logout.php">
+          <i class="fa fa-right-from-bracket fa-2xl text-black"></i>
+        </a>
+      </div>
+    </div>
   </div>
+
   <div class="card mt-1 ms-3 me-3">
     <div class="card-body">
       <div class="row dataku">

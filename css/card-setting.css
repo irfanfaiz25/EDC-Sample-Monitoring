@@ -167,6 +167,32 @@ p {
     border: solid 1px #BA68C8
 }
 
+.card-dash-setting {
+  width: 800px !important;
+  background: #fcfcfc !important;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: .5vmin solid #05060f;
+  box-shadow: .4rem .4rem #05060f;
+  overflow: hidden;
+  color: rgb(255, 255, 255);
+}
+
+  @media only screen and (max-width: 400px) {
+    .card-dash-setting {
+        /* z-index: -1; */
+        width: auto !important;
+        /* margin-left: auto; */
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .card-dash-setting {
+        width: auto !important;
+        /* margin-left: auto; */
+    }
+  }
+
 .card-logo img {
     width: 50%;
 }

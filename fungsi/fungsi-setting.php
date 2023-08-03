@@ -11,3 +11,11 @@ while ($row = mysqli_fetch_assoc($res)) {
     $level = $row["level_user"];
     $foto = $row["foto"];
 }
+
+if (isset($_POST["btn-pass"])) {
+    if (updateProfil($_POST)) {
+        header('Location: setting.php');
+    } else {
+        $errorUpdateProfil = true;
+    }
+}
