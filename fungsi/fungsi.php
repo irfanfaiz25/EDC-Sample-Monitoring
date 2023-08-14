@@ -1,5 +1,5 @@
 <?php
-
+// session_start();
 $konek = mysqli_connect("localhost", "root", "", "db_edc");
 
 
@@ -127,6 +127,7 @@ function hapus($id)
 function tracking($data)
 {
     global $konek;
+    session_start();
 
     $sample = htmlspecialchars($data["sample"]);
     date_default_timezone_set("Asia/Jakarta");

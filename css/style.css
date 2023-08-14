@@ -1,6 +1,7 @@
 /* Google Fonts - Poppins */
 /* Google Fonts Import Link */
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -501,10 +502,6 @@ label {
 
 .nav-item .active {
   background-color: #05060f !important;
-  
-}
-
-.nav-item .active {
   color:#f8f8f8 !important;
 }
 
@@ -518,8 +515,6 @@ label {
 
 .notif {
 margin-left: auto;
-/* margin-right: 20px; */
-/* z-index: 1000; */
 }
 
 /* .logout {
@@ -940,6 +935,7 @@ margin-left: auto;
     transform: translate(100%, 100%);
   }
 }
+
 
 
 

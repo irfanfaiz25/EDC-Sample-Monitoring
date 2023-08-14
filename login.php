@@ -72,7 +72,7 @@ if (isset($_POST["btn-login"])) {
       <div class="form-container sign-up-container">
          <form action="" method="post" enctype="multipart/form-data">
             <h1>Register</h1>
-            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="name" placeholder="Name" autofocus />
             <input type="text" name="username" placeholder="Username" />
             <input type="password" name="password" placeholder="Password" />
             <input type="password" name="password2" placeholder="Confirm password" />
@@ -91,7 +91,7 @@ if (isset($_POST["btn-login"])) {
          <form action="" method="post" enctype="multipart/form-data">
             <h1 class="mb-5">Sign in</h1>
 
-            <input type="text" name="username" placeholder="Username" />
+            <input type="text" name="username" placeholder="Username" autofocus />
             <input type="password" name="password" placeholder="Password" />
 
             <?php

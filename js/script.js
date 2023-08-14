@@ -134,6 +134,20 @@
             .order([1, 'desc'])
             .draw();
 
+        $(document).ready(function() {
+            $('#tabel-history').DataTable();
+        });
+
+        $('#tabel-history').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-history').DataTable();
+
+        table
+            .order([0, 'asc'])
+            .draw();
+
 
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -227,7 +241,7 @@
         var table = $('#tabel-data-tracking').DataTable();
 
         table
-            .order([12, 'desc'])
+            .order([13, 'desc'])
             .draw();
 
         // <-- end script track

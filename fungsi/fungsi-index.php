@@ -8,6 +8,7 @@ $sample = query("SELECT * FROM tb_sample WHERE njo!='' AND sample_stat=1 ORDER B
 $sample_scrap = query("SELECT * FROM tb_sample WHERE after_test='scrap' AND sample_stat=0 ORDER BY time_stamp DESC");
 $sample_return = query("SELECT * FROM tb_sample WHERE after_test='return' AND sample_stat=0 ORDER BY time_stamp DESC");
 $sample_exp = query("SELECT * FROM tb_sample WHERE due_date < '$date' AND sample_stat=1");
+$sample_history = query("SELECT * FROM tb_sample");
 
 $sample_pending = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE id_loc=0 AND sample_stat=1");
 while ($row = mysqli_fetch_assoc($sample_pending)) {
@@ -69,6 +70,15 @@ while ($row = mysqli_fetch_assoc($exp_count)) {
         $exp = "0";
     } else {
         $exp = $row["total"];
+    }
+}
+
+$history_count = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample");
+while ($row = mysqli_fetch_assoc($history_count)) {
+    if (mysqli_num_rows($history_count) == 0) {
+        $hist = "0";
+    } else {
+        $hist = $row["total"];
     }
 }
 

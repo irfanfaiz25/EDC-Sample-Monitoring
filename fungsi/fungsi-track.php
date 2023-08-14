@@ -61,4 +61,4 @@ if (isset($_POST["submit-kry"])) {
     $errorid = true;
 }
 
-$sample_tbl = query("SELECT * FROM tb_sample ORDER BY time_stamp DESC");
+$sample_tbl = query("SELECT * FROM tb_sample WHERE njo != '' ORDER BY time_stamp DESC");

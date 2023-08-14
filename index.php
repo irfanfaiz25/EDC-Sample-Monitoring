@@ -22,7 +22,7 @@ include 'header.php';
 
     <div class="content">
         <div class="container cont-dash">
-            <div class="row ms-3 cont-dash2">
+            <div class="row me-3 cont-dash2">
                 <div class="col-md-4 pt-3">
                     <div class="card-dash">
                         <div class="block-content">
@@ -110,6 +110,13 @@ include 'header.php';
                                     </span>
                                     EXP</strong></a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#history" class="nav-link" data-bs-toggle="tab"><strong>
+                                    <span class="badge rounded-pill badge-notification bg-danger">
+                                        <?= $hist; ?>
+                                    </span>
+                                    HISTORY</strong></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-12">
@@ -122,6 +129,7 @@ include 'header.php';
                                         <table id="tabel-data-track" class="table table-bordered align-middle text-center">
                                             <thead class="table-secondary">
                                                 <tr>
+                                                    <th scope="col">No</th>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col" hidden>Timestamp</th>
                                                     <th scope="col">After</th>
@@ -130,6 +138,9 @@ include 'header.php';
                                             <?php $i = 1; ?>
                                             <?php foreach ($sample as $data) : ?>
                                                 <tr>
+                                                    <td>
+                                                        <?= $i; ?>
+                                                    </td>
                                                     <td class="track-column">
                                                         <div class="row">
                                                             <div class="col-md-3">
@@ -165,7 +176,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample Before Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["tgl_datang"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-flask"></i>
@@ -174,7 +191,13 @@ include 'header.php';
                                                                                 </i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Lab/Testing</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_take"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-server"></i>
@@ -182,7 +205,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample After Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_return"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-file-check-alt"></i>
@@ -211,7 +240,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample Before Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["tgl_datang"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-flask"></i>
@@ -220,7 +255,13 @@ include 'header.php';
                                                                                 </i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Lab/Testing</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_take"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-server"></i>
@@ -228,7 +269,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample After Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_return"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-file-check-alt"></i>
@@ -257,7 +304,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample Before Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["tgl_datang"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-flask"></i>
@@ -266,7 +319,13 @@ include 'header.php';
                                                                                 </i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Lab/Testing</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_take"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-server"></i>
@@ -274,7 +333,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample After Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_return"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-file-check-alt"></i>
@@ -303,7 +368,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample Before Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["tgl_datang"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-flask"></i>
@@ -312,7 +383,13 @@ include 'header.php';
                                                                                 </i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Lab/Testing</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_take"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-server"></i>
@@ -320,7 +397,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample After Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_return"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-file-check-alt"></i>
@@ -349,7 +432,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample Before Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["tgl_datang"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-flask"></i>
@@ -357,8 +446,14 @@ include 'header.php';
                                                                                 <i class="uil uil-check">
                                                                                 </i>
                                                                             </div>
-                                                                            <p class="text-green mb-0">Lab/Testing</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <p class="text-green mb-0">Lab/Testing</p>\
+                                                                            <?php
+                                                                            if ($data["date_take"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-server"></i>
@@ -366,7 +461,13 @@ include 'header.php';
                                                                                 <i class="uil uil-check"></i>
                                                                             </div>
                                                                             <p class="text-green mb-0">Sample After Test</p>
-                                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            if ($data["date_return"] != "") :
+                                                                            ?>
+                                                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                            <?php
+                                                                            endif;
+                                                                            ?>
                                                                         </li>
                                                                         <li>
                                                                             <i class="icon-green uil uil-file-check-alt"></i>
@@ -430,6 +531,7 @@ include 'header.php';
                                         <table id="tabel-scrap" class="table table-bordered align-middle text-center">
                                             <thead class="table-secondary">
                                                 <tr>
+                                                    <th scope="col">No</th>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col">Timestamp</th>
                                                 </tr>
@@ -437,6 +539,9 @@ include 'header.php';
                                             <?php $i = 1; ?>
                                             <?php foreach ($sample_scrap as $data) : ?>
                                                 <tr>
+                                                    <td>
+                                                        <?= $i; ?>
+                                                    </td>
                                                     <td class="track-column">
                                                         <div class="row">
                                                             <div class="col-md-3">
@@ -721,6 +826,7 @@ include 'header.php';
                                         <table id="tabel-return" class="table table-bordered align-middle text-center">
                                             <thead class="table-secondary">
                                                 <tr>
+                                                    <th scope="col">No</th>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col">Timestamp</th>
                                                 </tr>
@@ -728,6 +834,9 @@ include 'header.php';
                                             <?php $i = 1; ?>
                                             <?php foreach ($sample_return as $data) : ?>
                                                 <tr>
+                                                    <td>
+                                                        <?= $i; ?>
+                                                    </td>
                                                     <td class="track-column">
                                                         <div class="row">
                                                             <div class="col-md-3">
@@ -957,6 +1066,7 @@ include 'header.php';
                                         <table id="tabel-exp" class="table table-bordered align-middle text-center">
                                             <thead class="table-secondary">
                                                 <tr>
+                                                    <th scope="col">No</th>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col">Timestamp</th>
                                                 </tr>
@@ -964,6 +1074,249 @@ include 'header.php';
                                             <?php $i = 1; ?>
                                             <?php foreach ($sample_exp as $data) : ?>
                                                 <tr>
+                                                    <td>
+                                                        <?= $i; ?>
+                                                    </td>
+                                                    <td class="track-column">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="tag pt-3 ps-5">
+                                                                    <h2>
+                                                                        <?= $data["sample_test"]; ?>
+                                                                    </h2>
+                                                                    <h6>
+                                                                        <?= $data["nm_sample"]; ?>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9 track-graph">
+                                                                <?php
+
+                                                                $id_loc = $data["id_loc"];
+                                                                if ($id_loc == 1) {
+                                                                    $loc = "Sample Before Test";
+                                                                } elseif ($id_loc == 2) {
+                                                                    $loc = "Lab";
+                                                                } elseif ($id_loc == 3) {
+                                                                    $loc = "Sample After Test";
+                                                                } elseif ($id_loc == 4) {
+                                                                    $loc = "Finish";
+                                                                } else {
+                                                                    $loc = "";
+                                                                }
+                                                                if ($loc == "Sample Before Test") : ?>
+                                                                    <ul class="bars mt-2">
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog one active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample Before Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-flask"></i>
+                                                                            <div class="prog two">
+                                                                                <i class="uil uil-check">
+                                                                                </i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Lab/Testing</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog four">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample After Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-file-check-alt"></i>
+                                                                            <div class="prog five">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text">Finish</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                <?php elseif ($loc == "Lab") : ?>
+                                                                    <ul class="bars mt-2">
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog one active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample Before Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-flask"></i>
+                                                                            <div class="prog two active">
+                                                                                <i class="uil uil-check">
+                                                                                </i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Lab/Testing</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog four">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample After Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-file-check-alt"></i>
+                                                                            <div class="prog five">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text">Finish</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                <?php elseif ($loc == "Sample After Test") : ?>
+                                                                    <ul class="bars mt-2">
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog one active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample Before Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-flask"></i>
+                                                                            <div class="prog two active">
+                                                                                <i class="uil uil-check">
+                                                                                </i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Lab/Testing</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog four active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample After Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-file-check-alt"></i>
+                                                                            <div class="prog five">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text">Finish</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                <?php elseif ($loc == "Finish") : ?>
+                                                                    <ul class="bars mt-2">
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog one active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample Before Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-flask"></i>
+                                                                            <div class="prog two active">
+                                                                                <i class="uil uil-check">
+                                                                                </i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Lab/Testing</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog four active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample After Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-file-check-alt"></i>
+                                                                            <div class="prog five active">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text">Finish</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                <?php else : ?>
+                                                                    <ul class="bars mt-2">
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog one">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample Before Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-flask"></i>
+                                                                            <div class="prog two">
+                                                                                <i class="uil uil-check">
+                                                                                </i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Lab/Testing</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-server"></i>
+                                                                            <div class="prog four">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text mb-0">Sample After Test</p>
+                                                                            <p class="text-black mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <i class="icon uil uil-file-check-alt"></i>
+                                                                            <div class="prog five">
+                                                                                <i class="uil uil-check"></i>
+                                                                            </div>
+                                                                            <p class="text">Finish</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                <?php
+                                                                endif; ?>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <?= $data["time_stamp"]; ?>
+                                                    </td>
+                                                </tr>
+
+                                                <?php $i++; ?>
+                                            <?php endforeach; ?>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="history">
+                            <div class="card-dash-body">
+
+                                <div class="table-responsive">
+                                    <div id="pending-table" style="color: black !important;">
+                                        <table id="tabel-history" class="table table-bordered align-middle text-center">
+                                            <thead class="table-secondary">
+                                                <tr>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Tracking</th>
+                                                    <th scope="col">Timestamp</th>
+                                                </tr>
+                                            </thead>
+                                            <?php $i = 1; ?>
+                                            <?php foreach ($sample_history as $data) : ?>
+                                                <tr>
+                                                    <td>
+                                                        <?= $i; ?>
+                                                    </td>
                                                     <td class="track-column">
                                                         <div class="row">
                                                             <div class="col-md-3">
