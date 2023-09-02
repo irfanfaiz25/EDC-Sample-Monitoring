@@ -26,12 +26,12 @@
             });
         });
 
-        setTimeout(() => {
-            const alert = document.getElementById('myAlert');
+        // setTimeout(() => {
+        //     const alert = document.getElementById('myAlert');
 
-            alert.style.display = 'none';
+        //     alert.style.display = 'none';
 
-        }, 2000);
+        // }, 2000);
 
         $(document).ready(function() {
             $('#tabel-data-sample').DataTable();
@@ -44,7 +44,7 @@
         var table = $('#tabel-data-sample').DataTable();
 
         table
-            .order([1, 'desc'])
+            .order([2, 'desc'])
             .draw();
 
         $(document).ready(function() {
@@ -58,7 +58,7 @@
         var table = $('#tabel-data-ready').DataTable();
 
         table
-            .order([1, 'desc'])
+            .order([2, 'desc'])
             .draw();
 
         
@@ -78,18 +78,54 @@
         //   }
         // }
 
+    
         $(document).ready(function() {
-            $('#tabel-data-track').DataTable();
+            $('#tabel-track').DataTable();
         });
 
-        $('#tabel-data-track').dataTable({
+        $('#tabel-track').dataTable({
             "pageLength": 2
         });
 
-        var table = $('#tabel-data-track').DataTable();
+        var table = $('#tabel-track').DataTable();
 
         table
             .order([1, 'desc'])
+            .draw();
+            
+        $(document).ready(function() {
+            $('#tabel-data-incoming').DataTable();
+        });
+
+        $('#tabel-data-incoming').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-data-incoming').DataTable();
+
+        table
+            .order([4, 'desc'])
+            .draw();
+
+        $("#export").click(function (e) {
+            window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#tabel-data-incoming').html()));
+            e.preventDefault();
+        });
+
+        
+
+        $(document).ready(function() {
+            $('#tabel-data-waiting').DataTable();
+        });
+
+        $('#tabel-data-waiting').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-data-waiting').DataTable();
+
+        table
+            .order([5, 'desc'])
             .draw();
 
         $(document).ready(function() {
@@ -131,7 +167,21 @@
         var table = $('#tabel-exp').DataTable();
 
         table
-            .order([1, 'desc'])
+            .order([3, 'desc'])
+            .draw();
+
+        $(document).ready(function() {
+            $('#tabel-exp-after').DataTable();
+        });
+
+        $('#tabel-exp-after').dataTable({
+            "pageLength": 2
+        });
+
+        var table = $('#tabel-exp-after').DataTable();
+
+        table
+            .order([3, 'desc'])
             .draw();
 
         $(document).ready(function() {
@@ -241,7 +291,7 @@
         var table = $('#tabel-data-tracking').DataTable();
 
         table
-            .order([13, 'desc'])
+            .order([12, 'desc'])
             .draw();
 
         // <-- end script track
@@ -293,6 +343,14 @@
             navbar.classList.remove("sticky");
         }
         }
+
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+            }
+        };
         
 
      

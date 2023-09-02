@@ -19,3 +19,13 @@ if (isset($_POST["btn-pass"])) {
         $errorUpdateProfil = true;
     }
 }
+
+if (isset($_POST["btn-update-admin"])) {
+    if (updateAdmin($_POST)) {
+        header('Location: setting-admin.php');
+    } else {
+        $errorUpdateProfil = true;
+    }
+}
+
+$admin_set = query("SELECT * FROM tb_user");

@@ -1,6 +1,6 @@
 <?php
 include_once 'fungsi/fungsi.php';
-session_start();
+// session_start();
 
 if (!isset($_SESSION["login"])) {
     header('Location: login.php');
@@ -48,17 +48,32 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style-trackk.css">
     <link rel="stylesheet" href="css/card-setting.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- data table -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" />
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
+
+    <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/bootstrap.min.js"></script> -->
 
 </head>
 
@@ -70,10 +85,10 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
         </div>
         <ul class="nav-links side-bar">
             <li <?php
-                if ($curPageName == "index.php") :
+            if ($curPageName == "index.php"):
                 ?> class="active" <?php
-                                endif;
-                                    ?>>
+            endif;
+            ?>>
                 <a href="index.php">
                     <i class='fa fa-home'></i>
                     <span class="link_name">Dashboard</span>
@@ -83,10 +98,10 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
                 </ul>
             </li>
             <li <?php
-                if ($curPageName == "sample.php") :
+            if ($curPageName == "sample.php"):
                 ?> class="active" <?php
-                                endif;
-                                    ?>>
+            endif;
+            ?>>
                 <a href="sample.php">
                     <i class='fa fa-database'></i>
                     <span class="link_name">Sample Data</span>
@@ -96,10 +111,10 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
                 </ul>
             </li>
             <li <?php
-                if ($curPageName == "track.php") :
+            if ($curPageName == "track.php"):
                 ?> class="active" <?php
-                                endif;
-                                    ?>>
+            endif;
+            ?>>
                 <a href="track.php">
                     <i class='fa fa-location-dot'></i>
                     <span class="link_name">Tracking</span>
@@ -109,16 +124,32 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
                 </ul>
             </li>
             <li <?php
-                if ($curPageName == "setting.php") :
+            if ($curPageName == "setting.php"):
                 ?> class="active" <?php
-                                endif;
-                                    ?>>
-                <a href="setting.php">
+            endif;
+            ?>>
+                <a href="
+                <?php
+                if ($_SESSION["level"] == "marketing") {
+                    echo 'setting-admin.php';
+                } else {
+                    echo 'setting.php';
+                }
+                ?>
+                ">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="setting.php">Setting</a></li>
+                    <li><a class="link_name" href="
+                    <?php
+                    if ($_SESSION["level"] == "marketing") {
+                        echo 'setting-admin.php';
+                    } else {
+                        echo 'setting.php';
+                    }
+                    ?>
+                    ">Setting</a></li>
                 </ul>
             </li>
             <li>
@@ -127,8 +158,12 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
                         <img src="img/user-img/<?= $foto; ?>" alt="profileImg">
                     </div>
                     <div class="name-job">
-                        <div class="profile_name"><?= $_SESSION["user"]; ?></div>
-                        <div class="job"><?= $_SESSION["level"]; ?></div>
+                        <div class="profile_name">
+                            <?= $_SESSION["user"]; ?>
+                        </div>
+                        <div class="job">
+                            <?= $_SESSION["level"]; ?>
+                        </div>
                     </div>
                     <a href="">
                         <i class=''></i>

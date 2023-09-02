@@ -1,12 +1,11 @@
 <?php
-session_start();
+// session_start();
+include 'fungsi/fungsi.php';
 
 if (isset($_SESSION["login"])) {
    header('Location: index.php');
    exit;
 }
-
-include 'fungsi/fungsi.php';
 
 if (isset($_POST["btn-regist"])) {
    if (regist($_POST) > 0) {
@@ -56,7 +55,8 @@ if (isset($_POST["btn-login"])) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -95,24 +95,24 @@ if (isset($_POST["btn-login"])) {
             <input type="password" name="password" placeholder="Password" />
 
             <?php
-            if (isset($regist_fail)) : ?>
+            if (isset($regist_fail)): ?>
                <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
                   Register failed
                   <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
                </div>
-            <?php
-            elseif (isset($alert_pass)) : ?>
+               <?php
+            elseif (isset($alert_pass)): ?>
                <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
                   Incorrect password
                   <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
                </div>
-            <?php
-            elseif (isset($alert_user)) : ?>
+               <?php
+            elseif (isset($alert_user)): ?>
                <div id="myAlert" class="alert alert-danger alert-dismissible fade show">
                   Username not found
                   <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
                </div>
-            <?php
+               <?php
             endif;
             ?>
 

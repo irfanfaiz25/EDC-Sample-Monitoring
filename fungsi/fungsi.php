@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 $konek = mysqli_connect("localhost", "root", "", "db_edc");
 
 
@@ -19,6 +19,7 @@ function tambah($data)
     global $konek;
 
     $smp_test = htmlspecialchars($data["sample-test"]);
+    $namaFile = $_FILES['foto']['name'];
     $njo = htmlspecialchars($data["njo"]);
     $nama = htmlspecialchars($data["sample"]);
     $qty = htmlspecialchars($data["qty"]);
@@ -66,6 +67,15 @@ function tambah($data)
         $cek_layak = 0;
     }
 
+    if ($namaFile != "") {
+        $foto = uploadFotoSample($smp_test);
+        if (!$foto) {
+            return false;
+        }
+    } else {
+        $foto = "";
+    }
+
     if (
         $nama == "" || $qty == "" || $cust == "" || $tgl_dtg == ""
         || $tgl_dtg == "dd/mm/yyyy" || $tools == ""
@@ -76,9 +86,9 @@ function tambah($data)
     $tgl_dtg = $tgl_dtg . date(" H:i:s");
 
     $input = "INSERT IGNORE INTO tb_sample (sample_test,njo,nm_sample,qty,customer,tgl_datang,tujuan1,tujuan2,tujuan3,tujuan4,tujuan5,
-    tools,after_test,date_take,date_return,due_date,date_after,note,id_loc,pic,rak,time_stamp,cek_nama,cek_qty,cek_comp,cek_dupl,cek_layak,pic_cek,sample_stat)
+    tools,after_test,date_take,date_return,due_date,date_after,note,id_loc,pic,rak,time_stamp,cek_nama,cek_qty,cek_comp,cek_dupl,cek_layak,pic_cek,sample_stat,foto)
     VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg','$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools',
-    '','','','$due_date','','$note','','','','','$cek_nama','$cek_qty','$cek_comp','$cek_dupl','$cek_layak','$pic_cek',1)";
+    '','','','$due_date','','$note','','','','','$cek_nama','$cek_qty','$cek_comp','$cek_dupl','$cek_layak','$pic_cek',1,'$foto')";
 
     mysqli_query($konek, $input);
 
@@ -90,6 +100,7 @@ function ubahSample($data)
     global $konek;
 
     $smp_test = htmlspecialchars($data["id"]);
+    $namaFile = $_FILES['foto']['name'];
     $njo = htmlspecialchars($data["njo"]);
     $nama = htmlspecialchars($data["sample"]);
     $qty = htmlspecialchars($data["qty"]);
@@ -102,15 +113,59 @@ function ubahSample($data)
     $tujuan4 = htmlspecialchars($data["tujuan4"]);
     $tujuan5 = htmlspecialchars($data["tujuan5"]);
     $tools = htmlspecialchars($data["tools"]);
-    $after = htmlspecialchars($data["after"]);
+    // $after = htmlspecialchars($data["after"]);
     $note = htmlspecialchars($data["note"]);
 
-    $edit = "UPDATE tb_sample SET sample_test='$smp_test',njo='$njo',nm_sample='$nama',qty='$qty',
-    customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tujuan2='$tujuan2',tujuan3='$tujuan3',
-    tujuan4='$tujuan4',tujuan5='$tujuan5',tools='$tools',after_test='$after',
-    note='$note' WHERE sample_test='$smp_test'";
+    $pic_cek = $data["pic_cek"];
 
-    mysqli_query($konek, $edit);
+    if (isset($data["cek1"])) {
+        $cek_nama = 1;
+    } else {
+        $cek_nama = 0;
+    }
+
+    if (isset($data["cek2"])) {
+        $cek_qty = 1;
+    } else {
+        $cek_qty = 0;
+    }
+
+    if (isset($data["cek3"])) {
+        $cek_comp = 1;
+    } else {
+        $cek_comp = 0;
+    }
+
+    if (isset($data["cek4"])) {
+        $cek_dupl = 1;
+    } else {
+        $cek_dupl = 0;
+    }
+
+    if (isset($data["cek5"])) {
+        $cek_layak = 1;
+    } else {
+        $cek_layak = 0;
+    }
+
+    if ($namaFile != "") {
+        $foto = uploadFotoSample($smp_test);
+        if (!$foto) {
+            return false;
+        }
+
+        $edit = "UPDATE tb_sample SET sample_test='$smp_test',njo='$njo',nm_sample='$nama',qty='$qty',
+        customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tujuan2='$tujuan2',tujuan3='$tujuan3',
+        tujuan4='$tujuan4',tujuan5='$tujuan5',tools='$tools', foto='$foto', note='$note', cek_nama='$cek_nama', cek_qty='$cek_qty', cek_comp='$cek_comp', cek_dupl='$cek_dupl', cek_layak='$cek_layak', pic_cek='$pic_cek' WHERE sample_test='$smp_test'";
+
+        mysqli_query($konek, $edit);
+    } else {
+        $edit = "UPDATE tb_sample SET sample_test='$smp_test',njo='$njo',nm_sample='$nama',qty='$qty',
+        customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tujuan2='$tujuan2',tujuan3='$tujuan3',
+        tujuan4='$tujuan4',tujuan5='$tujuan5',tools='$tools', note='$note', cek_nama='$cek_nama', cek_qty='$cek_qty', cek_comp='$cek_comp', cek_dupl='$cek_dupl', cek_layak='$cek_layak', pic_cek='$pic_cek' WHERE sample_test='$smp_test'";
+
+        mysqli_query($konek, $edit);
+    }
 
     return mysqli_affected_rows($konek);
 }
@@ -288,12 +343,61 @@ function upload()
     return $namaFileBaru;
 }
 
+function uploadFotoSample($data)
+{
+    $namaFile = $_FILES['foto']['name'];
+    $ukuran = $_FILES['foto']['size'];
+    $eror = $_FILES['foto']['error'];
+    $tmpName = $_FILES['foto']['tmp_name'];
+
+    if ($eror === 4) {
+        echo "
+                <script>
+                    alert('Pilih foto yang akan di upload');
+                </script>
+            ";
+        return false;
+    }
+
+    $valEkstensiFoto = ['jpg', 'jpeg', 'png'];
+    $ekstensiFoto = explode('.', $namaFile);
+    $ekstensiFoto = strtolower(end($ekstensiFoto));
+
+    if (!in_array($ekstensiFoto, $valEkstensiFoto)) {
+        echo "
+                <script>
+                    alert('Incorrect extension!');
+                </script>
+            ";
+        return false;
+    }
+
+    if ($ukuran > 2000000) {
+        echo "
+                <script>
+                    alert('File too large');
+                </script>
+            ";
+        return false;
+    }
+
+    date_default_timezone_set("Asia/Jakarta");
+    $tanggal = date("Y-m-d H.i.s");
+    $namaFileBaru = $data . " " . $tanggal;
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiFoto;
+
+    move_uploaded_file($tmpName, 'img/foto-sample/' . $namaFileBaru);
+    return $namaFileBaru;
+}
+
 function updateProfil($data)
 {
     global $konek;
 
     $id = $data["id"];
     $nama = $data["nama"];
+    $level = $data["level"];
     // $username = $data["username"];
 
     $res = mysqli_query($konek, "SELECT * FROM tb_user WHERE id=$id");
@@ -315,12 +419,44 @@ function updateProfil($data)
                 return false;
             }
             $new_pass = password_hash($pass, PASSWORD_DEFAULT);
-            mysqli_query($konek, "UPDATE tb_user SET nama='$nama', password='$new_pass', foto='$foto' WHERE id=$id");
+            mysqli_query($konek, "UPDATE tb_user SET nama='$nama', password='$new_pass', foto='$foto',level_user='$level' WHERE id=$id");
         }
         return false;
     } else {
-        mysqli_query($konek, "UPDATE tb_user SET nama='$nama', foto='$foto' WHERE id=$id");
+        mysqli_query($konek, "UPDATE tb_user SET nama='$nama', foto='$foto',level_user='$level' WHERE id=$id");
     }
+
+    return mysqli_affected_rows($konek);
+}
+
+function updateAdmin($data)
+{
+    global $konek;
+
+    $id = $data["id"];
+    $nama = $data["nama"];
+    $level = $data["level"];
+
+    if ($_FILES['foto']['size'] <= 0) {
+        $foto = $data["foto_old"];
+    } else {
+        $foto = upload();
+    }
+
+    mysqli_query($konek, "UPDATE tb_user SET nama='$nama', foto='$foto',level_user='$level' WHERE id=$id");
+
+    return mysqli_affected_rows($konek);
+}
+
+function updateRemark($data)
+{
+    global $konek;
+
+    $smp_test = $data["sample_test"];
+    $user = $_SESSION["nama"];
+    $remark = $user . " : " . $data["remark"];
+
+    mysqli_query($konek, "UPDATE tb_sample SET note='$remark' WHERE sample_test='$smp_test'");
 
     return mysqli_affected_rows($konek);
 }

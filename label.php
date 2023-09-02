@@ -42,7 +42,8 @@ if (isset($_GET['sample_test'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css" />
 
 
@@ -74,15 +75,16 @@ if (isset($_GET['sample_test'])) {
                             <div class="row dataku mb-4">
                                 <div class="col-md-6 text-center">
 
-                                    <?php foreach ($cetak as $row) : ?>
+                                    <?php foreach ($cetak as $row): ?>
                                         <table class=" table table-bordered align-middle text-center" style="width: 600px;">
                                             <tbody>
                                                 <tr>
                                                     <td class="label-header" rowspan="2" colspan="4">
-                                                        <img style="margin-left: 20px;" src="img/logoo.png" height="50" alt="logo">
+                                                        <img style="margin-left: 20px;" src="img/logoo.png" height="50"
+                                                            alt="logo">
                                                         <span class="float-end">
                                                             <h1 class="pt-3 pe-5">
-                                                                <strong>PART TAG</strong>
+                                                                <strong>SAMPLE TAG</strong>
                                                             </h1>
                                                         </span>
                                                     </td>
@@ -99,48 +101,72 @@ if (isset($_GET['sample_test'])) {
                                                 </tr>
                                                 <tr>
                                                     <td class="label-head text-start">SAMPLE TEST:</td>
-                                                    <td class="label-field"><?= strtoupper($row["sample_test"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["sample_test"]); ?>
+                                                    </td>
                                                     <td class="label-head text-start">NJO:</td>
-                                                    <td class="label-field"><?= $row["njo"]; ?></td>
+                                                    <td class="label-field">
+                                                        <?= $row["njo"]; ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label-head text-start">CUSTOMER NAME:</td>
-                                                    <td class="label-field"><?= strtoupper($row["customer"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["customer"]); ?>
+                                                    </td>
                                                     <td class="label-head text-start">QTY:</td>
-                                                    <td class="label-field"><?= strtoupper($row["qty"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["qty"]); ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label-head text-start">ITEM TEST 1:</td>
-                                                    <td class="label-field"><?= strtoupper($row["tujuan1"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["tujuan1"]); ?>
+                                                    </td>
                                                     <td class="label-head text-start">ITEM TEST 2:</td>
-                                                    <td class="label-field"><?= strtoupper($row["tujuan2"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["tujuan2"]); ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label-head text-start">ITEM TEST 3:</td>
-                                                    <td class="label-field"><?= strtoupper($row["tujuan3"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["tujuan3"]); ?>
+                                                    </td>
                                                     <td class="label-head text-start">ITEM TEST 4:</td>
-                                                    <td class="label-field"><?= strtoupper($row["tujuan4"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["tujuan4"]); ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label-head text-start">ITEM TEST 5:</td>
-                                                    <td class="label-field"><?= strtoupper($row["tujuan5"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["tujuan5"]); ?>
+                                                    </td>
                                                     <td class="label-head text-start">TOOLS:</td>
-                                                    <td class="label-field"><?= strtoupper($row["tools"]); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper($row["tools"]); ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label-head text-start">AFTER TEST:</td>
                                                     <td class="label-field">
-                                                        <input class="form-check-input border-2 border-dark" type="checkbox" value="" id="scrap" name="scrap" value="1">
+                                                        <input class="form-check-input border-2 border-dark" type="checkbox"
+                                                            value="" id="scrap" name="scrap" value="1">
                                                         <label class="form-check-label" for="scrap">
                                                             Scrap
                                                         </label>
-                                                        <input class="form-check-input border-2 border-dark" type="checkbox" value="" id="scrap" name="scrap" value="1">
+                                                        <input class="form-check-input border-2 border-dark" type="checkbox"
+                                                            value="" id="scrap" name="scrap" value="1">
                                                         <label class="form-check-label" for="scrap">
                                                             Return
                                                         </label>
                                                     </td>
                                                     <td class="label-head text-start">DATE ENTRY:</td>
-                                                    <td class="label-field"><?= strtoupper(date("d-m-Y", strtotime($row["tgl_datang"]))); ?></td>
+                                                    <td class="label-field">
+                                                        <?= strtoupper(date("d-m-Y", strtotime($row["tgl_datang"]))); ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label-header label-field" rowspan="2" colspan="3">
@@ -149,7 +175,8 @@ if (isset($_GET['sample_test'])) {
                                                         <?= strtoupper($row["note"]); ?>
                                                     </td>
                                                     <td>
-                                                        <img src="temp/<?php echo "$isi"; ?>.png" style="height: 150px;" alt="">
+                                                        <img src="temp/<?php echo "$isi"; ?>.png" style="height: 150px;"
+                                                            alt="">
                                                     </td>
                                                 </tr>
                                             </tbody>

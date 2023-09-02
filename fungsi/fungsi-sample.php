@@ -8,14 +8,20 @@ $today = date("d/m/Y");
 // echo $today;
 
 // membuat kode
+$query_cek = mysqli_query($konek, "SELECT * FROM tb_sample");
 $query = mysqli_query($konek, "SELECT max(sample_test) AS kodeTerbesar FROM tb_sample");
 $data = mysqli_fetch_array($query);
 $kode_sample = $data['kodeTerbesar'];
 $year_now = date("y");
-$urutan = (int) substr($kode_sample, 4, 4);
-$urutan++;
-$huruf = "ST";
-$kode_sample = $huruf . $year_now . sprintf("%04s", $urutan);
+if (mysqli_num_rows($query_cek) === 0) {
+    $huruf = "ST";
+    $kode_sample = $huruf . $year_now . "0001";
+} else {
+    $urutan = (int) substr($kode_sample, 4, 4);
+    $urutan++;
+    $huruf = "ST";
+    $kode_sample = $huruf . $year_now . sprintf("%04s", $urutan);
+}
 // kode selesai
 
 

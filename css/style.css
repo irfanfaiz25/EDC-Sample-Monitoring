@@ -482,6 +482,7 @@ label {
 
 .track-graph {
   margin-left: -50px;
+  padding-top: 15px;
 }
 
 .dash-field {
@@ -934,6 +935,10 @@ margin-left: auto;
   100% {
     transform: translate(100%, 100%);
   }
+}
+
+td img {
+  border-radius: 4px;
 }
 
 
