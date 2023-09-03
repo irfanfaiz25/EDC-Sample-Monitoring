@@ -76,6 +76,8 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
             if ($curPageName == "index.php"):
                 ?> class="active" <?php
             endif;
+            if ($_SESSION["level"] != "marketing"): ?> hidden <?php
+            endif;
             ?>>
                 <a href="index.php">
                     <i class='fa fa-home'></i>
@@ -88,6 +90,8 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], 
             <li <?php
             if ($curPageName == "sample.php"):
                 ?> class="active" <?php
+            endif;
+            if ($_SESSION["level"] != "marketing"): ?> hidden <?php
             endif;
             ?>>
                 <a href="sample.php">

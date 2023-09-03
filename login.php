@@ -2,8 +2,11 @@
 // session_start();
 include 'fungsi/fungsi.php';
 
-if (isset($_SESSION["login"])) {
+if (isset($_SESSION["login"]) && $_SESSION["level"] == "marketing") {
    header('Location: index.php');
+   exit;
+} elseif (isset($_SESSION["login"]) && $_SESSION["level"] != "marketing") {
+   header('Location: sample.php');
    exit;
 }
 
@@ -36,8 +39,14 @@ if (isset($_POST["btn-login"])) {
          $_SESSION["img"] = $img;
          $_SESSION["nama"] = $nama;
 
-         header('Location: index.php');
-         exit;
+         if ($level == "marketing") {
+            header('Location: index.php');
+            exit;
+         } elseif ($level != "marketing") {
+            header('Location: sample.php');
+            exit;
+         }
+
       } else {
          $alert_pass = true;
       }
