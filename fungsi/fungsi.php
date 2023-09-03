@@ -454,7 +454,7 @@ function updateRemark($data)
 
     $smp_test = $data["sample_test"];
     $user = $_SESSION["nama"];
-    $remark = $user . " : " . $data["remark"];
+    $remark = $data["remark"] . " - " . $user . ".";
 
     mysqli_query($konek, "UPDATE tb_sample SET note='$remark' WHERE sample_test='$smp_test'");
 
