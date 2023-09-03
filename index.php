@@ -72,11 +72,11 @@ include 'header.php';
 
 <?php
 if (isset($errorafter)): ?>
-                    <div id="myAlert" class="alert alert-danger alert-dismissible fade show ms-4 mt-4">
-                    Add action after failed!
-                    <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                    <?php
+                <div id="myAlert" class="alert alert-danger alert-dismissible fade show ms-4 mt-4">
+                Add action after failed!
+                <button type="button" id="myBtn" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                <?php
 endif;
 ?>
 <div class="row pb-4 ps-4 nav-tab">
@@ -141,7 +141,6 @@ HISTORY</strong></a>
 <div class="card-dash-body">
 
 <div class="table-responsive">
-    <button type="button" class="btn btn-warning" id="export">EXCEL</button>
 <div id="pending-table" style="color: black !important;">
 <table id="tabel-data-incoming" class="table table-bordered align-middle text-center display">
 <thead class="table-secondary">
@@ -156,26 +155,53 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_incoming as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <?= date("d-m-Y | H:i", strtotime($data["tgl_datang"])); ?>
-                    </td>
-                    <td hidden>
-                    <?= $data["time_stamp"]; ?>
-                    </td>
-                    </tr>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
+                </a>
 
-                    <?php $i++; ?>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <?= date("d-m-Y | H:i", strtotime($data["tgl_datang"])); ?>
+                </td>
+                <td hidden>
+                <?= $data["time_stamp"]; ?>
+                </td>
+                </tr>
+
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -203,70 +229,70 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_waiting as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td>
-                    <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">
-                    Image Sample (
-                    <?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </td>
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <?php
-                    $id_loc = $data["id_loc"];
-                    if ($id_loc == 1) {
-                        $loc = "Sample Room (Before Test)";
-                    } elseif ($id_loc == 2) {
-                        $loc = "Lab / Testing";
-                    } elseif ($id_loc == 3) {
-                        $loc = "Sample Room (After Test)";
-                    } elseif ($id_loc == 4) {
-                        $loc = "Finish";
-                    } elseif ($id_loc == 0) {
-                        $loc = "Sample Room (Not Scanned Yet)";
-                    }
-                    echo $loc;
-                    ?>
-                    </td>
-                    <td>
-                    <?= date("d-m-Y | H:i", strtotime($data["tgl_datang"])); ?>
-                    </td>
-                    <td>
-                    <?= $data["time_stamp"]; ?>
-                    </td>
-                    </tr>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <?php
+                $id_loc = $data["id_loc"];
+                if ($id_loc == 1) {
+                    $loc = "Sample Room (Before Test)";
+                } elseif ($id_loc == 2) {
+                    $loc = "Lab / Testing";
+                } elseif ($id_loc == 3) {
+                    $loc = "Sample Room (After Test)";
+                } elseif ($id_loc == 4) {
+                    $loc = "Finish";
+                } elseif ($id_loc == 0) {
+                    $loc = "Sample Room (Not Scanned Yet)";
+                }
+                echo $loc;
+                ?>
+                </td>
+                <td>
+                <?= date("d-m-Y | H:i", strtotime($data["tgl_datang"])); ?>
+                </td>
+                <td>
+                <?= $data["time_stamp"]; ?>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -285,401 +311,401 @@ HISTORY</strong></a>
 <tr>
 <th scope="col">No</th>
 <th scope="col">Tracking</th>
-<th scope="col">Timestamp</th>
+<th scope="col">Remark</th>
 <th scope="col">After Test</th>
 </tr>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td class="track-column">
-                    <div class="row">
-                    <div class="col-md-3">
-                    <div class="tag pt-3 ps-5">
-                    <h2>
-                    <?= $data["sample_test"]; ?>
-                    </h2>
-                    <h6>
-                    <?= $data["njo"]; ?>
-                    </h6>
-                    <h6>
-                    <?= $data["nm_sample"]; ?>
-                    </h6>
-                    <a href="" data-toggle="modal" data-target="#detailImageTracking<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="70" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td class="track-column">
+                <div class="row">
+                <div class="col-md-3">
+                <div class="tag pt-3 ps-5">
+                <h2>
+                <?= $data["sample_test"]; ?>
+                </h2>
+                <h6>
+                <?= $data["njo"]; ?>
+                </h6>
+                <h6>
+                <?= $data["nm_sample"]; ?>
+                </h6>
+                <a href="" data-toggle="modal" data-target="#detailImageTracking<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="70" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImageTracking<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">
-                    Image Sample (
-                    <?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </div>
-                    </div>
-                    <div class="col-md-9 track-graph">
-                    <?php
+                <!-- detail image modal -->
+                <div id="detailImageTracking<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </div>
+                </div>
+                <div class="col-md-9 track-graph">
+                <?php
 
-                    $id_loc = $data["id_loc"];
-                    if ($id_loc == 1) {
-                        $loc = "Sample Before Test";
-                    } elseif ($id_loc == 2) {
-                        $loc = "Lab";
-                    } elseif ($id_loc == 3) {
-                        $loc = "Sample After Test";
-                    } elseif ($id_loc == 4) {
-                        $loc = "Finish";
-                    } else {
-                        $loc = "";
-                    }
-                    if ($loc == "Sample Before Test"): ?>
-                                        <ul class="bars mt-2">
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog one active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample Before Test</p>
-                                        <?php
-                                        if ($data["tgl_datang"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-flask"></i>
-                                        <div class="prog two">
-                                        <i class="uil uil-check">
-                                        </i>
-                                        </div>
-                                        <p class="text-green mb-0">Lab/Testing</p>
-                                        <?php
-                                        if ($data["date_take"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog four">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample After Test</p>
-                                        <?php
-                                        if ($data["date_return"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-file-check-alt"></i>
-                                        <div class="prog five">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <?php
-                                        if ($data["date_after"] != ""):
-                                            ?>
-                                                            <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
-                                                            <?php
-                                        else:
-                                            ?>
-                                                            <p class="text-green">Status After</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        </ul>
-                    <?php elseif ($loc == "Lab"): ?>
-                                        <ul class="bars mt-2">
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog one active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample Before Test</p>
-                                        <?php
-                                        if ($data["tgl_datang"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-flask"></i>
-                                        <div class="prog two active-green">
-                                        <i class="uil uil-check">
-                                        </i>
-                                        </div>
-                                        <p class="text-green mb-0">Lab/Testing</p>
-                                        <?php
-                                        if ($data["date_take"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog four">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample After Test</p>
-                                        <?php
-                                        if ($data["date_return"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-file-check-alt"></i>
-                                        <div class="prog five">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <?php
-                                        if ($data["date_after"] != ""):
-                                            ?>
-                                                            <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
-                                                            <?php
-                                        else:
-                                            ?>
-                                                            <p class="text-green">Status After</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        </ul>
-                    <?php elseif ($loc == "Sample After Test"): ?>
-                                        <ul class="bars mt-2">
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog one active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample Before Test</p>
-                                        <?php
-                                        if ($data["tgl_datang"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-flask"></i>
-                                        <div class="prog two active-green">
-                                        <i class="uil uil-check">
-                                        </i>
-                                        </div>
-                                        <p class="text-green mb-0">Lab/Testing</p>
-                                        <?php
-                                        if ($data["date_take"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog four active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample After Test</p>
-                                        <?php
-                                        if ($data["date_return"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-file-check-alt"></i>
-                                        <div class="prog five">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <?php
-                                        if ($data["date_after"] != ""):
-                                            ?>
-                                                            <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
-                                                            <?php
-                                        else:
-                                            ?>
-                                                            <p class="text-green">Status After</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        </ul>
-                    <?php elseif ($loc == "Finish"): ?>
-                                        <ul class="bars mt-2">
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog one active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample Before Test</p>
-                                        <?php
-                                        if ($data["tgl_datang"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-flask"></i>
-                                        <div class="prog two active-green">
-                                        <i class="uil uil-check">
-                                        </i>
-                                        </div>
-                                        <p class="text-green mb-0">Lab/Testing</p>
-                                        <?php
-                                        if ($data["date_take"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog four active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample After Test</p>
-                                        <?php
-                                        if ($data["date_return"] != ""):
-                                            ?>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-file-check-alt"></i>
-                                        <div class="prog five active-green">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <?php
-                                        if ($data["date_after"] != ""):
-                                            ?>
-                                                            <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
-                                                            <?php
-                                        else:
-                                            ?>
-                                                            <p class="text-green">Status After</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        </ul>
-                    <?php else: ?>
-                                        <ul class="bars mt-2">
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog one">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample Before Test</p>
-                                        <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-flask"></i>
-                                        <div class="prog two">
-                                        <i class="uil uil-check">
-                                        </i>
-                                        </div>
-                                        <p class="text-green mb-0">Lab/Testing</p>
-                                        <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-server"></i>
-                                        <div class="prog four">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <p class="text-green mb-0">Sample After Test</p>
-                                        <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
-                                        </li>
-                                        <li>
-                                        <i class="icon-green uil uil-file-check-alt"></i>
-                                        <div class="prog five">
-                                        <i class="uil uil-check"></i>
-                                        </div>
-                                        <?php
-                                        if ($data["date_after"] != ""):
-                                            ?>
-                                                            <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
-                                                            <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
-                                                            <?php
-                                        else:
-                                            ?>
-                                                            <p class="text-green">Status After</p>
-                                                            <?php
-                                        endif;
-                                        ?>
-                                        </li>
-                                        </ul>
-                                        <?php
-                    endif; ?>
-                    </div>
-                    </div>
-                    </td>
-                    <td>
-                    <?= $data["time_stamp"]; ?>
-                    </td>
-                    <td>
-                    <button class="btn btn-primary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" <?php
-                    if ($data["id_loc"] != 3) {
-                        echo "disabled";
-                    }
-                    ?>>
-                    After Test
-                    </button>
+                $id_loc = $data["id_loc"];
+                if ($id_loc == 1) {
+                    $loc = "Sample Before Test";
+                } elseif ($id_loc == 2) {
+                    $loc = "Lab";
+                } elseif ($id_loc == 3) {
+                    $loc = "Sample After Test";
+                } elseif ($id_loc == 4) {
+                    $loc = "Finish";
+                } else {
+                    $loc = "";
+                }
+                if ($loc == "Sample Before Test"): ?>
+                                <ul class="bars mt-2">
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog one active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample Before Test</p>
+                                <?php
+                                if ($data["tgl_datang"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-flask"></i>
+                                <div class="prog two">
+                                <i class="uil uil-check">
+                                </i>
+                                </div>
+                                <p class="text-green mb-0">Lab/Testing</p>
+                                <?php
+                                if ($data["date_take"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog four">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample After Test</p>
+                                <?php
+                                if ($data["date_return"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-file-check-alt"></i>
+                                <div class="prog five">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <?php
+                                if ($data["date_after"] != ""):
+                                    ?>
+                                                <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
+                                                <?php
+                                else:
+                                    ?>
+                                                <p class="text-green">Status After</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                </ul>
+                <?php elseif ($loc == "Lab"): ?>
+                                <ul class="bars mt-2">
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog one active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample Before Test</p>
+                                <?php
+                                if ($data["tgl_datang"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-flask"></i>
+                                <div class="prog two active-green">
+                                <i class="uil uil-check">
+                                </i>
+                                </div>
+                                <p class="text-green mb-0">Lab/Testing</p>
+                                <?php
+                                if ($data["date_take"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog four">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample After Test</p>
+                                <?php
+                                if ($data["date_return"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-file-check-alt"></i>
+                                <div class="prog five">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <?php
+                                if ($data["date_after"] != ""):
+                                    ?>
+                                                <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
+                                                <?php
+                                else:
+                                    ?>
+                                                <p class="text-green">Status After</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                </ul>
+                <?php elseif ($loc == "Sample After Test"): ?>
+                                <ul class="bars mt-2">
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog one active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample Before Test</p>
+                                <?php
+                                if ($data["tgl_datang"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-flask"></i>
+                                <div class="prog two active-green">
+                                <i class="uil uil-check">
+                                </i>
+                                </div>
+                                <p class="text-green mb-0">Lab/Testing</p>
+                                <?php
+                                if ($data["date_take"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog four active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample After Test</p>
+                                <?php
+                                if ($data["date_return"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-file-check-alt"></i>
+                                <div class="prog five">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <?php
+                                if ($data["date_after"] != ""):
+                                    ?>
+                                                <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
+                                                <?php
+                                else:
+                                    ?>
+                                                <p class="text-green">Status After</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                </ul>
+                <?php elseif ($loc == "Finish"): ?>
+                                <ul class="bars mt-2">
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog one active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample Before Test</p>
+                                <?php
+                                if ($data["tgl_datang"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-flask"></i>
+                                <div class="prog two active-green">
+                                <i class="uil uil-check">
+                                </i>
+                                </div>
+                                <p class="text-green mb-0">Lab/Testing</p>
+                                <?php
+                                if ($data["date_take"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog four active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample After Test</p>
+                                <?php
+                                if ($data["date_return"] != ""):
+                                    ?>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-file-check-alt"></i>
+                                <div class="prog five active-green">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <?php
+                                if ($data["date_after"] != ""):
+                                    ?>
+                                                <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
+                                                <?php
+                                else:
+                                    ?>
+                                                <p class="text-green">Status After</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                </ul>
+                <?php else: ?>
+                                <ul class="bars mt-2">
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog one">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample Before Test</p>
+                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["tgl_datang"])); ?>)</p>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-flask"></i>
+                                <div class="prog two">
+                                <i class="uil uil-check">
+                                </i>
+                                </div>
+                                <p class="text-green mb-0">Lab/Testing</p>
+                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_take"])); ?>)</p>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-server"></i>
+                                <div class="prog four">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <p class="text-green mb-0">Sample After Test</p>
+                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_return"])); ?>)</p>
+                                </li>
+                                <li>
+                                <i class="icon-green uil uil-file-check-alt"></i>
+                                <div class="prog five">
+                                <i class="uil uil-check"></i>
+                                </div>
+                                <?php
+                                if ($data["date_after"] != ""):
+                                    ?>
+                                                <p class="text-green mb-0"><?= $data["after_test"]; ?></p>
+                                                <p class="text mt-0">(<?= date("d-m-Y H:i:s", strtotime($data["date_after"])); ?>)</p>
+                                                <?php
+                                else:
+                                    ?>
+                                                <p class="text-green">Status After</p>
+                                                <?php
+                                endif;
+                                ?>
+                                </li>
+                                </ul>
+                                <?php
+                endif; ?>
+                </div>
+                </div>
+                </td>
+                <td>
+                <?= $data["time_stamp"]; ?>
+                </td>
+                <td>
+                <button class="btn btn-primary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" <?php
+                if ($data["id_loc"] != 3) {
+                    echo "disabled";
+                }
+                ?>>
+                After Test
+                </button>
 
-                    <ul class="nav-links dropdown-menu">
-                    <li><a class="dropdown-item" href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
-                    </li>
-                    <li><a class="dropdown-item" href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
-                    to Customer</a></li>
-                    </ul>
-                    </td>
-                    </tr>
+                <ul class="nav-links dropdown-menu">
+                <li><a class="dropdown-item" href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
+                </li>
+                <li><a class="dropdown-item" href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
+                to Customer</a></li>
+                </ul>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -706,51 +732,51 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_scrap as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td>
-                    <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">Image Sample (<?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </td>
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["njo"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["time_stamp"]; ?>
-                    </td>
-                    </tr>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">Image Sample (<?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["njo"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <?= $data["time_stamp"]; ?>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -777,53 +803,53 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_return as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td>
-                    <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">
-                    Image Sample (
-                    <?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </td>
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["njo"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["time_stamp"]; ?>
-                    </td>
-                    </tr>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["njo"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <?= $data["time_stamp"]; ?>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -851,61 +877,61 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_exp as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="70" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="70" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">
-                    Image Sample (
-                    <?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </td>
-                    <td>
-                    <p hidden><?= $data["time_stamp"]; ?></p>
-                    <button class="btn btn-danger btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    After Test
-                    </button>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td>
+                <p hidden><?= $data["time_stamp"]; ?></p>
+                <button class="btn btn-danger btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                After Test
+                </button>
 
-                    <ul class="nav-links dropdown-menu">
-                    <li><a class="dropdown-item" href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
-                    </li>
-                    <li><a class="dropdown-item" href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
-                    to Customer</a></li>
-                    <li><a class="dropdown-item" href="?after_test=arsip&&sample_test=<?= $data["sample_test"]; ?>">Arsip</a></li>
-                    </ul>
-                    </td>
-                    </tr>
+                <ul class="nav-links dropdown-menu">
+                <li><a class="dropdown-item" href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
+                </li>
+                <li><a class="dropdown-item" href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
+                to Customer</a></li>
+                <li><a class="dropdown-item" href="?after_test=arsip&&sample_test=<?= $data["sample_test"]; ?>">Arsip</a></li>
+                </ul>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -930,64 +956,64 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_exp as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["njo"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="70" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["njo"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="70" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">
-                    Image Sample (
-                    <?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </td>
-                    <td>
-                    <p hidden><?= $data["time_stamp"]; ?></p>
-                    <button class="btn btn-danger btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    After Test
-                    </button>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td>
+                <p hidden><?= $data["time_stamp"]; ?></p>
+                <button class="btn btn-danger btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                After Test
+                </button>
 
-                    <ul class="nav-links dropdown-menu">
-                    <li><a class="dropdown-item" href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
-                    </li>
-                    <li><a class="dropdown-item" href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
-                    to Customer</a></li>
-                    <li><a class="dropdown-item" href="?after_test=arsip&&sample_test=<?= $data["sample_test"]; ?>">Arsip</a></li>
-                    </ul>
-                    </td>
-                    </tr>
+                <ul class="nav-links dropdown-menu">
+                <li><a class="dropdown-item" href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
+                </li>
+                <li><a class="dropdown-item" href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
+                to Customer</a></li>
+                <li><a class="dropdown-item" href="?after_test=arsip&&sample_test=<?= $data["sample_test"]; ?>">Arsip</a></li>
+                </ul>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
@@ -1016,53 +1042,53 @@ HISTORY</strong></a>
 </thead>
 <?php $i = 1; ?>
 <?php foreach ($sample_history as $data): ?>
-                    <tr>
-                    <td>
-                    <?= $i; ?>
-                    </td>
-                    <td>
-                    <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
-                    </a>
+                <tr>
+                <td>
+                <?= $i; ?>
+                </td>
+                <td>
+                <a href="" data-toggle="modal" data-target="#detailImage<?= $data["sample_test"]; ?>">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100" alt="">
+                </a>
 
-                    <!-- detail image modal -->
-                    <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
-                    <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="text-black">
-                    Image Sample (
-                    <?= $data["sample_test"]; ?>)
-                    </h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                    <div class="col-md-12 text-center pb-5 pt-4">
-                    <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- end detail image modal -->
-                    </td>
-                    <td class="track-column">
-                    <?= $data["sample_test"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["njo"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["nm_sample"]; ?>
-                    </td>
-                    <td>
-                    <?= $data["time_stamp"]; ?>
-                    </td>
-                    </tr>
+                <!-- detail image modal -->
+                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade" tabindex="	-1">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="text-black">
+                Image Sample (
+                <?= $data["sample_test"]; ?>)
+                </h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                <div class="col-md-12 text-center pb-5 pt-4">
+                <img src="img/foto-sample/<?= $data["foto"]; ?>" alt="foto-sample" height="400">
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <!-- end detail image modal -->
+                </td>
+                <td class="track-column">
+                <?= $data["sample_test"]; ?>
+                </td>
+                <td>
+                <?= $data["njo"]; ?>
+                </td>
+                <td>
+                <?= $data["nm_sample"]; ?>
+                </td>
+                <td>
+                <?= $data["time_stamp"]; ?>
+                </td>
+                </tr>
 
-                    <?php $i++; ?>
+                <?php $i++; ?>
 <?php endforeach; ?>
 
 </table>
