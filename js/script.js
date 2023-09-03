@@ -107,10 +107,19 @@
             .order([4, 'desc'])
             .draw();
 
-        $("#export").click(function (e) {
-            window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#tabel-data-incoming').html()));
-            e.preventDefault();
-        });
+        // $(document).ready( function() {
+        //     $('#tabel-data-incoming').DataTable( {
+        //         dom: 'Bfrtip',
+        //         buttons: [ {
+        //             extend: 'excelHtml5',
+        //             customize: function( xlsx ) {
+        //                 var sheet = xlsx.xl.worksheets['sheet1.xml'];
+            
+        //                 $('row c[r^="C"]', sheet).attr( 's', '2' );
+        //             }
+        //         } ]
+        //     } );
+        // } );
 
         
 
