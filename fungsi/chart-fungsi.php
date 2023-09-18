@@ -28,8 +28,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month jan
 $month = 1;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_jan = '0';
 } else {
@@ -40,8 +40,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month feb
 $month = 2;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_feb = '0';
 } else {
@@ -52,8 +52,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month march
 $month = 3;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_march = '0';
 } else {
@@ -64,8 +64,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month april
 $month = 4;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_april = '0';
 } else {
@@ -76,8 +76,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month may
 $month = 5;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_may = '0';
 } else {
@@ -88,8 +88,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month june
 $month = 6;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_june = '0';
 } else {
@@ -100,8 +100,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month july
 $month = 7;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_july = '0';
 } else {
@@ -112,8 +112,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month august
 $month = 8;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_august = '0';
 } else {
@@ -124,8 +124,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month sept
 $month = 9;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_sept = '0';
 } else {
@@ -136,8 +136,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month oct
 $month = 10;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_oct = '0';
 } else {
@@ -148,8 +148,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month nov
 $month = 11;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_nov = '0';
 } else {
@@ -160,8 +160,8 @@ if (mysqli_num_rows($come) == 0) {
 
 // month dec
 $month = 12;
-$come = mysqli_query($konek, "SELECT COUNT(tgl_datang) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
-WHERE YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month' GROUP BY month");
+$come = mysqli_query($konek, "SELECT COUNT(sample_test) AS total, EXTRACT(MONTH FROM tgl_datang) AS month FROM tb_sample
+WHERE id_loc=0 AND YEAR(tgl_datang)=YEAR(CURDATE()) AND MONTH(tgl_datang)='$month'");
 if (mysqli_num_rows($come) == 0) {
     $come_dec = '0';
 } else {

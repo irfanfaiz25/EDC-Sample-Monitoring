@@ -120,29 +120,9 @@ if (isset($_GET['sample_test'])) {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="label-head text-start">ITEM TEST 1:</td>
+                                                    <td class="label-head text-start">TUJUAN:</td>
                                                     <td class="label-field">
                                                         <?= strtoupper($row["tujuan1"]); ?>
-                                                    </td>
-                                                    <td class="label-head text-start">ITEM TEST 2:</td>
-                                                    <td class="label-field">
-                                                        <?= strtoupper($row["tujuan2"]); ?>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label-head text-start">ITEM TEST 3:</td>
-                                                    <td class="label-field">
-                                                        <?= strtoupper($row["tujuan3"]); ?>
-                                                    </td>
-                                                    <td class="label-head text-start">ITEM TEST 4:</td>
-                                                    <td class="label-field">
-                                                        <?= strtoupper($row["tujuan4"]); ?>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label-head text-start">ITEM TEST 5:</td>
-                                                    <td class="label-field">
-                                                        <?= strtoupper($row["tujuan5"]); ?>
                                                     </td>
                                                     <td class="label-head text-start">TOOLS:</td>
                                                     <td class="label-field">

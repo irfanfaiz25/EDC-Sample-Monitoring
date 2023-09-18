@@ -104,7 +104,7 @@
         var table = $('#tabel-data-incoming').DataTable();
 
         table
-            .order([4, 'desc'])
+            .order([6, 'desc'])
             .draw();
 
         // $(document).ready( function() {
@@ -307,7 +307,6 @@
 
         $(window).on("load",function(){
             $(".loader-wrapper").fadeOut("slow");
-            // $("section").addClass("blur-effect");
         });
 
 

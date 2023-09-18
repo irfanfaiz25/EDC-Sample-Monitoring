@@ -6,7 +6,7 @@ if (isset($_SESSION["login"]) && $_SESSION["level"] == "marketing") {
    header('Location: index.php');
    exit;
 } elseif (isset($_SESSION["login"]) && $_SESSION["level"] != "marketing") {
-   header('Location: sample.php');
+   header('Location: track.php');
    exit;
 }
 

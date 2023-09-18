@@ -26,10 +26,10 @@ function tambah($data)
     $cust = htmlspecialchars($data["cust"]);
     $tgl_dtg = htmlspecialchars($data["tanggaldatang"]);
     $tujuan1 = htmlspecialchars($data["tujuan"]);
-    $tujuan2 = htmlspecialchars($data["tujuan2"]);
-    $tujuan3 = htmlspecialchars($data["tujuan3"]);
-    $tujuan4 = htmlspecialchars($data["tujuan4"]);
-    $tujuan5 = htmlspecialchars($data["tujuan5"]);
+    // $tujuan2 = htmlspecialchars($data["tujuan2"]);
+    // $tujuan3 = htmlspecialchars($data["tujuan3"]);
+    // $tujuan4 = htmlspecialchars($data["tujuan4"]);
+    // $tujuan5 = htmlspecialchars($data["tujuan5"]);
     $tools = htmlspecialchars($data["tools"]);
     $note = htmlspecialchars($data["note"]);
     $date_ent = date_create(date('Y-m-d'));
@@ -85,9 +85,9 @@ function tambah($data)
 
     $tgl_dtg = $tgl_dtg . date(" H:i:s");
 
-    $input = "INSERT IGNORE INTO tb_sample (sample_test,njo,nm_sample,qty,customer,tgl_datang,tujuan1,tujuan2,tujuan3,tujuan4,tujuan5,
+    $input = "INSERT IGNORE INTO tb_sample (sample_test,njo,nm_sample,qty,customer,tgl_datang,tujuan1,
     tools,after_test,date_take,date_return,due_date,date_after,note,id_loc,pic,rak,time_stamp,cek_nama,cek_qty,cek_comp,cek_dupl,cek_layak,pic_cek,sample_stat,foto)
-    VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg','$tujuan1','$tujuan2','$tujuan3','$tujuan4','$tujuan5','$tools',
+    VALUES ('$smp_test','$njo','$nama','$qty','$cust','$tgl_dtg','$tujuan1','$tools',
     '','','','$due_date','','$note','','','','','$cek_nama','$cek_qty','$cek_comp','$cek_dupl','$cek_layak','$pic_cek',1,'$foto')";
 
     mysqli_query($konek, $input);
@@ -108,10 +108,10 @@ function ubahSample($data)
     $tgl_dtg = htmlspecialchars($data["tgl-dtg"]);
 
     $tujuan1 = htmlspecialchars($data["tujuan1"]);
-    $tujuan2 = htmlspecialchars($data["tujuan2"]);
-    $tujuan3 = htmlspecialchars($data["tujuan3"]);
-    $tujuan4 = htmlspecialchars($data["tujuan4"]);
-    $tujuan5 = htmlspecialchars($data["tujuan5"]);
+    // $tujuan2 = htmlspecialchars($data["tujuan2"]);
+    // $tujuan3 = htmlspecialchars($data["tujuan3"]);
+    // $tujuan4 = htmlspecialchars($data["tujuan4"]);
+    // $tujuan5 = htmlspecialchars($data["tujuan5"]);
     $tools = htmlspecialchars($data["tools"]);
     // $after = htmlspecialchars($data["after"]);
     $note = htmlspecialchars($data["note"]);
@@ -155,14 +155,12 @@ function ubahSample($data)
         }
 
         $edit = "UPDATE tb_sample SET sample_test='$smp_test',njo='$njo',nm_sample='$nama',qty='$qty',
-        customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tujuan2='$tujuan2',tujuan3='$tujuan3',
-        tujuan4='$tujuan4',tujuan5='$tujuan5',tools='$tools', foto='$foto', note='$note', cek_nama='$cek_nama', cek_qty='$cek_qty', cek_comp='$cek_comp', cek_dupl='$cek_dupl', cek_layak='$cek_layak', pic_cek='$pic_cek' WHERE sample_test='$smp_test'";
+        customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tools='$tools', foto='$foto', note='$note', cek_nama='$cek_nama', cek_qty='$cek_qty', cek_comp='$cek_comp', cek_dupl='$cek_dupl', cek_layak='$cek_layak', pic_cek='$pic_cek' WHERE sample_test='$smp_test'";
 
         mysqli_query($konek, $edit);
     } else {
         $edit = "UPDATE tb_sample SET sample_test='$smp_test',njo='$njo',nm_sample='$nama',qty='$qty',
-        customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tujuan2='$tujuan2',tujuan3='$tujuan3',
-        tujuan4='$tujuan4',tujuan5='$tujuan5',tools='$tools', note='$note', cek_nama='$cek_nama', cek_qty='$cek_qty', cek_comp='$cek_comp', cek_dupl='$cek_dupl', cek_layak='$cek_layak', pic_cek='$pic_cek' WHERE sample_test='$smp_test'";
+        customer='$cust',tgl_datang='$tgl_dtg',tujuan1='$tujuan1',tools='$tools', note='$note', cek_nama='$cek_nama', cek_qty='$cek_qty', cek_comp='$cek_comp', cek_dupl='$cek_dupl', cek_layak='$cek_layak', pic_cek='$pic_cek' WHERE sample_test='$smp_test'";
 
         mysqli_query($konek, $edit);
     }

@@ -59,7 +59,8 @@ include "header.php";
                 </tr>
                 <tr>
                   <td><label for="njo">NJO / Work Code</label></td>
-                  <td><input type="text" id="njo" name="njo" class="form-control"></td>
+                  <td><input type="text" id="njo" name="njo" class="form-control"
+                      placeholder="filled in only when njo already exists"></td>
                 </tr>
                 <tr>
                   <td><label for="sample">Nama Sample</label></td>
@@ -79,33 +80,21 @@ include "header.php";
                       value="<?= date("d-m-Y"); ?>" readonly></td>
                 </tr>
                 <tr>
-                  <td><label for="tujuan">Item Test</label></td>
-                  <td><input type="text" id="tujuan" placeholder="item test 1" name="tujuan" class="form-control"></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input type="text" id="tujuan2" placeholder="item test 2" name="tujuan2" class="form-control">
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input type="text" id="tujuan3" placeholder="item test 3" name="tujuan3" class="form-control">
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input type="text" id="tujuan4" placeholder="item test 4" name="tujuan4" class="form-control">
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input type="text" id="tujuan5" placeholder="item test 5" name="tujuan5" class="form-control">
+                  <td><label for="tujuan">Tujuan</label></td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="tujuan" id="tujuan1" value="laboratory">
+                      <label class="form-check-label" for="tujuan1">Laboratory</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="tujuan" id="tujuan2" value="testing">
+                      <label class="form-check-label" for="tujuan2">Testing</label>
+                    </div>
                   </td>
                 </tr>
                 <tr>
                   <td><label for="tools">Tools</label></td>
                   <td>
-                    <!-- <input type="text" id="tools" name="tools" class="form-control"> -->
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="tools" id="tools1" value="ada">
                       <label class="form-check-label" for="tools1">Ada</label>
@@ -263,7 +252,7 @@ include "header.php";
           </div>
           <div class="col-md-8">
             <h2 class="mb-4">
-              SAMPLE PENDING
+              SAMPLE INCOMING
             </h2>
 
             <!-- error edit sample pending notif -->
@@ -427,19 +416,51 @@ include "header.php";
 
                                   <div class="row g-3 align-items-center mt-1 mb-1">
                                     <div class="col-md-4">
-                                      <label for="tujuan">Tujuan (Item-test)</label>
+                                      <label for="tujuan">Tujuan</label>
                                     </div>
                                     <div class="col-md-8">
-                                      <input type="text" class="form-control" name="tujuan1" id="tujuan1"
-                                        value="<?= $row["tujuan1"]; ?>">
-                                      <input type="text" class="form-control mt-1" name="tujuan2" id="tujuan2"
-                                        value="<?= $row["tujuan2"]; ?>">
-                                      <input type="text" class="form-control mt-1" name="tujuan3" id="tujuan3"
-                                        value="<?= $row["tujuan3"]; ?>">
-                                      <input type="text" class="form-control mt-1" name="tujuan4" id="tujuan4"
-                                        value="<?= $row["tujuan4"]; ?>">
-                                      <input type="text" class="form-control mt-1" name="tujuan5" id="tujuan5"
-                                        value="<?= $row["tujuan5"]; ?>">
+                                      <?php
+                                      if ($row["tujuan1"] == "laboratory"):
+                                        ?>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tujuan1"
+                                            id="tujuanPending<?= $i; ?>" value="laboratory" checked>
+                                          <label class="form-check-label" for="tujuanPending<?= $i; ?>">Laboratory</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tujuan1"
+                                            id="tujuanPending2<?= $i; ?>" value="testing">
+                                          <label class="form-check-label" for="tujuanPending2<?= $i; ?>">Testing</label>
+                                        </div>
+                                        <?php
+                                      elseif ($row["tujuan1"] == "testing"):
+                                        ?>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tujuan1"
+                                            id="tujuanPending<?= $i; ?>" value="laboratory">
+                                          <label class="form-check-label" for="tujuanPending<?= $i; ?>">Laboratory</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tujuan1"
+                                            id="tujuanPending2<?= $i; ?>" value="testing" checked>
+                                          <label class="form-check-label" for="tujuanPending2<?= $i; ?>">Testing</label>
+                                        </div>
+                                        <?php
+                                      else:
+                                        ?>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tujuan1"
+                                            id="tujuanPending<?= $i; ?>" value="laboratory">
+                                          <label class="form-check-label" for="tujuanPending<?= $i; ?>">Laboratory</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tujuan1"
+                                            id="tujuanPending2<?= $i; ?>" value="testing">
+                                          <label class="form-check-label" for="tujuanPending2<?= $i; ?>">Testing</label>
+                                        </div>
+                                        <?php
+                                      endif;
+                                      ?>
                                     </div>
                                   </div>
 
@@ -448,8 +469,35 @@ include "header.php";
                                       <label for="tools">Tools </label>
                                     </div>
                                     <div class="col-md-8">
-                                      <input type="text" class="form-control" name="tools" id="tools"
-                                        value="<?= $row["tools"]; ?>">
+                                      <?php
+                                      if ($row["tools"] == "ada"):
+                                        ?>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tools" id="tools1<?= $i ?>"
+                                            value="ada" checked>
+                                          <label class="form-check-label" for="tools1<?= $i ?>">Ada</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tools" id="tools2<?= $i ?>"
+                                            value="tidak">
+                                          <label class="form-check-label" for="tools2<?= $i ?>">Tidak</label>
+                                        </div>
+                                        <?php
+                                      else:
+                                        ?>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tools" id="tools1<?= $i ?>"
+                                            value="ada">
+                                          <label class="form-check-label" for="tools1<?= $i ?>">Ada</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="tools" id="tools2<?= $i ?>"
+                                            value="tidak" checked>
+                                          <label class="form-check-label" for="tools2<?= $i ?>">Tidak</label>
+                                        </div>
+                                        <?php
+                                      endif;
+                                      ?>
                                     </div>
                                   </div>
 
@@ -625,33 +673,9 @@ include "header.php";
                                     </span>
                                   </div>
                                   <div class="color chinese-white">
-                                    Tujuan 1 &emsp13; :
+                                    Tujuan &emsp13; :
                                     <span class="hex">
                                       <?= $row["tujuan1"]; ?>
-                                    </span>
-                                  </div>
-                                  <div class="color anti-flash-white">
-                                    Tujuan 2 &emsp13; :
-                                    <span class="hex">
-                                      <?= $row["tujuan2"]; ?>
-                                    </span>
-                                  </div>
-                                  <div class="color chinese-white">
-                                    Tujuan 3 &emsp13; :
-                                    <span class="hex">
-                                      <?= $row["tujuan3"]; ?>
-                                    </span>
-                                  </div>
-                                  <div class="color anti-flash-white">
-                                    Tujuan 4 &emsp13; :
-                                    <span class="hex">
-                                      <?= $row["tujuan4"]; ?>
-                                    </span>
-                                  </div>
-                                  <div class="color chinese-white">
-                                    Tujuan 5 &emsp13; :
-                                    <span class="hex">
-                                      <?= $row["tujuan5"]; ?>
                                     </span>
                                   </div>
                                   <div class="color anti-flash-white">
@@ -992,19 +1016,51 @@ include "header.php";
 
                                 <div class="row g-3 align-items-center mt-1 mb-1">
                                   <div class="col-md-4">
-                                    <label for="tujuan">Tujuan (Item-test)</label>
+                                    <label for="tujuan">Tujuan</label>
                                   </div>
                                   <div class="col-md-8">
-                                    <input type="text" class="form-control" name="tujuan1" id="tujuan1"
-                                      value="<?= $row["tujuan1"]; ?>">
-                                    <input type="text" class="form-control mt-1" name="tujuan2" id="tujuan2"
-                                      value="<?= $row["tujuan2"]; ?>">
-                                    <input type="text" class="form-control mt-1" name="tujuan3" id="tujuan3"
-                                      value="<?= $row["tujuan3"]; ?>">
-                                    <input type="text" class="form-control mt-1" name="tujuan4" id="tujuan4"
-                                      value="<?= $row["tujuan4"]; ?>">
-                                    <input type="text" class="form-control mt-1" name="tujuan5" id="tujuan5"
-                                      value="<?= $row["tujuan5"]; ?>">
+                                    <?php
+                                    if ($row["tujuan1"] == "laboratory"):
+                                      ?>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tujuan1"
+                                          id="tujuanReady<?= $i; ?>" value="laboratory" checked>
+                                        <label class="form-check-label" for="tujuanReady<?= $i; ?>">Laboratory</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tujuan1"
+                                          id="tujuanReady2<?= $i; ?>" value="testing">
+                                        <label class="form-check-label" for="tujuanReady2<?= $i; ?>">Testing</label>
+                                      </div>
+                                      <?php
+                                    elseif ($row["tujuan1"] == "testing"):
+                                      ?>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tujuan1"
+                                          id="tujuanReady<?= $i; ?>" value="laboratory">
+                                        <label class="form-check-label" for="tujuanReady<?= $i; ?>">Laboratory</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tujuan1"
+                                          id="tujuanReady2<?= $i; ?>" value="testing" checked>
+                                        <label class="form-check-label" for="tujuanReady2<?= $i; ?>">Testing</label>
+                                      </div>
+                                      <?php
+                                    else:
+                                      ?>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tujuan1"
+                                          id="tujuanReady<?= $i; ?>" value="laboratory">
+                                        <label class="form-check-label" for="tujuanReady<?= $i; ?>">Laboratory</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tujuan1"
+                                          id="tujuanReady2<?= $i; ?>" value="testing">
+                                        <label class="form-check-label" for="tujuanReady2<?= $i; ?>">Testing</label>
+                                      </div>
+                                      <?php
+                                    endif;
+                                    ?>
                                   </div>
                                 </div>
 
@@ -1013,8 +1069,35 @@ include "header.php";
                                     <label for="tools">Tools </label>
                                   </div>
                                   <div class="col-md-8">
-                                    <input type="text" class="form-control" name="tools" id="tools"
-                                      value="<?= $row["tools"]; ?>">
+                                    <?php
+                                    if ($row["tools"] == "ada"):
+                                      ?>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tools" id="toolsReady1<?= $i ?>"
+                                          value="ada" checked>
+                                        <label class="form-check-label" for="toolsReady1<?= $i ?>">Ada</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tools" id="toolsReady2<?= $i ?>"
+                                          value="tidak">
+                                        <label class="form-check-label" for="toolsReady2<?= $i ?>">Tidak</label>
+                                      </div>
+                                      <?php
+                                    else:
+                                      ?>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tools" id="toolsReady1<?= $i ?>"
+                                          value="ada">
+                                        <label class="form-check-label" for="toolsReady1<?= $i ?>">Ada</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tools" id="toolsReady2<?= $i ?>"
+                                          value="tidak" checked>
+                                        <label class="form-check-label" for="toolsReady2<?= $i ?>">Tidak</label>
+                                      </div>
+                                      <?php
+                                    endif;
+                                    ?>
                                   </div>
                                 </div>
 
@@ -1192,33 +1275,9 @@ include "header.php";
                                   </span>
                                 </div>
                                 <div class="color chinese-white">
-                                  Tujuan 1 &emsp13; :
+                                  Tujuan &emsp13; :
                                   <span class="hex">
                                     <?= $row["tujuan1"]; ?>
-                                  </span>
-                                </div>
-                                <div class="color anti-flash-white">
-                                  Tujuan 2 &emsp13; :
-                                  <span class="hex">
-                                    <?= $row["tujuan2"]; ?>
-                                  </span>
-                                </div>
-                                <div class="color chinese-white">
-                                  Tujuan 3 &emsp13; :
-                                  <span class="hex">
-                                    <?= $row["tujuan3"]; ?>
-                                  </span>
-                                </div>
-                                <div class="color anti-flash-white">
-                                  Tujuan 4 &emsp13; :
-                                  <span class="hex">
-                                    <?= $row["tujuan4"]; ?>
-                                  </span>
-                                </div>
-                                <div class="color chinese-white">
-                                  Tujuan 5 &emsp13; :
-                                  <span class="hex">
-                                    <?= $row["tujuan5"]; ?>
                                   </span>
                                 </div>
                                 <div class="color anti-flash-white">

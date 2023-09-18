@@ -9,7 +9,8 @@ $sample_incoming = query("SELECT * FROM tb_sample WHERE njo='' AND id_loc=0 AND 
 $sample_waiting = query("SELECT * FROM tb_sample WHERE njo!='' AND (id_loc=1 OR id_loc=0) AND sample_stat=1 ORDER BY time_stamp DESC");
 $sample_scrap = query("SELECT * FROM tb_sample WHERE after_test='scrap' AND sample_stat=0 ORDER BY time_stamp DESC");
 $sample_return = query("SELECT * FROM tb_sample WHERE after_test='return' AND sample_stat=0 ORDER BY time_stamp DESC");
-$sample_exp = query("SELECT * FROM tb_sample WHERE due_date < '$date' AND sample_stat=1");
+$sample_exp_incoming = query("SELECT * FROM tb_sample WHERE due_date < '$date' AND sample_stat=1 AND (id_loc=0 OR id_loc=1)");
+$sample_exp_after = query("SELECT * FROM tb_sample WHERE due_date < '$date' AND sample_stat=1 AND id_loc=3");
 $sample_history = query("SELECT * FROM tb_sample");
 
 $sample_pending = mysqli_query($konek, "SELECT COUNT(sample_test) AS total FROM tb_sample WHERE njo='' AND id_loc=0 AND sample_stat=1");
@@ -108,5 +109,11 @@ if (isset($_GET["after_test"])) {
         header('Location: index.php');
     } else {
         $errorafter = true;
+    }
+}
+
+if (isset($_POST["btn-remark"])) {
+    if (updateRemark($_POST)) {
+        header('Location: index.php');
     }
 }

@@ -150,6 +150,7 @@ include 'header.php';
                                                     <th scope="col">Sample Test</th>
                                                     <th scope="col">Nama Sample</th>
                                                     <th scope="col">Entry Date</th>
+                                                    <th scope="col">Status</th>
                                                     <th scope="col" hidden>Timestamp</th>
                                                 </tr>
                                             </thead>
@@ -202,6 +203,21 @@ include 'header.php';
                                                             <td>
                                                                 <?= date("d-m-Y | H:i", strtotime($data["tgl_datang"])); ?>
                                                             </td>
+                                                            <td>
+                                                                <button class="btn btn-danger btn-sm dropdown-toggle" role="button"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    Pilih Status
+                                                                </button>
+
+                                                                <ul class="nav-links dropdown-menu">
+                                                                    <li><a class="dropdown-item"
+                                                                            href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item"
+                                                                            href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
+                                                                            to Customer</a></li>
+                                                                </ul>
+                                                            </td>
                                                             <td hidden>
                                                                 <?= $data["time_stamp"]; ?>
                                                             </td>
@@ -232,6 +248,7 @@ include 'header.php';
                                                     <th scope="col">Location</th>
                                                     <th scope="col">Entry Date</th>
                                                     <th scope="col">Timestamp</th>
+                                                    <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
@@ -303,6 +320,21 @@ include 'header.php';
                                                             <td>
                                                                 <?= $data["time_stamp"]; ?>
                                                             </td>
+                                                            <td>
+                                                                <button class="btn btn-danger btn-sm dropdown-toggle" role="button"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    Pilih Status
+                                                                </button>
+
+                                                                <ul class="nav-links dropdown-menu">
+                                                                    <li><a class="dropdown-item"
+                                                                            href="?after_test=scrap&&sample_test=<?= $data["sample_test"]; ?>">Scrap</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item"
+                                                                            href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
+                                                                            to Customer</a></li>
+                                                                </ul>
+                                                            </td>
                                                         </tr>
 
                                                         <?php $i++; ?>
@@ -325,7 +357,7 @@ include 'header.php';
                                                     <th scope="col">No</th>
                                                     <th scope="col">Tracking</th>
                                                     <th scope="col">Remark</th>
-                                                    <th scope="col">After Test</th>
+                                                    <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
@@ -764,12 +796,8 @@ include 'header.php';
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-primary btn-sm dropdown-toggle" role="button"
-                                                                    data-bs-toggle="dropdown" aria-expanded="false" <?php
-                                                                    if ($data["id_loc"] != 3) {
-                                                                        echo "disabled";
-                                                                    }
-                                                                    ?>>
-                                         After Test
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    Pilih Status
                                                                 </button>
 
                                                                 <ul class="nav-links dropdown-menu">
@@ -792,16 +820,26 @@ include 'header.php';
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <textarea name="remark" id="remark" class="form-control"
-                                                                            rows="5" readonly><?= $data["note"]; ?></textarea>
+                                                                        <form action="" method="post">
+                                                                            <input type="hidden" name="sample_test"
+                                                                                value="<?= $data["sample_test"]; ?>">
+                                                                            <textarea name="remark" id="remark" class="form-control"
+                                                                                rows="5"><?= $data["note"]; ?></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-primary"
+                                                                            name="btn-remark">Update
+                                                                            changes</button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!-- end remark modal -->
 
-                                                        <?php $i++; ?>
-                                            <?php endforeach; ?>
+                                                        <?php
+                                                        $i++;
+                                            endforeach; ?>
 
                                         </table>
                                     </div>
@@ -837,7 +875,6 @@ include 'header.php';
                                                                     <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100"
                                                                         alt="">
                                                                 </a>
-
                                                                 <!-- detail image modal -->
                                                                 <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade"
                                                                     tabindex="	-1">
@@ -878,8 +915,10 @@ include 'header.php';
                                                             </td>
                                                         </tr>
 
-                                                        <?php $i++; ?>
-                                            <?php endforeach; ?>
+                                                        <?php
+                                                        $i++;
+                                            endforeach;
+                                            ?>
 
                                         </table>
                                     </div>
@@ -915,7 +954,6 @@ include 'header.php';
                                                                     <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100"
                                                                         alt="">
                                                                 </a>
-
                                                                 <!-- detail image modal -->
                                                                 <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade"
                                                                     tabindex="	-1">
@@ -957,8 +995,9 @@ include 'header.php';
                                                             </td>
                                                         </tr>
 
-                                                        <?php $i++; ?>
-                                            <?php endforeach; ?>
+                                                        <?php
+                                                        $i++;
+                                            endforeach; ?>
 
                                         </table>
                                     </div>
@@ -978,23 +1017,17 @@ include 'header.php';
                                                     <thead class="table-secondary">
                                                         <tr>
                                                             <th scope="col">No</th>
+                                                            <th scope="col">Image</th>
                                                             <th scope="col">Sample Test</th>
                                                             <th scope="col">Sample Name</th>
-                                                            <th scope="col">Image</th>
                                                             <th scope="col">After Test</th>
                                                         </tr>
                                                     </thead>
                                                     <?php $i = 1; ?>
-                                                    <?php foreach ($sample_exp as $data): ?>
+                                                    <?php foreach ($sample_exp_incoming as $data): ?>
                                                                 <tr>
                                                                     <td>
                                                                         <?= $i; ?>
-                                                                    </td>
-                                                                    <td class="track-column">
-                                                                        <?= $data["sample_test"]; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?= $data["nm_sample"]; ?>
                                                                     </td>
                                                                     <td>
                                                                         <a href="" data-toggle="modal"
@@ -1002,7 +1035,6 @@ include 'header.php';
                                                                             <img src="img/foto-sample/<?= $data["foto"]; ?>"
                                                                                 height="70" alt="">
                                                                         </a>
-
                                                                         <!-- detail image modal -->
                                                                         <div id="detailImage<?= $data["sample_test"]; ?>"
                                                                             class="modal fade" tabindex="	-1">
@@ -1031,6 +1063,12 @@ include 'header.php';
                                                                         </div>
                                                                         <!-- end detail image modal -->
                                                                     </td>
+                                                                    <td class="track-column">
+                                                                        <?= $data["sample_test"]; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?= $data["nm_sample"]; ?>
+                                                                    </td>
                                                                     <td>
                                                                         <p hidden>
                                                                             <?= $data["time_stamp"]; ?>
@@ -1038,7 +1076,7 @@ include 'header.php';
                                                                         <button class="btn btn-danger btn-sm dropdown-toggle"
                                                                             role="button" data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
-                                                                            After Test
+                                                                            Pilih Status
                                                                         </button>
 
                                                                         <ul class="nav-links dropdown-menu">
@@ -1048,15 +1086,13 @@ include 'header.php';
                                                                             <li><a class="dropdown-item"
                                                                                     href="?after_test=return&&sample_test=<?= $data["sample_test"]; ?>">Return
                                                                                     to Customer</a></li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="?after_test=arsip&&sample_test=<?= $data["sample_test"]; ?>">Arsip</a>
-                                                                            </li>
                                                                         </ul>
                                                                     </td>
                                                                 </tr>
 
-                                                                <?php $i++; ?>
-                                                    <?php endforeach; ?>
+                                                                <?php
+                                                                $i++;
+                                                    endforeach; ?>
 
                                                 </table>
                                             </div>
@@ -1072,28 +1108,18 @@ include 'header.php';
                                                     <thead class="table-secondary">
                                                         <tr>
                                                             <th scope="col">No</th>
+                                                            <th scope="col">Image</th>
                                                             <th scope="col">NJO</th>
                                                             <th scope="col">Sample Test</th>
                                                             <th scope="col">Sample Name</th>
-                                                            <th scope="col">Image</th>
-                                                            <!-- <th scope="col">Timestamp</th> -->
                                                             <th scope="col">After Test</th>
                                                         </tr>
                                                     </thead>
                                                     <?php $i = 1; ?>
-                                                    <?php foreach ($sample_exp as $data): ?>
+                                                    <?php foreach ($sample_exp_after as $data): ?>
                                                                 <tr>
                                                                     <td>
                                                                         <?= $i; ?>
-                                                                    </td>
-                                                                    <td class="track-column">
-                                                                        <?= $data["sample_test"]; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?= $data["njo"]; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?= $data["nm_sample"]; ?>
                                                                     </td>
                                                                     <td>
                                                                         <a href="" data-toggle="modal"
@@ -1101,7 +1127,6 @@ include 'header.php';
                                                                             <img src="img/foto-sample/<?= $data["foto"]; ?>"
                                                                                 height="70" alt="">
                                                                         </a>
-
                                                                         <!-- detail image modal -->
                                                                         <div id="detailImage<?= $data["sample_test"]; ?>"
                                                                             class="modal fade" tabindex="	-1">
@@ -1130,6 +1155,15 @@ include 'header.php';
                                                                         </div>
                                                                         <!-- end detail image modal -->
                                                                     </td>
+                                                                    <td class="track-column">
+                                                                        <?= $data["sample_test"]; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?= $data["njo"]; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?= $data["nm_sample"]; ?>
+                                                                    </td>
                                                                     <td>
                                                                         <p hidden>
                                                                             <?= $data["time_stamp"]; ?>
@@ -1154,8 +1188,9 @@ include 'header.php';
                                                                     </td>
                                                                 </tr>
 
-                                                                <?php $i++; ?>
-                                                    <?php endforeach; ?>
+                                                                <?php
+                                                                $i++;
+                                                    endforeach; ?>
 
                                                 </table>
                                             </div>
@@ -1193,32 +1228,6 @@ include 'header.php';
                                                                     <img src="img/foto-sample/<?= $data["foto"]; ?>" height="100"
                                                                         alt="">
                                                                 </a>
-                                                                <!-- detail image modal -->
-                                                                <div id="detailImage<?= $data["sample_test"]; ?>" class="modal fade"
-                                                                    tabindex="	-1">
-                                                                    <div class="modal-dialog modal-lg">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="text-black">
-                                                                                    Image Sample (
-                                                                                    <?= $data["sample_test"]; ?>)
-                                                                                </h4>
-                                                                                <button type="button" class="btn-close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-12 text-center pb-5 pt-4">
-                                                                                        <img src="img/foto-sample/<?= $data["foto"]; ?>"
-                                                                                            alt="foto-sample" height="400">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- end detail image modal -->
                                                             </td>
                                                             <td class="track-column">
                                                                 <?= $data["sample_test"]; ?>
@@ -1234,8 +1243,9 @@ include 'header.php';
                                                             </td>
                                                         </tr>
 
-                                                        <?php $i++; ?>
-                                            <?php endforeach; ?>
+                                                        <?php
+                                                        $i++;
+                                            endforeach; ?>
 
                                         </table>
                                     </div>
@@ -1248,7 +1258,6 @@ include 'header.php';
                 </div>
 
             </div>
-
 
             <div class="row ms-2 pb-5">
                 <div class="col-md-12">
@@ -1288,7 +1297,7 @@ include 'header.php';
             data: [{
                 type: "column",
                 color: "#00b4d8",
-                name: "Sample Before Test",
+                name: "Sample Incoming",
                 indexLabel: "{y}",
                 yValueFormatString: "#0.##",
                 showInLegend: true,
